@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: 0750f12504aee4cd9b5de58714289ddf
+guid: 62557a61ab572d648bfe9fbcb0b3bf0a
 ModelImporter:
   serializedVersion: 26
-  internalIDToNameTable:
-  - first:
-      74: -203655887218126122
-    second: mixamo.com
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -85,12 +82,12 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: Armature
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
