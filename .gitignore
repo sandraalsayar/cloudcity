@@ -9,13 +9,6 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
-
-[merge]
-tool = unityyamlmerge
-
-[mergetool "unityyamlmerge"]
-trustExitCode = false
-cmd = '<path to UnityYAMLMerge>' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
     
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
