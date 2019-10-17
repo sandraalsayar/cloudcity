@@ -12,10 +12,6 @@ public class MazeSheepAI : MonoBehaviour
 	public GameObject[] waypoints;
 	public int currWaypoint;
 	private bool go;
-	// public float distanceToMovingWaypoint;
-	// public float lookAheadTime;
-	// public Vector3 futureTarget;
-	// public float stoppingDistance;
 
 	private void Start() {
 		myNavMeshAgent = GetComponent<NavMeshAgent>();
@@ -29,9 +25,10 @@ public class MazeSheepAI : MonoBehaviour
 	}
 
 	private void Update() {
-		if (go) {
+		if (go && currWaypoint < 19) {
 			if ((Vector3.Distance(transform.position,waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending)) {
-				Debug.Log("current " + waypoints[currWaypoint].transform.position + " distance " + myNavMeshAgent.remainingDistance + " position " + transform.position);
+				// Debug.Log("current " + waypoints[currWaypoint].transform.position + " distance " + myNavMeshAgent.remainingDistance + " position " + transform.position);
+				// Debug.Log("Current waypoint index is: " + currWaypoint);
 				setNextWaypoint();
 			}
 
@@ -43,7 +40,8 @@ public class MazeSheepAI : MonoBehaviour
 	private void setNextWaypoint() {
 
 		// This decides which waypoint in the array the minion is going to next
-		if (currWaypoint > waypoints.Length - 1) {
+		// waypoints.Length - 1
+		if (currWaypoint >= waypoints.Length - 1) {
 			go = false;
 		} else {
 			go = true;
