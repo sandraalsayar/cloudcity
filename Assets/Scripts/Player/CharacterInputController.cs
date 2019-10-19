@@ -16,7 +16,7 @@ public class CharacterInputController : MonoBehaviour
     public float turnInputFilter = 3f;
 
     private float forwardSpeedLimit = 1f;
-
+    public int pickUpCounter = 0;
 
     public float Forward
     {
@@ -97,6 +97,15 @@ public class CharacterInputController : MonoBehaviour
             ActionSneak = false;
         }
         // interact is ONLY button press "Interact"
-        ActionInteract = Input.GetButtonDown("Interact");
+        // if it's within range of a star(checked by canCollect), let them press X
+        ActionInteract = Input.GetButtonDown("Interact") && GetComponent<StarCollector>().canCollect;
+        if (pickUpCounter>=1 || ActionInteract){
+            pickUpCounter++;
+        }
+        // Once pick up animation is done, destroy star & add to inventory (sets var to cue that)
+        if(pickUpCounter>=79){
+            pickUpCounter = 0;
+            GetComponent<StarCollector>().pickedUp = true;
+        }
     }
 }

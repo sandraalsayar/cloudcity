@@ -142,9 +142,6 @@ public class CharacterControllerScript : MonoBehaviour
         //anim.SetBool("isFalling", !isGrounded);
     //    anim.SetBool("doButtonPress", inputAction);
 
-        //if (inputAction)
-            //Debug.Log("Action pressed");
-
     }
 
 
