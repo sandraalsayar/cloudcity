@@ -17,7 +17,7 @@ public class CharacterSetup : MonoBehaviour
         {
                 Debug.LogError("camera must be set");
         }
-            thirdPersonCamera.desiredPose = player.transform.Find(CameraPositionMarkerName);
+        thirdPersonCamera.desiredPose = player.transform.Find("CamCollider").Find(CameraPositionMarkerName);
     }
 
 }
