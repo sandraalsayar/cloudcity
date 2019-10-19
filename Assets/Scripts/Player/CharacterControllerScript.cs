@@ -30,6 +30,7 @@ public class CharacterControllerScript : MonoBehaviour
     public float rootMovementSpeed = 1.4f;
     public float rootTurnSpeed = 2f;
     //public GameObject buttonObject;
+    public float isIdle = 0f;
 
     public bool IsGrounded
     {
@@ -80,32 +81,64 @@ public class CharacterControllerScript : MonoBehaviour
 
         float inputForward = 0f;
         float inputTurn = 0f;
-        bool inputAction = false;
-    //    // input is polled in the Update() step, not FixedUpdate()
-    //    // Therefore, you should ONLY use input state that is NOT event-based in FixedUpdate()
-    //    // Input events should be handled in Update(), and possibly passed on to FixedUpdate() through 
-    //    // the state of the MonoBehavior
+        //bool inputAction = false;
+        //string inputActionName = "";
+        bool inputActionSneak = false;
+        bool inputActionInteract = false;
+
+        //    // input is polled in the Update() step, not FixedUpdate()
+        //    // Therefore, you should ONLY use input state that is NOT event-based in FixedUpdate()
+        //    // Input events should be handled in Update(), and possibly passed on to FixedUpdate() through 
+        //    // the state of the MonoBehavior
         if (cinput.enabled)
         {
             //Debug.Log("input enabled, moving");
             inputForward = cinput.Forward;
             inputTurn = cinput.Turn;
-            inputAction = cinput.Action;
+            //inputAction = cinput.Action;
+            //inputActionName = cinput.ActionName;
+            inputActionSneak = cinput.ActionSneak;
+            inputActionInteract = cinput.ActionInteract;
+
 
         }
 
-    //    //onCollisionXXX() doesn't always work for checking if the character is grounded from a playability perspective
-    //    //Uneven terrain can cause the player to become technically airborne, but so close the player thinks they're touching ground.
-    //    //Therefore, an additional raycast approach is used to check for close ground
+        //    //onCollisionXXX() doesn't always work for checking if the character is grounded from a playability perspective
+        //    //Uneven terrain can cause the player to become technically airborne, but so close the player thinks they're touching ground.
+        //    //Therefore, an additional raycast approach is used to check for close ground
         bool isGrounded = IsGrounded;
         //|| CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
-    //    //set anim component speed to speedscalar
-    //    //between 1f regular speed, 0.5f half, 2f twice as fast
+        //If player is idle, increment counter
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            isIdle++;
+        }
+        //Once counter hits this number, it should cue long idle animation (dance)
+        if (isIdle >= 200)
+        {
+            anim.SetBool("longIdle", true);
+
+        }
+        //    //set anim component speed to speedscalar
+        //    //between 1f regular speed, 0.5f half, 2f twice as fast
         anim.speed = animationSpeed;
+
+        //If player moves at all, should do appropriate animation and stop longidle
+        if (inputTurn != 0 || inputForward != 0)
+        {
+            anim.SetBool("longIdle", false);
+            isIdle = 0f;
+        }
+
+        //Checking for special actions
+        anim.SetBool("isSneaking", inputActionSneak);
+        anim.SetBool("pickUp", inputActionInteract);
 
         anim.SetFloat("velx", inputTurn);
         anim.SetFloat("vely", inputForward);
+
+
         //anim.SetBool("isFalling", !isGrounded);
     //    anim.SetBool("doButtonPress", inputAction);
 
