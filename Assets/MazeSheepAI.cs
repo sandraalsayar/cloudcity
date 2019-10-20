@@ -74,6 +74,7 @@
 						} else if (BehindSphereColliderScript.StopMoving == false) {
 							if(FrontBoxColliderScript.StopMoving == true) {
 								myNavMeshAgent.Stop();
+                                anim.SetBool("PlayerInFront", true);
 								Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
 							} else {
 								myNavMeshAgent.Resume();
