@@ -29239,6 +29239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4338c4dfebcab9e49835dd4c6063015a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 341055341}
 --- !u!1 &1740295030 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: fce25a5d3107c2545b06ebf503b48363,

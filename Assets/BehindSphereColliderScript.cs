@@ -15,7 +15,7 @@ public class BehindSphereColliderScript : MonoBehaviour
 	public static bool StopMoving;
 	public static bool TurnAroundFlag;
 
-	// public Animator anim;	
+	public Animator anim;	
 
 	private float timer;
 	private bool turnAround;
@@ -33,18 +33,19 @@ public class BehindSphereColliderScript : MonoBehaviour
 		TurnAroundFlag = false;
 
 		// turnOffFrontCollider = false;
-		// anim = GetComponent<Animator>();
+		anim = GetComponent<Animator>();
 		// if (anim == null) {
 		// 	Debug.Log("Animator could not be found");
 		// }
 	}
 
-	// Notifies the sheep that the player has enetred from the back
+	// Notifies the sheep that the player has entered from the back
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.CompareTag("Player")) {
 			BehindCollisionFlag = true;
 			StopMoving = true;
 			TurnAroundFlag = false;
+           
 		}
 	}
 
@@ -57,16 +58,19 @@ public class BehindSphereColliderScript : MonoBehaviour
 					// turn around completly and loose game
 					turnOffFrontCollider = true;
 					TurnAroundFlag = true;
+                    
 					
 				}
 			}
 	}
 
-		// Player moved out of shot and is not in danger
+    // Player moved out of shot and is not in danger
 	void OnTriggerExit(Collider other) {
 		timer = 0;
 		StopMoving = false;
 		TurnAroundFlag = false;
+        
+
 
 	}
 

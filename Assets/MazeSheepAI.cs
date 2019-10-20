@@ -51,7 +51,7 @@
 		private void Update() {
 		// If star entered the border, then start walking
 			if (MazeFlagCollisionCode.sheepFlag == true) {
-                anim.SetBool("PlayerClose", true);
+                anim.SetTrigger("StartWalking");
 				
 				if (keepGoing & currWaypoint < 19) {
 					if (currWaypoint == -1) {
@@ -62,17 +62,22 @@
 					} else {
 						if (BehindSphereColliderScript.StopMoving == true) {
 							myNavMeshAgent.Stop();
-							if(BehindSphereColliderScript.TurnAroundFlag == true) {
-								transform.LookAt(playerPosition);
-								Debug.Log("YOU LOOOOOSEEEE IN BACK");
+							if (BehindSphereColliderScript.TurnAroundFlag == true) { //Sheep turns around fully -> GAMEOVER
+                            //transform.LookAt(playerPosition);
+                                anim.SetBool("PlayerTooClose", true);
+                                Debug.Log("YOU LOOOOOSEEEE IN BACK");
 								// STOP EVERYTHING & RESTART LEVEL HERE - Stop timer as well
-							}
+							} else {
+                                anim.SetBool("PlayerClose", true);
+                        
+                            }
 						} else if (BehindSphereColliderScript.StopMoving == false) {
 							if(FrontBoxColliderScript.StopMoving == true) {
 								myNavMeshAgent.Stop();
 								Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
 							} else {
 								myNavMeshAgent.Resume();
+                                anim.SetBool("PlayerClose", false);
 								if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending)) {
 									setNextWaypoint();
 								}
