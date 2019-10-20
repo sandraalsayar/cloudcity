@@ -18,6 +18,8 @@ public class CharacterInputController : MonoBehaviour
     private float forwardSpeedLimit = 1f;
     public int pickUpCounter = 0;
 
+    StarCollector starCollector;
+
     public float Forward
     {
         get;
@@ -53,7 +55,10 @@ public class CharacterInputController : MonoBehaviour
 
 
 
-
+    void Start(){
+        // Reference to the starcollector
+        starCollector = GetComponent<StarCollector>();
+    }
     void Update()
     {
 
@@ -86,7 +91,8 @@ public class CharacterInputController : MonoBehaviour
         Turn = h;
 
         //If z was pressed and while held, cue sneak action anim
-        if (Input.GetKeyDown(KeyCode.Z))
+        // ONLY if first star was collected
+        if (Input.GetKeyDown(KeyCode.Z) && starCollector.stars[0])
         {
             ActionSneak = Input.GetKeyDown(KeyCode.Z);
         }
@@ -98,14 +104,14 @@ public class CharacterInputController : MonoBehaviour
         }
         // interact is ONLY button press "Interact"
         // if it's within range of a star(checked by canCollect), let them press X
-        ActionInteract = Input.GetButtonDown("Interact") && GetComponent<StarCollector>().canCollect;
+        ActionInteract = Input.GetButtonDown("Interact") && starCollector.canCollect;
         if (pickUpCounter>=1 || ActionInteract){
             pickUpCounter++;
         }
         // Once pick up animation is done, destroy star & add to inventory (sets var to cue that)
         if(pickUpCounter>=79){
             pickUpCounter = 0;
-            GetComponent<StarCollector>().pickedUp = true;
+            starCollector.pickedUp = true;
         }
     }
 }

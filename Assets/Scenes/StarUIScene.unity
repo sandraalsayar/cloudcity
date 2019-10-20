@@ -22899,6 +22899,7 @@ MonoBehaviour:
   canCollect: 0
   pickedUp: 0
   starScore: {fileID: 1365259978}
+  stars: 
 --- !u!1001 &1360500662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35228,6 +35229,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 0.025917374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881232508892644112, guid: 65211941d56b245dfa1a977d64486360,
+        type: 3}
+      propertyPath: name
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65211941d56b245dfa1a977d64486360, type: 3}

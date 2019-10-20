@@ -12,14 +12,16 @@ public class StarCollector : MonoBehaviour
 
     public Text starScore;
 
+    public bool[] stars;
+
     public void Start()
     {
+        stars = new bool[4];
         starScore.text = starCount.ToString();
     }
     public void ReceiveStar()
     {
         starCount++;
-        Debug.Log("count"+starCount);
         canCollect = false;
         pickedUp = false;
         starScore.text = starCount.ToString();

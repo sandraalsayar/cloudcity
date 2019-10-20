@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CollectableStar : MonoBehaviour
 {
+    public string name; // name is the index and star number(specific)
     //Enter->stay
     void OnTriggerStay(Collider c)
     {
@@ -19,6 +20,11 @@ public class CollectableStar : MonoBehaviour
                 // only go through with picking up steps IF pickedup animation is complete
                 if(bc.pickedUp){
                 //    //EventManager.TriggerEvent<BombBounceEvent, Vector3>(c.transform.position);
+
+                    // Add to correct star index
+                    bc.stars[int.Parse(this.name)] = true;
+
+                    Debug.Log("stars collected" + bc.stars[0]);
                     Destroy(this.gameObject);
                     bc.ReceiveStar();
                 }
