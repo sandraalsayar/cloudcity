@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlaceItemDownTrigger : MonoBehaviour
 {
     private Animator anim;
-    private Animator star_anim;
+    public GameObject newStar;
 
 
     private void OnTriggerEnter(Collider other)
@@ -14,10 +14,19 @@ public class PlaceItemDownTrigger : MonoBehaviour
         {
             anim = other.gameObject.transform.parent.gameObject.GetComponent<Animator>();
             anim.SetBool("ReachedDestination", true);
-            star_anim = other.gameObject.GetComponent<Animator>();
-            star_anim.SetTrigger("NearBench");
+
+            StartCoroutine(WaitUntilStarOnBench(other.gameObject));
+
 
         }
      
+    }
+
+    IEnumerator WaitUntilStarOnBench(GameObject star)
+    {
+        yield return new WaitForSeconds(8);
+        Destroy(star);
+        newStar.SetActive(true);
+
     }
 }
