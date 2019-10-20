@@ -26,7 +26,6 @@
 		public Rigidbody player;
 		private Vector3 playerPosition;
 		public static bool turnOffCollider;
-		public Transform teleportLocation;
 		public static bool Lose;
 
 		private void Start() {
@@ -53,9 +52,9 @@
 		private void Update() {
 		// If star entered the border, then start walking
 			if (MazeFlagCollisionCode.sheepFlag == true) {
-                anim.SetTrigger("StartWalking");
+				anim.SetTrigger("StartWalking");
 				
-				if (keepGoing & currWaypoint < 19) {
+				if (keepGoing & currWaypoint < 22) {
 					if (currWaypoint == -1) {
 						currWaypoint = 0;
 						if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending)) {
@@ -64,115 +63,64 @@
 					} else {
 						if (BehindSphereColliderScript.StopMoving == true) {
 							myNavMeshAgent.Stop();
+
 							if (BehindSphereColliderScript.TurnAroundFlag == true && !Lose) { //Sheep turns around fully -> GAMEOVER
-                            //transform.LookAt(playerPosition);
-                                anim.SetBool("PlayerTooClose", true);
-                                Debug.Log("YOU LOOOOOSEEEE IN BACK");
-								// pause game
-                                Lose = true;
 
-							} else {
-                                anim.SetBool("PlayerClose", true);
-                        
+								anim.SetBool("PlayerTooClose", true);
+								Debug.Log("YOU LOOOOOSEEEE IN BACK");
+                                Lose = true; // Pauses game
+
+                            } else {
+                            	anim.SetBool("PlayerClose", true);
+
                             }
-						} else if (BehindSphereColliderScript.StopMoving == false) {
-							if(FrontBoxColliderScript.StopMoving == true) {
-								myNavMeshAgent.Stop();
-                                anim.SetBool("PlayerInFront", true);
-								Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
-								Lose = true;
-							} else {
-								myNavMeshAgent.Resume();
-                                anim.SetBool("PlayerClose", false);
-								if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending)) {
-									setNextWaypoint();
-								}
-							}
-						} 
-					}
-					
-				}
-			}
-		}
+                        } else if (BehindSphereColliderScript.StopMoving == false) {
+                        	if(FrontBoxColliderScript.StopMoving == true) {
+                        		myNavMeshAgent.Stop();
+                        		anim.SetBool("PlayerInFront", true);
+                        		Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
+                        		Lose = true;
+                        	} else {
+                        		myNavMeshAgent.Resume();
+                        		anim.SetBool("PlayerClose", false);
+                        		if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending)) {
+                        			setNextWaypoint();
+                        		}
+                        	}
+                        } 
+                    }
+
+                }
+            }
+        }
 
 
-		private void setNextWaypoint() {
-		// Debug.Log("Im supposed to be called again and again but am I?????");
-		// This decides which waypoint in the array the minion is going to next
-		// waypoints.Length - 1
+        private void setNextWaypoint() {
 		// Debug.Log("Current waypoint index again us: " + currWaypoint);
-			if (currWaypoint >= waypoints.Length - 1) {
-				keepGoing = false;
-
-			} else {
-
-				if (MazeFlagCollisionCode.sheepFlag == true) {
-					keepGoing = true;
-					currWaypoint++;
-					myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
-				}
-			}
-
-
-			if (waypoints.Length == 0) {
-				Debug.Log("The array contains no waypoints.");
-			}
-		}
-	}
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-	// // if player hits sheep
-	// void OnTriggerEnter(Collider other) {
-	// 	// Debug.Log("Ok so im inside!");
-	// 	if(other.gameObject.CompareTag("Player")) {
-	// 		keepGoing = false;
-	// 		myNavMeshAgent.Stop();
-	// 	}
-	// }
-
-	// /*
-	// Player is still standing to close to the sheep
-	// Start timer. If time finishes, sheep turns around, player looses and resets
-	// If player moves away before timer ends, timer resets
-	// */
-	// void OnTriggerStay(Collider other) {
-	// 	if(other.gameObject.CompareTag("Player")) {
-	// 		// If it's hit from behind
-	// 		if(BehindSphereColliderScript.BehindFlag == true) {
-	// 			timer += Time.deltaTime; // real time seconds
-	// 			Debug.Log("TIMER IS = " + timer);
-	// 			if (timer >= 5.0) {  // NOTE: Need to make this smaller but untill everything is implemented keep it high
-	// 				// turn around completly and loose game
-	// 				// Debug.Log("TIMER IS NOW 5!!!");
-	// 				// Disable the front collider since it will turn around (double collision)
-	// 				turnOffCollider = true;
-	// 				Debug.Log("I TURNED AROUND MUWAAAHAHAHAHAHAHAHA");
-	// 				Debug.Log("The player postion is  = " + playerPosition);
-	// 				transform.LookAt(playerPosition);
-	// 				Debug.Log("YOU LOOOOOSEEEE IN BACK");
-	// 			}
-	// 		} else if(FrontBoxColliderScript.frontBoxDisabled == true && FrontBoxColliderScript.FrontFlag == true) {
-	// 			timer += Time.deltaTime; // real time seconds
-	// 			if (timer >= 2.0) {
-	// 				transform.LookAt(playerPosition);
-	// 				Debug.Log("YOU LOOOOOSEEEE IN FRONT");
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	// // Player moved out of shot and is not in danger
-	// void OnTriggerExit(Collider other) {
-	// 	timer = 0;
-	// 	keepGoing = true;
-	// 	myNavMeshAgent.Resume();
-
-	// }
-// }
+			// if the final waypoint is reached then stop
+        	if (currWaypoint >= waypoints.Length - 1) {
+        		keepGoing = false;
+        	} else {
+        		if (currWaypoint == 19) {
+        			timer += Time.deltaTime;
+        			if (timer >= 5.0) { 
+        				keepGoing = true;
+        				currWaypoint++;
+        				myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
+        			}
+        		} else { 
+        			if (MazeFlagCollisionCode.sheepFlag == true) {
+        				keepGoing = true;
+        				currWaypoint++;
+        				myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
+        			}
+        		}
+        	}
+        }
+    }
 
 
+        	// if (waypoints.Length == 0) {
+        	// 	Debug.Log("The array contains no waypoints.");
+        	// }
 
