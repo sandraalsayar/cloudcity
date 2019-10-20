@@ -27,6 +27,7 @@
 		private Vector3 playerPosition;
 		public static bool turnOffCollider;
 		public Transform teleportLocation;
+		public static bool Lose;
 
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
@@ -35,6 +36,7 @@
 			timer = 0; // 5 seconds
 			playerPosition = player.transform.position;
 			turnOffCollider = false;
+			Lose = false;
 
 			if (anim == null) {
 				Debug.Log("Animator could not be found");
@@ -62,11 +64,13 @@
 					} else {
 						if (BehindSphereColliderScript.StopMoving == true) {
 							myNavMeshAgent.Stop();
-							if (BehindSphereColliderScript.TurnAroundFlag == true) { //Sheep turns around fully -> GAMEOVER
+							if (BehindSphereColliderScript.TurnAroundFlag == true && !Lose) { //Sheep turns around fully -> GAMEOVER
                             //transform.LookAt(playerPosition);
                                 anim.SetBool("PlayerTooClose", true);
                                 Debug.Log("YOU LOOOOOSEEEE IN BACK");
-								// STOP EVERYTHING & RESTART LEVEL HERE - Stop timer as well
+								// pause game
+                                Lose = true;
+
 							} else {
                                 anim.SetBool("PlayerClose", true);
                         
@@ -76,6 +80,7 @@
 								myNavMeshAgent.Stop();
                                 anim.SetBool("PlayerInFront", true);
 								Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
+								Lose = true;
 							} else {
 								myNavMeshAgent.Resume();
                                 anim.SetBool("PlayerClose", false);
