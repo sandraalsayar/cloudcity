@@ -51,6 +51,7 @@
 		private void Update() {
 		// If star entered the border, then start walking
 			if (MazeFlagCollisionCode.sheepFlag == true) {
+                anim.SetBool("PlayerClose", true);
 				
 				if (keepGoing & currWaypoint < 19) {
 					if (currWaypoint == -1) {
