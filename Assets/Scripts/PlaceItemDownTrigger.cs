@@ -24,6 +24,7 @@ public class PlaceItemDownTrigger : MonoBehaviour
 
     IEnumerator WaitUntilStarOnBench(GameObject star)
     {
+        Debug.Log("Im waiting for ");
         yield return new WaitForSeconds(8);
         Destroy(star);
         newStar.SetActive(true);
