@@ -18,7 +18,8 @@ public class TriggerEnd : MonoBehaviour
     //}
 
     void OnTriggerEnter(Collider c){
-        if (c.attachedRigidbody != null && c.CompareTag("Player") && c.attachedRigidbody.gameObject.GetComponent<StarCollector>().starCount==1)
+        //starcount hardcoded to be 2 for now
+        if (c.attachedRigidbody != null && c.CompareTag("Player") && c.attachedRigidbody.gameObject.GetComponent<StarCollector>().starCount==2)
         {
             Debug.Log("endScene");
             SceneManager.LoadScene("End");
