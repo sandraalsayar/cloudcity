@@ -68,7 +68,11 @@
 
 								anim.SetBool("PlayerTooClose", true);
 								Debug.Log("YOU LOOOOOSEEEE IN BACK");
-                                Lose = true; // Pauses game
+								timer += Time.deltaTime;
+								if (timer >= 2.0) {
+									Lose = true; // Pauses game
+								}
+                                
 
                             } else {
                             	anim.SetBool("PlayerClose", true);
