@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 4646683401527407884}
   - component: {fileID: 4646683401527407885}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: GameOverCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23b3655367f5334e92cbfb9b9670ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeout: 10
+  timeout: 180
 --- !u!1 &4646683402214899786
 GameObject:
   m_ObjectHideFlags: 0

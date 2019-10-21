@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameOverMenuTimeIn : MonoBehaviour 
 {
     //Number of seconds till game over
-    public float timeout = 60f;
+    public float timeout;
 
     private CanvasGroup canvasGroup;
 
@@ -29,7 +29,7 @@ public class GameOverMenuTimeIn : MonoBehaviour
     //Waits waitTime amount of seconds, then enables the canvas/menu to appear
     IEnumerator TimeOut(float waitTime)
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime+1); //+1 so that the timer goes down to 0 then shows gameover
         if (canvasGroup.interactable)
         {
             Time.timeScale = 1f;
