@@ -115,7 +115,7 @@ public class CharacterControllerScript : MonoBehaviour
             isIdle++;
         }
         //Once counter hits this number, it should cue long idle animation (dance)
-        if (isIdle >= 200)
+        if (isIdle >= 300)
         {
             anim.SetBool("longIdle", true);
 
