@@ -8,6 +8,7 @@ TagManager:
   - BehindSphereCollider
   - FrontBoxCollider
   - Star
+  - PauseMenuCanvas
   layers:
   - Default
   - TransparentFX
