@@ -34,7 +34,7 @@ public class Idle_Transition : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Happy Hand Gesture"))
         {
             random_value = Random.Range(11, 13);
-            Debug.Log("current state is happy hand gesture");
+            // Debug.Log("current state is happy hand gesture");
         } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Looking Behind"))
         {
             random_value = Random.Range(21, 23);
