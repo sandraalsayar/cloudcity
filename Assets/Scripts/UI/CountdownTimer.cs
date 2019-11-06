@@ -33,7 +33,7 @@ public class CountdownTimer : MonoBehaviour
         while (currCountdown >= 0)
         {
 
-            Debug.Log("countdown: " + currCountdown);
+            // Debug.Log("countdown: " + currCountdown);
             countdownText = gameObject.GetComponent<Text>();
             countdownText.text = "Timer: "+ currCountdown+ " seconds";
 

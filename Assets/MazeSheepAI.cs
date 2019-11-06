@@ -67,7 +67,7 @@
 							if (BehindSphereColliderScript.TurnAroundFlag == true && !Lose) { //Sheep turns around fully -> GAMEOVER
 
 								anim.SetBool("PlayerTooClose", true);
-								Debug.Log("YOU LOOOOOSEEEE IN BACK");
+								// Debug.Log("YOU LOOOOOSEEEE IN BACK");
 								timer += Time.deltaTime;
 								if (timer >= 2.0) {
 									Lose = true; // Pauses game
@@ -82,7 +82,7 @@
                         	if(FrontBoxColliderScript.StopMoving == true) {
                         		myNavMeshAgent.Stop();
                         		anim.SetBool("PlayerInFront", true);
-                        		Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
+                        		// Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
                         		Lose = true;
                         	} else {
                         		myNavMeshAgent.Resume();

@@ -19,12 +19,12 @@ public class CollectableStar : MonoBehaviour
                 bc.canCollect = true;
                 // only go through with picking up steps IF pickedup animation is complete
                 if(bc.pickedUp){
-                //    //EventManager.TriggerEvent<BombBounceEvent, Vector3>(c.transform.position);
+                //EventManager.TriggerEvent<BombBounceEvent, Vector3>(c.transform.position);
 
                     // Add to correct star index
                     bc.stars[int.Parse(this.name)] = true;
 
-                    Debug.Log("stars collected" + bc.stars[0]);
+                    // Debug.Log("stars collected" + bc.stars[0]);
                     Destroy(this.gameObject);
                     bc.ReceiveStar();
                 }
