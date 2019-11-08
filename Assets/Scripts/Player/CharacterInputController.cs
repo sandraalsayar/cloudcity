@@ -19,6 +19,8 @@ public class CharacterInputController : MonoBehaviour
     public int pickUpCounter = 0;
 
     StarCollector starCollector;
+    private Animator anim;
+    private bool activeAnim;
 
     public float Forward
     {
@@ -58,6 +60,7 @@ public class CharacterInputController : MonoBehaviour
     void Start(){
         // Reference to the starcollector
         starCollector = GetComponent<StarCollector>();
+        anim = GetComponent<Animator>();
     }
     void Update()
     {
@@ -104,14 +107,23 @@ public class CharacterInputController : MonoBehaviour
         }
         // interact is ONLY button press "Interact"
         // if it's within range of a star(checked by canCollect), let them press X
-        ActionInteract = Input.GetButtonDown("Interact") && starCollector.canCollect;
-        if (pickUpCounter>=1 || ActionInteract){
-            pickUpCounter++;
+        // don't allow X to be pressed while it's playing
+        ActionInteract = Input.GetButtonDown("Interact") && starCollector.canCollect && !activeAnim;
+        if(ActionInteract){
+            activeAnim = true;
+            anim.SetTrigger("pickUp");
+            StartCoroutine(WaitForAnim());
+
         }
-        // Once pick up animation is done, destroy star & add to inventory (sets var to cue that)
-        if(pickUpCounter>=79){
-            pickUpCounter = 0;
-            starCollector.pickedUp = true;
-        }
+    }
+
+    // coroutine to make star disappear when animation is done playing
+    IEnumerator WaitForAnim()
+    {
+        yield return new WaitForSeconds(1.6f);
+        //duration based on anim length but sometimes it's off anim.GetCurrentAnimatorStateInfo(0).length+ anim.GetCurrentAnimatorStateInfo(0).normalizedTime
+        starCollector.pickedUp = true;
+        activeAnim = false;
+
     }
 }

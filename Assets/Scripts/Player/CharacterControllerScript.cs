@@ -133,7 +133,6 @@ public class CharacterControllerScript : MonoBehaviour
 
         //Checking for special actions
         anim.SetBool("isSneaking", inputActionSneak);
-        anim.SetBool("pickUp", inputActionInteract);
 
         anim.SetFloat("velx", inputTurn);
         anim.SetFloat("vely", inputForward);

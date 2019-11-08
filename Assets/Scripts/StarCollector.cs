@@ -16,7 +16,7 @@ public class StarCollector : MonoBehaviour
 
     public void Start()
     {
-        stars = new bool[4];
+        stars = new bool[7];
         starScore.text = starCount.ToString();
     }
     public void ReceiveStar()
