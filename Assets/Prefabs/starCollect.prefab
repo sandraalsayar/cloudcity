@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5881232508892644119}
   - component: {fileID: 5881232508892644112}
   m_Layer: 0
-  m_Name: star
+  m_Name: starCollect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2503923158035765338}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 83.63, y: 1.2475175, z: 1.8}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 40, y: 45, z: 40}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -105,3 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecc9b99c651c40b4b328868c7293527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: 
