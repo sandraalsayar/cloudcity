@@ -8,7 +8,9 @@ public class PlantAction : MonoBehaviour
     public GameObject plantStar;
     // Start is called before the first frame update
     Animator anim;
+    //refernce to star collector class
     StarCollector starCollector;
+    //reference to player
     public GameObject player;
 
     void Start()
@@ -22,17 +24,19 @@ public class PlantAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if you are near the plant and the PLAYER's animation has played, trigger animation for plant
+        // make star appear
         if (isNearPlant && starCollector.interacted)
         {
             //trigger plant flying animation
             anim.SetTrigger("isYanked");
-
             //make star pop out
             plantStar.SetActive(true);
 
         }
     }
-
+    // when you enter collision zone, set check that you're near the object to true
+    // update starCollector's variable to true as well
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

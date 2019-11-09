@@ -125,21 +125,45 @@ public class CharacterInputController : MonoBehaviour
 
         //Interaction for star collections
         //ActionInteract = Input.GetButtonDown("Interact") && starCollector.canCollect && !activeAnim;
-        if (Input.GetButtonDown("Interact") && starCollector.canCollect && !activeAnim)
+        if (Input.GetButtonDown("Interact") && !activeAnim)
         {
-            Debug.Log("isstar");
             activeAnim = true;
-            //anim.SetTrigger("pickUp");
-            anim.SetFloat("interaction", 1.0f);
-            anim.SetTrigger("interact");
-            StartCoroutine(WaitForAnim());
-
-        } else if(Input.GetButtonDown("Interact") && starCollector.isNearPlant && !activeAnim){
-            Debug.Log("plant");
-            activeAnim = true;
-            anim.SetFloat("interaction", 2.0f);
-            anim.SetTrigger("interact");
-            StartCoroutine(WaitForInteract());
+            //regular collecting the actual star
+            if (starCollector.canCollect)
+            {
+                Debug.Log("isstar");
+                anim.SetFloat("interaction", 1.0f);
+                anim.SetTrigger("interact");
+                StartCoroutine(WaitForAnim());
+            }
+            //plant interaction
+            else if (starCollector.isNearPlant)
+            {
+                Debug.Log("plant");
+                anim.SetFloat("interaction", 2.0f);
+                anim.SetTrigger("interact");
+                StartCoroutine(WaitForInteract(2.3f));
+            }
+            //tree interaction
+            else if (starCollector.isNearTree)
+            {
+                Debug.Log("tree");
+                anim.SetFloat("interaction", 3.0f);
+                anim.SetTrigger("interact");
+                StartCoroutine(WaitForInteract(2.3f)); //TODO: adjust time based on anim&whether needed
+            }
+            //rock interaction
+            else if(starCollector.isNearRock)
+            {
+                Debug.Log("rock");
+                anim.SetFloat("interaction", 4.0f);
+                anim.SetTrigger("interact");
+                StartCoroutine(WaitForInteract(2.3f)); //TODO: adjust time based on anim&whether needed
+            }
+            else { //talking/next interaction
+                Debug.Log("plain interact");
+                //TODO: whatever needs to be done
+            }
         }
 
         //if (Input.GetButtonDown("Jump"))
@@ -163,9 +187,9 @@ public class CharacterInputController : MonoBehaviour
         activeAnim = false;
 
     }
-    IEnumerator WaitForInteract(){
-        yield return new WaitForSeconds(2.3f);
-        starCollector.interacted = true;
+    IEnumerator WaitForInteract(float time){
+        yield return new WaitForSeconds(time);
+        starCollector.interacted = true; // used to trigger whatever needs to be done AFTER animation is complete
         activeAnim = false;
     }
 }
