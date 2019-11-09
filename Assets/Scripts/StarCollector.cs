@@ -26,6 +26,8 @@ public class StarCollector : MonoBehaviour
     public Text newsDelivery;
     public bool[] stars;
 
+    string nextStar = "";
+
     public void Start()
     {
         stars = new bool[7];
@@ -35,8 +37,14 @@ public class StarCollector : MonoBehaviour
     public void ReceiveStar()
     {
         starCount++;
+        //make star appear above head
+        nextStar = "StarBoy/stars/Orbit/"+"star" + starCount;
+        GameObject.Find(nextStar).SetActive(true);
+
+        //reset vars
         canCollect = false;
         pickedUp = false;
+        //update num in UI
         starScore.text = starCount.ToString();
     }
     //similar method for when delivering newspapers
