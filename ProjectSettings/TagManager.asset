@@ -9,6 +9,7 @@ TagManager:
   - FrontBoxCollider
   - Star
   - PauseMenuCanvas
+  - NPC
   layers:
   - Default
   - TransparentFX

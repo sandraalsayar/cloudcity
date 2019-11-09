@@ -160,10 +160,15 @@ public class CharacterInputController : MonoBehaviour
                 anim.SetTrigger("interact");
                 StartCoroutine(WaitForInteract(2.3f)); //TODO: adjust time based on anim&whether needed
             }
-            else { //talking/next interaction
-                Debug.Log("plain interact");
-                //TODO: whatever needs to be done
+            else{ //talking/next interaction
+                activeAnim = false;
             }
+        }
+        //throw newspaper if in quest
+        if (Input.GetKeyDown("s") && starCollector.inQuest)
+        {
+            Debug.Log("throw");
+            //make newspaper fly
         }
 
         //if (Input.GetButtonDown("Jump"))
