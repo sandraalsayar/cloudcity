@@ -5,24 +5,60 @@ using UnityEngine.SceneManagement;
 
 public class TriggerEnd : MonoBehaviour
 {
+    public bool well;
+    public GameObject player;
+    StarCollector starCollector;
+
+    public bool firstTime;
     // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    void Start()
+    {
+        well = false;
+        firstTime = true;
+        starCollector = player.GetComponent<StarCollector>();
+    }
 
     //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+    void Update()
+    {
+        //will only go through if you complete the game
+        if(well)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                starCollector.endgame = true;
+                if (firstTime)
+                {
+                    Debug.Log("toggle");
+                    //toggle the text
+                    gameObject.GetComponent<TextboxToggle>().TriggerDialogue();
+                    firstTime = false;
+                }
+                else
+                {
+                    Debug.Log("next");
+                    FindObjectOfType<DialogueManager>().DisplayNextSentence();
+                } 
+            }  
+        }
+
+
+    }
 
     void OnTriggerEnter(Collider c){
-        //starcount hardcoded to be 2 for now
-        if (c.attachedRigidbody != null && c.CompareTag("Player") && c.attachedRigidbody.gameObject.GetComponent<StarCollector>().starCount==2)
+        if (c.CompareTag("Player")
+            && starCollector.starCount==7)
         {
-            Debug.Log("endScene");
-            SceneManager.LoadScene("End");
+            well = true;
         }
     }
+    void OnTriggerExit(Collider c)
+    {
+        //starcount hardcoded to be 2 for now
+        if (c.CompareTag("Player"))
+        {
+            well = false;
+        }
+    }
+
 }
