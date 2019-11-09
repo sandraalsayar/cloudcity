@@ -17,14 +17,20 @@ public class StarCollector : MonoBehaviour
     public bool isNearTree = false;
     //rock variable
     public bool isNearRock = false;
+    //sheep
+    //public bool isNPC = false;
+    public int newsDelivered = 0;
+    public bool inQuest = false;
 
     public Text starScore;
+    public Text newsDelivery;
     public bool[] stars;
 
     public void Start()
     {
         stars = new bool[7];
         starScore.text = starCount.ToString();
+        newsDelivery.text = newsDelivered.ToString() + "/ 4"; //hardcode newspaper count total
     }
     public void ReceiveStar()
     {
@@ -33,5 +39,6 @@ public class StarCollector : MonoBehaviour
         pickedUp = false;
         starScore.text = starCount.ToString();
     }
+    //similar method for when delivering newspapers
 }
 
