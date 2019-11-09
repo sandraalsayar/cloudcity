@@ -27,12 +27,15 @@ public class StarCollector : MonoBehaviour
     public bool[] stars;
 
     string nextStar = "";
+    //endgame check
+    public bool endgame;
 
     public void Start()
     {
         stars = new bool[7];
         starScore.text = starCount.ToString();
         newsDelivery.text = newsDelivered.ToString() + "/ 4"; //hardcode newspaper count total
+        endgame = false;
     }
     public void ReceiveStar()
     {

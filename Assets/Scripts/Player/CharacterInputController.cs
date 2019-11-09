@@ -96,8 +96,12 @@ public class CharacterInputController : MonoBehaviour
         //Turn = filteredTurnInput;
 
         //unfiltered input
-        Forward = v;
-        Turn = h;
+        //DONT ALLOW MOVEMENT WHEN @ ENDGAME DIALOGUE
+        if(!starCollector.endgame){
+            Forward = v;
+            Turn = h; 
+        }
+
 
         //If z was pressed and while held, cue sneak action anim
         // ONLY if first star was collected
