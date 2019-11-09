@@ -21,6 +21,7 @@ public class CharacterInputController : MonoBehaviour
     StarCollector starCollector;
     private Animator anim;
     private bool activeAnim;
+    public bool nearPlant;
 
     public float Forward
     {
@@ -113,14 +114,34 @@ public class CharacterInputController : MonoBehaviour
         // interact is ONLY button press "Interact"
         // if it's within range of a star(checked by canCollect), let them press X
         // don't allow X to be pressed while it's playing
-        ActionInteract = Input.GetButtonDown("Interact") && starCollector.canCollect && !activeAnim;
-        if (ActionInteract)
+        //ActionInteract = Input.GetButtonDown("Interact") && starCollector.canCollect && !activeAnim;
+        //if (ActionInteract)
+        //{
+        //    activeAnim = true;
+        //    anim.SetTrigger("pickUp");
+        //    StartCoroutine(WaitForAnim());
+
+        //}
+
+        //Interaction for star collections
+        //ActionInteract = Input.GetButtonDown("Interact") && starCollector.canCollect && !activeAnim;
+        if (Input.GetButtonDown("Interact") && starCollector.canCollect && !activeAnim)
         {
+            Debug.Log("isstar");
             activeAnim = true;
-            anim.SetTrigger("pickUp");
+            //anim.SetTrigger("pickUp");
+            anim.SetFloat("interaction", 1.0f);
+            anim.SetTrigger("interact");
             StartCoroutine(WaitForAnim());
 
+        } else if(Input.GetButtonDown("Interact") && starCollector.isNearPlant && !activeAnim){
+            Debug.Log("plant");
+            activeAnim = true;
+            anim.SetFloat("interaction", 2.0f);
+            anim.SetTrigger("interact");
+            StartCoroutine(WaitForInteract());
         }
+
         //if (Input.GetButtonDown("Jump"))
         //{
         //    //anim.SetTrigger("jump");
@@ -141,5 +162,10 @@ public class CharacterInputController : MonoBehaviour
         starCollector.pickedUp = true;
         activeAnim = false;
 
+    }
+    IEnumerator WaitForInteract(){
+        yield return new WaitForSeconds(2.3f);
+        starCollector.interacted = true;
+        activeAnim = false;
     }
 }

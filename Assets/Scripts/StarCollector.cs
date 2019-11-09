@@ -10,6 +10,9 @@ public class StarCollector : MonoBehaviour
     public bool canCollect = false;
     public bool pickedUp = false;
 
+    public bool interacted = false;
+    public bool isNearPlant = false;
+
     public Text starScore;
 
     public bool[] stars;
