@@ -85,6 +85,7 @@ public class CharacterControllerScript : MonoBehaviour
         //string inputActionName = "";
         bool inputActionSneak = false;
         bool inputActionInteract = false;
+        bool inputJump = false;
 
         //    // input is polled in the Update() step, not FixedUpdate()
         //    // Therefore, you should ONLY use input state that is NOT event-based in FixedUpdate()
@@ -99,6 +100,7 @@ public class CharacterControllerScript : MonoBehaviour
             //inputActionName = cinput.ActionName;
             inputActionSneak = cinput.ActionSneak;
             inputActionInteract = cinput.ActionInteract;
+            inputJump = cinput.Jump;
 
 
         }
@@ -106,8 +108,7 @@ public class CharacterControllerScript : MonoBehaviour
         //    //onCollisionXXX() doesn't always work for checking if the character is grounded from a playability perspective
         //    //Uneven terrain can cause the player to become technically airborne, but so close the player thinks they're touching ground.
         //    //Therefore, an additional raycast approach is used to check for close ground
-        bool isGrounded = IsGrounded;
-        //|| CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
+        bool isGrounded = IsGrounded || Common.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
         //If player is idle, increment counter
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
@@ -137,6 +138,17 @@ public class CharacterControllerScript : MonoBehaviour
         anim.SetFloat("velx", inputTurn);
         anim.SetFloat("vely", inputForward);
 
+        //anim.SetBool("jump",inputJump);
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            //anim.SetTrigger("jump");
+            //Jump = true;
+            Debug.Log("jump");
+            anim.applyRootMotion = false;
+            rbody.AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
+            anim.applyRootMotion = true;
+        }
 
         //anim.SetBool("isFalling", !isGrounded);
     //    anim.SetBool("doButtonPress", inputAction);
@@ -176,8 +188,7 @@ public class CharacterControllerScript : MonoBehaviour
         Vector3 newRootPosition;
         Quaternion newRootRotation;
 
-        bool isGrounded = IsGrounded;
-            //|| CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
+        bool isGrounded = IsGrounded|| Common.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
         if (isGrounded)
         {
@@ -187,7 +198,7 @@ public class CharacterControllerScript : MonoBehaviour
         else
         {
             //Simple trick to keep model from climbing other rigidbodies that aren't the ground
-            newRootPosition = new Vector3(anim.rootPosition.x, this.transform.position.y, anim.rootPosition.z);
+            newRootPosition = new Vector3(anim.rootPosition.x, this.transform.position.y, anim.rootPosition.z);//this.transform.position.y
         }
 
     //    //use rotational root motion as is
@@ -197,7 +208,8 @@ public class CharacterControllerScript : MonoBehaviour
 
         //this.transform.position = newRootPosition;
         //this.transform.rotation = newRootRotation;
-        this.transform.position = Vector3.LerpUnclamped(this.transform.position, new Vector3(anim.rootPosition.x, this.transform.position.y, anim.rootPosition.z), rootMovementSpeed);
+
+        this.transform.position = Vector3.LerpUnclamped(this.transform.position, new Vector3(anim.rootPosition.x, this.transform.position.y, anim.rootPosition.z), rootMovementSpeed); //this.transform.position.y
         this.transform.rotation = Quaternion.LerpUnclamped(this.transform.rotation, anim.rootRotation, rootTurnSpeed);
 
     }

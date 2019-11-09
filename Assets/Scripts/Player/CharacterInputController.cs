@@ -37,9 +37,14 @@ public class CharacterInputController : MonoBehaviour
     {
         get;
         private set;
-        
+
     }
     public bool ActionSneak
+    {
+        get;
+        private set;
+    }
+    public bool Jump
     {
         get;
         private set;
@@ -109,12 +114,23 @@ public class CharacterInputController : MonoBehaviour
         // if it's within range of a star(checked by canCollect), let them press X
         // don't allow X to be pressed while it's playing
         ActionInteract = Input.GetButtonDown("Interact") && starCollector.canCollect && !activeAnim;
-        if(ActionInteract){
+        if (ActionInteract)
+        {
             activeAnim = true;
             anim.SetTrigger("pickUp");
             StartCoroutine(WaitForAnim());
 
         }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    //anim.SetTrigger("jump");
+        //    Jump = true;
+
+        //} else
+        //{
+        //    Jump = false;
+        //}
+
     }
 
     // coroutine to make star disappear when animation is done playing
