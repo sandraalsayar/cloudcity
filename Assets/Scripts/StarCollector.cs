@@ -11,10 +11,14 @@ public class StarCollector : MonoBehaviour
     public bool pickedUp = false;
 
     public bool interacted = false;
+    //plant variable
     public bool isNearPlant = false;
+    //tree variable
+    public bool isNearTree = false;
+    //rock variable
+    public bool isNearRock = false;
 
     public Text starScore;
-
     public bool[] stars;
 
     public void Start()
