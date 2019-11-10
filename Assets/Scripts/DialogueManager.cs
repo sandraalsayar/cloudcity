@@ -14,6 +14,8 @@ public class DialogueManager : MonoBehaviour
     //gameobjects that will have dialogue
     public GameObject player;
     StarCollector starCollector;
+    public Animator playerAnim;
+
     public GameObject NewsSheep;
     NewspaperSheep sheep;
     public GameObject newsStar;
@@ -31,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue (Dialogue d)
     {
         animator.SetBool("isOpen", true);
+        playerAnim.SetBool("dialogue", true); //prevent dancing
         Debug.Log("start convo for" + d.name);
         nameText.text = d.name;
         //clear previous
@@ -57,6 +60,7 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("end ofconvo");
         animator.SetBool("isOpen", false);
+        playerAnim.SetBool("dialogue", false); //allow dancing
         if(starCollector.endgame){
             Debug.Log("endScene");
             SceneManager.LoadScene("End");
