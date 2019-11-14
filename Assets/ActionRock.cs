@@ -24,6 +24,7 @@ public class ActionRock : MonoBehaviour
 	void Update() {
 		// check if player is near rock and rock isn't turned over yet
 		if (isNearRock && isTurnedOver == false) {
+			// noooo looping
 			if(Input.GetKeyDown("x"))
 			{
 				anim.SetTrigger("isTurnedOver");

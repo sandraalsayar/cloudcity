@@ -15,13 +15,14 @@ public class ActionStar : MonoBehaviour
     StarCollector starCollector;
     //reference to player
     public GameObject player;
+    public bool starFloated;
 
     void Start()
     {
 		anim = GetComponent<Animator>();
 		// CanFloat = false;
 		starIsFloating = false;
-
+		starFloated = false;
 		isNearRock = false;
         starCollector = player.GetComponent<StarCollector>();
 
@@ -29,20 +30,13 @@ public class ActionStar : MonoBehaviour
 
     void Update()
     {
-		// if (CanFloat == false && ActionRock.isTurnedOver == true) {
-		// 	anim.SetTrigger("CanFloat");
-		// 	CanFloat = true;
-		// 	starIsFloating = true;
-		// }
+		if (ActionRock.isTurnedOver == true) {
+			anim.SetBool("starIsFloating", true);
+			// CanFloat = true;
+			// starIsFloating = true;
+			starFloated = true;
+		}
 
-		// if you are near the rock and the PLAYER's animation has played, trigger animation for rock
-        // make star appear
-        if (isNearRock && starCollector.interacted)
-        {
-            //make star pop out
-            rockStar.SetActive(true);
-
-        }
     }
 
     // when you enter collision zone, set check that you're near the rock to true
@@ -65,10 +59,4 @@ public class ActionStar : MonoBehaviour
         }
     }
 
-    //called at end of Star animation
-    public void FadePlant(){
-        Destroy(this.gameObject);
-        starCollector.interacted = false;
-        starCollector.isNearRock = false;
-    }
 }
