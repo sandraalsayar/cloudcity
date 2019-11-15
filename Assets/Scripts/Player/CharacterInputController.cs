@@ -154,7 +154,7 @@ public class CharacterInputController : MonoBehaviour
                 Debug.Log("tree");
                 anim.SetFloat("interaction", 3.0f);
                 anim.SetTrigger("interact");
-                StartCoroutine(WaitForInteract(2.3f)); //TODO: adjust time based on anim&whether needed
+                StartCoroutine(WaitForInteract(0.0f)); //TODO: adjust time based on anim&whether needed
             }
             //rock interaction
             else if(starCollector.isNearRock)
