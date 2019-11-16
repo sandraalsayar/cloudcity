@@ -85,7 +85,7 @@ public class CharacterControllerScript : MonoBehaviour
         //string inputActionName = "";
         bool inputActionSneak = false;
         bool inputActionInteract = false;
-        bool inputJump = false;
+        bool inputActionThrow = false;
 
         //    // input is polled in the Update() step, not FixedUpdate()
         //    // Therefore, you should ONLY use input state that is NOT event-based in FixedUpdate()
@@ -100,7 +100,7 @@ public class CharacterControllerScript : MonoBehaviour
             //inputActionName = cinput.ActionName;
             inputActionSneak = cinput.ActionSneak;
             inputActionInteract = cinput.ActionInteract;
-            inputJump = cinput.Jump;
+            //inputActionThrow = cinput.ActionThrow;
 
 
         }
@@ -134,21 +134,22 @@ public class CharacterControllerScript : MonoBehaviour
 
         //Checking for special actions
         anim.SetBool("isSneaking", inputActionSneak);
+        //anim.SetBool("isThrowing", inputActionThrow);
 
         anim.SetFloat("velx", inputTurn);
         anim.SetFloat("vely", inputForward);
 
         //anim.SetBool("jump",inputJump);
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            //anim.SetTrigger("jump");
-            //Jump = true;
-            Debug.Log("jump");
-            anim.applyRootMotion = false;
-            rbody.AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
-            anim.applyRootMotion = true;
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    //anim.SetTrigger("jump");
+        //    //Jump = true;
+        //    Debug.Log("jump");
+        //    anim.applyRootMotion = false;
+        //    rbody.AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
+        //    anim.applyRootMotion = true;
+        //}
 
         //anim.SetBool("isFalling", !isGrounded);
     //    anim.SetBool("doButtonPress", inputAction);

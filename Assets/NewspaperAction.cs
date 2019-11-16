@@ -16,7 +16,9 @@ public class NewspaperAction : MonoBehaviour
 	StarCollector starCollector;
     //reference to player
 	public GameObject player;
-	private bool isThrown;
+    public GameObject newspaper;
+    //GameObject news;
+	public bool isThrown;
 
     // Start is called before the first frame update
 	void Start()
@@ -27,16 +29,29 @@ public class NewspaperAction : MonoBehaviour
 		// blueHouseCounter = 0;
 		anim = GetComponent<Animator>();
 		starCollector = player.GetComponent<StarCollector>();
-		isThrown = false;
+		starCollector.isThrown = false;
+
 	}
 
     // Update is called once per frame
 	void Update()
 	{
-		if (isThrown) {
-			//trigger newspaper flying animation
-			anim.SetTrigger("isNewspaperFlying");
-		}
+        if (starCollector.isThrown)
+        {
+            Debug.Log("newspaper thrown");
+            //trigger newspaper flying animation
+            //anim.SetTrigger("isNewspaperFlying");
+            //newspaper = Instantiate(newspaper); doesnt work
+            newspaper.SetActive(true);
+            newspaper.GetComponent<Rigidbody>().useGravity = true;
+            newspaper.GetComponent<Rigidbody>().velocity = transform.forward * 10.0f;
+            starCollector.isThrown = false;
+
+        }
+        //if(newspaper && newspaper.transform.position.y <= 0){
+        //    Destroy(newspaper);
+        //}
+
 	}
 
 	void OnCollisionEnter(Collision other)
