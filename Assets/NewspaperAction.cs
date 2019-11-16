@@ -17,7 +17,8 @@ public class NewspaperAction : MonoBehaviour
     //reference to player
 	public GameObject player;
     public GameObject newspaper;
-    //GameObject news;
+    public GameObject newsParent;
+    GameObject news;
 	public bool isThrown;
 
     // Start is called before the first frame update
@@ -39,44 +40,48 @@ public class NewspaperAction : MonoBehaviour
         if (starCollector.isThrown)
         {
             Debug.Log("newspaper thrown");
-            //trigger newspaper flying animation
-            //anim.SetTrigger("isNewspaperFlying");
-            //newspaper = Instantiate(newspaper); doesnt work
-            newspaper.SetActive(true);
-            newspaper.GetComponent<Rigidbody>().useGravity = true;
-            newspaper.GetComponent<Rigidbody>().velocity = transform.forward * 10.0f;
+            // instantiates newspaper
+            news = Instantiate(newspaper, transform.position +transform.forward ,Quaternion.identity);
+            news.gameObject.SetActive(true);
+            //trigger newspaper flying
+            news.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            //modify this to change how much its thrown by in conjunction with the height of the gameobject in unity inspector
+            news.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * 10.0f;
+
             starCollector.isThrown = false;
 
         }
-        //if(newspaper && newspaper.transform.position.y <= 0){
-        //    Destroy(newspaper);
+	}
+
+    //moved to be on newspaper.cs
+	//void OnCollisionEnter(Collision other)
+	//{
+        // If we want to make it so that he needs to deliver certain amounts of newspapers to certain houses, then use this
+        // if (other.gameObject.CompareTag("RedHouse")) {
+        // 	redHouseCounter++;
+        // } else if (other.gameObject.CompareTag("PinkHouse")) {
+        // 	pinkHouseCounter++;
+        // } else if (other.gameObject.CompareTag("OrangeHouse")) {
+        // 	orangeHouseCounter++;
+        // } else if (other.gameObject.CompareTag("BlueHouse")) {
+        // 	blueHouseCounter++;
+        // }
+
+        //if (other.gameObject.CompareTag("RedHouse") || other.gameObject.CompareTag("PinkHouse")
+        //	|| other.gameObject.CompareTag("OrangeHouse") || other.gameObject.CompareTag("BlueHouse"))
+        //{
+        //	starCollector.newsDelivered++;
+        //} 
+        //if(!other.gameObject.CompareTag("Player")){
+        //    Debug.Log("destory newspaper");
+        //    Destroy(this.gameObject);
         //}
 
-	}
+	//}
 
-	void OnCollisionEnter(Collision other)
-	{
-		// If we want to make it so that he needs to deliver certain amounts of newspapers to certain houses, then use this
-		// if (other.gameObject.CompareTag("RedHouse")) {
-		// 	redHouseCounter++;
-		// } else if (other.gameObject.CompareTag("PinkHouse")) {
-		// 	pinkHouseCounter++;
-		// } else if (other.gameObject.CompareTag("OrangeHouse")) {
-		// 	orangeHouseCounter++;
-		// } else if (other.gameObject.CompareTag("BlueHouse")) {
-		// 	blueHouseCounter++;
-		// }
-
-		if (other.gameObject.CompareTag("RedHouse") || other.gameObject.CompareTag("PinkHouse")
-			|| other.gameObject.CompareTag("OrangeHouse") || other.gameObject.CompareTag("BlueHouse"))
-		{
-			starCollector.newsDelivered++;
-		} 
-	}
-
-	//called at end of newspaper flying animation
-	public void FadeNewspaper() {
-        //TODO: fade away newspaper and then destroy
-		Destroy(this.gameObject);
-	}
+	////called at end of newspaper flying animation
+	//public void FadeNewspaper() {
+ //       //TODO: fade away newspaper and then destroy
+	//	Destroy(this.gameObject);
+	//}
 }

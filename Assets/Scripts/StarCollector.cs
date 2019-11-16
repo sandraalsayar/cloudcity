@@ -54,7 +54,6 @@ public class StarCollector : MonoBehaviour
     //similar method for when delivering newspapers
     public void ThrowNewspaper(){
         Debug.Log("throwing news paper here");
-        //Destroy(this.gameObject);
         isThrown = true;
     }
 }
