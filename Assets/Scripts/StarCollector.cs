@@ -21,6 +21,7 @@ public class StarCollector : MonoBehaviour
     //public bool isNPC = false;
     public int newsDelivered = 0;
     public bool inQuest = false;
+    public bool isThrown = false;
 
     public Text starScore;
     public Text newsDelivery;
@@ -51,5 +52,10 @@ public class StarCollector : MonoBehaviour
         starScore.text = starCount.ToString();
     }
     //similar method for when delivering newspapers
+    public void ThrowNewspaper(){
+        Debug.Log("throwing news paper here");
+        //Destroy(this.gameObject);
+        isThrown = true;
+    }
 }
 

@@ -45,7 +45,7 @@ public class CharacterInputController : MonoBehaviour
         get;
         private set;
     }
-    public bool Jump
+    public bool ActionThrow
     {
         get;
         private set;
@@ -100,6 +100,8 @@ public class CharacterInputController : MonoBehaviour
         if(!starCollector.endgame){
             Forward = v;
             Turn = h; 
+            //Forward = filteredForwardInput;
+            //Turn = filteredTurnInput;
         }
 
 
@@ -169,12 +171,14 @@ public class CharacterInputController : MonoBehaviour
             }
         }
         //throw newspaper if in quest
-        if (Input.GetKeyDown("s") && starCollector.inQuest)
+        // && starCollector.inQuest
+        //dont allow rapid pressing
+        if (Input.GetKeyDown("s"))
         {
             Debug.Log("throw");
+            anim.SetTrigger("isThrowing");
             //make newspaper fly
         }
-
         //if (Input.GetButtonDown("Jump"))
         //{
         //    //anim.SetTrigger("jump");
