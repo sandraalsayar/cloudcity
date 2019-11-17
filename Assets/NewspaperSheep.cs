@@ -9,11 +9,11 @@ public class NewspaperSheep : MonoBehaviour
     public bool quest; //track whether the player is doing quest or not
     public bool complete;
 
-    public const int newspaperCount = 4; //TODO: change this to be wat max we want
+    public const int newspaperCount = 22; //TODO: change this to be wat max we want
     public GameObject player;
     //public GameObject newsStar;
     public GameObject questComplete;
-
+    public GameObject questIncomplete;
     StarCollector starCollector;
     // Start is called before the first frame update
     void Start()
@@ -54,7 +54,7 @@ public class NewspaperSheep : MonoBehaviour
             {
                 Debug.Log("in quest");
                 //complete
-                if(newspaperCount==starCollector.newsDelivered){
+                if(newspaperCount == starCollector.newsDelivered){
                     Debug.Log("you get a star!");
                     complete = true;
                     if (firstTime)
@@ -69,8 +69,12 @@ public class NewspaperSheep : MonoBehaviour
                         FindObjectOfType<DialogueManager>().DisplayNextSentence();
                         //EndDialogue() will handle giving star
                     } 
-                }
-                //else not complete, have sheep say some text, finish delivering
+                } 
+                // else { //else not complete, have sheep say some text, finish delivering
+                //     complete = false;
+                //     questComplete.GetComponent<TextboxToggle>().TriggerDialogue();
+                // }
+                
 
             }
 
