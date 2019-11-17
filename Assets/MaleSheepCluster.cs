@@ -31,6 +31,7 @@ public class MaleSheepCluster : MonoBehaviour
 				{
 					Debug.Log("next");
 					FindObjectOfType<DialogueManager>().DisplayNextSentence();
+					firstTime = true;
 				} 
 			}
 		}
