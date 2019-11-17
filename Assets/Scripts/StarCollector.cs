@@ -21,7 +21,7 @@ public class StarCollector : MonoBehaviour
     //public bool isNPC = false;
     public int newsDelivered = 0;
     public int maxNews = 22; // can be delivered
-    public int newsGoal = 7;
+    public int newsGoal = 22;
     public int remainingNews;
 
     public bool inQuest = false;
