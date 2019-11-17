@@ -52,8 +52,10 @@
  		if (other.gameObject.CompareTag("Newspaper")) {
         	// increment amount of newspapers that house now has
  			newspapersHave++;
-        	// increment amount of newspapers delivered in total
+ 			if (newspapersHave <= newspapersNeeded) {
+ 				// increment amount of newspapers delivered in total
  			starCollector.newsDelivered++;
+ 			}
  		}
 
 
