@@ -7,12 +7,15 @@ public class GameOverMenuTimeIn : MonoBehaviour
 {
     //Number of seconds till game over
     public int timeout;
+    public GameObject player;
+    StarCollector starCollector;
 
     private CanvasGroup canvasGroup;
 
     // prints a Debug.LogError() if GetComponent() doesn’t find the component you are looking for
     private void Awake()
     {
+        starCollector = player.GetComponent<StarCollector>();
         canvasGroup = GetComponent<CanvasGroup>();
 
         if (canvasGroup == null)
@@ -30,19 +33,29 @@ public class GameOverMenuTimeIn : MonoBehaviour
     IEnumerator TimeOut(float waitTime)
     {
         yield return new WaitForSeconds(waitTime+1); //+1 so that the timer goes down to 0 then shows gameover
-        if (canvasGroup.interactable)
+
+        //disables GameOver Canvas when Player collects all 7 stars
+        if (starCollector.starCount >= 7)
         {
-            Time.timeScale = 1f;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.alpha = 0f;
+            gameObject.SetActive(false);
         }
         else
         {
-            Time.timeScale = 0f;
-            canvasGroup.interactable = true;
-            canvasGroup.blocksRaycasts = true;
-            canvasGroup.alpha = 1f;
+
+            if (canvasGroup.interactable)
+            {
+                Time.timeScale = 1f;
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
+                canvasGroup.alpha = 0f;
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.alpha = 1f;
+            }
         }
     }
 
