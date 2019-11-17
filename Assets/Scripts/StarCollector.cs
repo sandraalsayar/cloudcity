@@ -63,6 +63,8 @@ public class StarCollector : MonoBehaviour
         pickedUp = false;
         //update num in UI
         starScore.text = starCount.ToString();
+        Debug.Log("received star");
+        Debug.Log(canCollect);
     }
     //similar method for when delivering newspapers
     public void ThrowNewspaper(){

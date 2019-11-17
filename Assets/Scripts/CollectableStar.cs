@@ -16,7 +16,7 @@ public class CollectableStar : MonoBehaviour
             if (bc != null)
             {
                 // tells that you're in range of star
-                bc.canCollect = true;
+                //bc.canCollect = true;
                 // only go through with picking up steps IF pickedup animation is complete
                 if(bc.pickedUp){
                 //EventManager.TriggerEvent<BombBounceEvent, Vector3>(c.transform.position);
@@ -30,6 +30,24 @@ public class CollectableStar : MonoBehaviour
                 }
 
             }
+        }
+    }
+    void OnTriggerEnter(Collider other){
+        // tells that you're in range of star
+        StarCollector bc = other.attachedRigidbody.gameObject.GetComponent<StarCollector>();
+
+        if(other.gameObject.CompareTag("Player")){
+            bc.canCollect = true;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        // tells that you're in range of star
+        StarCollector bc = other.attachedRigidbody.gameObject.GetComponent<StarCollector>();
+
+        if(other.gameObject.CompareTag("Player"))
+        {
+            bc.canCollect = false;
         }
     }
 }
