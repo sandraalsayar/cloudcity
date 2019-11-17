@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject NewsSheep;
     NewspaperSheep sheep;
     public GameObject newsStar;
-
+    public CanvasGroup newsPanel;
 
     private Queue<string> sentences;
     // Start is called before the first frame update
@@ -80,7 +80,10 @@ public class DialogueManager : MonoBehaviour
                 Debug.Log("star appears");
                 newsStar.SetActive(true);
                 sheep.isNPC = false;
-
+                //make quest panel disappear
+                newsPanel.interactable = false;
+                newsPanel.blocksRaycasts = false;
+                newsPanel.alpha = 0f;
                 //TODO: get sheep to hand star--plce in front of player?
             }
         }
