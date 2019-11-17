@@ -20,6 +20,7 @@ public class StarCollector : MonoBehaviour
     //sheep
     //public bool isNPC = false;
     public int newsDelivered = 0;
+    public int maxNews = 22;
     public bool inQuest = false;
     public bool isThrown = false;
 
@@ -35,8 +36,12 @@ public class StarCollector : MonoBehaviour
     {
         stars = new bool[7];
         starScore.text = starCount.ToString();
-        newsDelivery.text = newsDelivered.ToString() + "/ 4"; //hardcode newspaper count total
+        newsDelivery.text = newsDelivered.ToString() + "/" + maxNews.ToString(); //hardcode newspaper count total
         endgame = false;
+    }
+
+    public void Update() {
+        newsDelivery.text = newsDelivered.ToString() + "/" + maxNews.ToString();
     }
     public void ReceiveStar()
     {
