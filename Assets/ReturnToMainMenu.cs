@@ -10,5 +10,6 @@ public class ReturnToMainMenu : MonoBehaviour
 {
 	public void startGame() {
 		SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1f;
 	}
 }
