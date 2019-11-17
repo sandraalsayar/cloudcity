@@ -38,11 +38,18 @@ public class DialogueManager : MonoBehaviour
         nameText.text = d.name;
         //clear previous
         sentences.Clear();
+
         //load dialogue
-        foreach(string sent in d.sentences)
-        {
-            sentences.Enqueue(sent);
+        if(d.isCluster){ // if you have a cluster (load in one of the possible dialogues)
+            int sent = Random.Range(0, d.sentences.Length-1); //chooses an index from the array
+            sentences.Enqueue(d.sentences[sent]);
+        } else { //load all
+            foreach (string sent in d.sentences)
+            {
+                sentences.Enqueue(sent);
+            }
         }
+
         DisplayNextSentence();
     }
     public void DisplayNextSentence()

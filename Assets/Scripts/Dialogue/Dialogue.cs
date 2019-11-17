@@ -9,4 +9,5 @@ public class Dialogue
     public string name;
     [TextArea(1,2)]
     public string[] sentences;
+    public bool isCluster; //override for clusters
 }
