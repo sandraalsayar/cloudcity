@@ -12,7 +12,7 @@
  	public int newspapersNeeded;
  	public int newspapersHave;
  	public bool haveEnough;
- 	public bool haveMore;
+ 	// public bool haveMore;
  	public bool haveLess;
 
  	public GameObject player;
@@ -23,7 +23,7 @@
  	void Start() {
  		newspapersHave = 0;
  		haveEnough = false;
- 		haveMore = false;
+ 		// haveMore = false;
  		haveLess = true;
  		starCollector = player.GetComponent<StarCollector>();
  	}
@@ -32,15 +32,15 @@
  	{
  		if (newspapersHave == newspapersNeeded) {
  			haveEnough = true;
- 			haveMore = false;
+ 			// haveMore = false;
  			haveLess = false;
  		} else if (newspapersHave > newspapersNeeded) {
  			haveEnough = false;
- 			haveMore = true;
+ 			// haveMore = true;
  			haveLess = false;
  		} else if (newspapersHave < newspapersNeeded) {
  			haveEnough = false;
- 			haveMore = false;
+ 			// haveMore = false;
  			haveLess = true;
  		}
 

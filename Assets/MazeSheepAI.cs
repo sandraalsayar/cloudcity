@@ -24,9 +24,11 @@
 		private bool winMaze;
 		private bool looseMaze;
 		public Rigidbody player;
+		public GameObject npc;
 		private Vector3 playerPosition;
 		public static bool turnOffCollider;
 		public static bool Lose;
+		WoodChopperTextScript woodChopper;
 
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
@@ -42,9 +44,7 @@
 			}
 			currWaypoint = -1;
 			keepGoing = true;
-		// startFlag = MazeFlagCollisionCode.sheepFlag;
-
-		// Debug.Log("wayoint was: " + currWaypoint);
+			woodChopper = npc.GetComponent<WoodChopperTextScript>();
 			setNextWaypoint();
 		}
 
@@ -52,6 +52,7 @@
 		private void Update() {
 		// If star entered the border, then start walking
 			if (MazeFlagCollisionCode.sheepFlag == true) {
+			// if (woodChopper.tutorialDone == true)
 				anim.SetTrigger("StartWalking");
 				
 				if (keepGoing & currWaypoint < 22) {
