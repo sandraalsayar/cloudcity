@@ -53,7 +53,7 @@ public class BehindSphereColliderScript : MonoBehaviour
 		if(other.gameObject.CompareTag("Player")) {
 			// If it's hit from behind
 				timer += Time.deltaTime; // real time seconds
-				Debug.Log("TIMER IS = " + timer);
+				// Debug.Log("TIMER IS = " + timer);
 				if (timer >= 5.0) {  // NOTE: Need to make this smaller but untill everything is implemented keep it high
 					// turn around completly and loose game
 					turnOffFrontCollider = true;

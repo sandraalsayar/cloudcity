@@ -9,9 +9,11 @@ public class WoodChopperTextScript : MonoBehaviour
 	public bool firstTime;
 	public GameObject player;
 	public bool tutorialDone; // signifies that first encounter dialogue finished
+
     // Start is called before the first frame update
 	void Start()
 	{
+		isNPC = false;
 		firstTime = true;
 		tutorialDone = false;
 	}
@@ -21,6 +23,7 @@ public class WoodChopperTextScript : MonoBehaviour
 	{
 		if(isNPC)
 		{
+			
 			if(Input.GetButtonDown("Interact")){
 
 				if (firstTime)
@@ -35,6 +38,7 @@ public class WoodChopperTextScript : MonoBehaviour
 					FindObjectOfType<DialogueManager>().DisplayNextSentence();
 				} 
 			}
+			// tutorialDone = true;
 		}
 	}
 	// how can i make it so that when dialogue ends in WoodChopperTextScript.cs the AI sheep will start walking away?
@@ -43,7 +47,7 @@ public class WoodChopperTextScript : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
-            // Debug.Log("issheep");
+            Debug.Log("issheep");
 			isNPC = true;
 		}
 	}
@@ -53,9 +57,6 @@ public class WoodChopperTextScript : MonoBehaviour
 		if (other.gameObject.CompareTag("Player"))
 		{
 			isNPC = false;
-
-            //for now if you ever leave trigger area: ends dialogue
-            //TODO:make it so player cant move when talking to sheep?
 			FindObjectOfType<DialogueManager>().EndDialogue();
 		}
 	}
