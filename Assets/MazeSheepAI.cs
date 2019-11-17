@@ -27,6 +27,9 @@
 		private Vector3 playerPosition;
 		public static bool turnOffCollider;
 		public static bool Lose;
+		public bool isNPC;
+		public bool firstTime;
+		public GameObject questFailedText;
 
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
@@ -42,18 +45,33 @@
 			}
 			currWaypoint = -1;
 			keepGoing = true;
-		// startFlag = MazeFlagCollisionCode.sheepFlag;
 
-		// Debug.Log("wayoint was: " + currWaypoint);
 			setNextWaypoint();
 		}
 
 
 		private void Update() {
-		// If star entered the border, then start walking
-			if (MazeFlagCollisionCode.sheepFlag == true) {
+			if(isNPC)
+			{
+            // FIRST ENCOUNTER DIALOGUE
+				if(Input.GetButtonDown("Interact")){
+					if (firstTime)
+					{
+						Debug.Log("toggle");
+						gameObject.GetComponent<TextboxToggle>().TriggerDialogue();
+						firstTime = false;
+					}
+					else
+					{
+						Debug.Log("next");
+						FindObjectOfType<DialogueManager>().DisplayNextSentence();
+					} 
+				}
+
+				// If star entered the border, then start walking
+				// if (MazeFlagCollisionCode.sheepFlag == true) {
 				anim.SetTrigger("StartWalking");
-				
+
 				if (keepGoing & currWaypoint < 22) {
 					if (currWaypoint == -1) {
 						currWaypoint = 0;
@@ -69,62 +87,80 @@
 								anim.SetBool("PlayerTooClose", true);
 								// Debug.Log("YOU LOOOOOSEEEE IN BACK");
 								timer += Time.deltaTime;
-								if (timer >= 2.0) {
-									Lose = true; // Pauses game
+								if (timer >= 2.0) { // pauses game
+									Lose = true; 
 								}
-                                
+								if (firstTime)
+								{
+									Debug.Log("toggle");
+									questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
+									firstTime = false;
+								}
+								else
+								{
+									Debug.Log("next");
+									FindObjectOfType<DialogueManager>().DisplayNextSentence();
+								} 
 
-                            } else {
-                            	anim.SetBool("PlayerClose", true);
+							} else {
+								anim.SetBool("PlayerClose", true);
 
-                            }
-                        } else if (BehindSphereColliderScript.StopMoving == false) {
-                        	if(FrontBoxColliderScript.StopMoving == true) {
-                        		myNavMeshAgent.Stop();
-                        		anim.SetBool("PlayerInFront", true);
+							}
+						} else if (BehindSphereColliderScript.StopMoving == false) {
+							if(FrontBoxColliderScript.StopMoving == true) {
+								myNavMeshAgent.Stop();
+								anim.SetBool("PlayerInFront", true);
                         		// Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
-                        		Lose = true;
-                        	} else {
-                        		myNavMeshAgent.Resume();
-                        		anim.SetBool("PlayerClose", false);
-                        		if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending)) {
-                        			setNextWaypoint();
-                        		}
-                        	}
-                        } 
-                    }
+								Lose = true;
+                        		// TEXT
+								if (firstTime)
+								{
+									Debug.Log("toggle");
+									questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
+									firstTime = false;
+								}
+								else
+								{
+									Debug.Log("next");
+									FindObjectOfType<DialogueManager>().DisplayNextSentence();
+								} 
+							} else {
+								myNavMeshAgent.Resume();
+								anim.SetBool("PlayerClose", false);
+								if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending)) {
+									setNextWaypoint();
+								}
+							}
+						} 
+					}
 
-                }
-            }
-        }
+				}
+			}
+		}
 
 
-        private void setNextWaypoint() {
+		private void setNextWaypoint() {
 		// Debug.Log("Current waypoint index again us: " + currWaypoint);
 			// if the final waypoint is reached then stop
-        	if (currWaypoint >= waypoints.Length - 1) {
-        		keepGoing = false;
-        	} else {
-        		if (currWaypoint == 19) {
-        			timer += Time.deltaTime;
-        			if (timer >= 5.0) { 
-        				keepGoing = true;
-        				currWaypoint++;
-        				myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
-        			}
-        		} else { 
-        			if (MazeFlagCollisionCode.sheepFlag == true) {
-        				keepGoing = true;
-        				currWaypoint++;
-        				myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
-        			}
-        		}
-        	}
-        }
-    }
+			if (currWaypoint >= waypoints.Length - 1) {
+				keepGoing = false;
+			} else {
+				if (currWaypoint == 19) {
+					timer += Time.deltaTime;
+					if (timer >= 5.0) { 
+						keepGoing = true;
+						currWaypoint++;
+						myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
+					}
+				} else { 
+					if (MazeFlagCollisionCode.sheepFlag == true) {
+						keepGoing = true;
+						currWaypoint++;
+						myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
+					}
+				}
+			}
+		}
+	}
 
-
-        	// if (waypoints.Length == 0) {
-        	// 	Debug.Log("The array contains no waypoints.");
-        	// }
 
