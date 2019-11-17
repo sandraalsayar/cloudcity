@@ -20,12 +20,17 @@ public class StarCollector : MonoBehaviour
     //sheep
     //public bool isNPC = false;
     public int newsDelivered = 0;
-    public int maxNews = 22;
+    public int maxNews = 22; // can be delivered
+    public int newsGoal = 7;
+    public int remainingNews;
+
     public bool inQuest = false;
     public bool isThrown = false;
 
     public Text starScore;
     public Text newsDelivery;
+    public Text newsRemaining;
+
     public bool[] stars;
 
     string nextStar = "";
@@ -34,14 +39,17 @@ public class StarCollector : MonoBehaviour
 
     public void Start()
     {
+        remainingNews = maxNews;
         stars = new bool[7];
         starScore.text = starCount.ToString();
-        newsDelivery.text = newsDelivered.ToString() + "/" + maxNews.ToString(); //hardcode newspaper count total
+        newsDelivery.text = newsDelivered.ToString() + "/" + newsGoal.ToString(); //hardcode newspaper count total
+        newsRemaining.text = remainingNews.ToString() + "/" + maxNews.ToString();
         endgame = false;
     }
 
     public void Update() {
-        newsDelivery.text = newsDelivered.ToString() + "/" + maxNews.ToString();
+        newsDelivery.text = newsDelivered.ToString() + "/" + newsGoal.ToString();
+        newsRemaining.text = remainingNews.ToString() + "/" + maxNews.ToString();
     }
     public void ReceiveStar()
     {
@@ -58,8 +66,11 @@ public class StarCollector : MonoBehaviour
     }
     //similar method for when delivering newspapers
     public void ThrowNewspaper(){
+        
         Debug.Log("throwing news paper here");
         isThrown = true;
+        remainingNews--; //decrement newspapers
+
     }
 }
 
