@@ -10,6 +10,9 @@ public class StartQuest : MonoBehaviour
 
     public Text newsText;
     public Text newsProgress;
+    public Text newsDelivery;
+    public Text newsRemaining;
+    public Text numRemaining;
 
     public bool nearBox;
     // Start is called before the first frame update
@@ -26,6 +29,9 @@ public class StartQuest : MonoBehaviour
             //news related text shows on HUD to signify quest has begun
             newsText.gameObject.SetActive(true);
             newsProgress.gameObject.SetActive(true);
+            newsDelivery.gameObject.SetActive(true);
+            newsRemaining.gameObject.SetActive(true);
+            numRemaining.gameObject.SetActive(true);
         }
     }
 

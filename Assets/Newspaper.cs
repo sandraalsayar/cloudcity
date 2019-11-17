@@ -9,6 +9,7 @@ public class Newspaper : MonoBehaviour
         if(!other.gameObject.CompareTag("Player")){
             Debug.Log("destory newspaper");
             Destroy(this.gameObject);
+            //increment starcollector's newsDelivered here IF collides with house
         }
     }
 }
