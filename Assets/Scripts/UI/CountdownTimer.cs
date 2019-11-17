@@ -14,9 +14,11 @@ using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour
 {
-    private float countdown;
+    private int countdown;
     private Text countdownText;
-    public float currCountdown;
+    private int minutes;
+    private int seconds;
+    public int currCountdown;
 
     IEnumerator Start()
     {
@@ -26,7 +28,7 @@ public class CountdownTimer : MonoBehaviour
         yield return StartCoroutine(StartCountdown(countdown));
     }
 
-    IEnumerator StartCountdown(float countdown)
+    IEnumerator StartCountdown(int countdown)
     {
         currCountdown = countdown;
 
@@ -34,8 +36,34 @@ public class CountdownTimer : MonoBehaviour
         {
 
             // Debug.Log("countdown: " + currCountdown);
+           //compute minutes from seconds if over 59 seconds
+           if (currCountdown > 59)
+            {
+                minutes = currCountdown / 60;
+                seconds = currCountdown - (minutes * 60);
+            } else
+            {
+                minutes = 0;
+                seconds = currCountdown;
+            }
+       
             countdownText = gameObject.GetComponent<Text>();
-            countdownText.text = "Timer: "+ currCountdown+ " seconds";
+
+            if (seconds < 10 && minutes < 10)
+            {
+                countdownText.text = "Timer: 0" + minutes + " : 0" + seconds;
+            } else if (seconds < 10)
+            {
+                countdownText.text = "Timer: " + minutes + " : 0" + seconds;
+            } else if (minutes < 10)
+            {
+                countdownText.text = "Timer: 0" + minutes + " : " + seconds;
+
+            } else
+            {
+                countdownText.text = "Timer: " + minutes + " : " + seconds;
+            }
+            
 
             if (currCountdown <= 15)
             {

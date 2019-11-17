@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameOverMenuTimeIn : MonoBehaviour 
 {
     //Number of seconds till game over
-    public float timeout;
+    public int timeout;
 
     private CanvasGroup canvasGroup;
 
