@@ -22,13 +22,17 @@ public class DialogueManager : MonoBehaviour
     public CanvasGroup newsPanel;
 
     private Queue<string> sentences;
+
+    public bool tutorialDone;
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
         sheep = NewsSheep.GetComponent<NewspaperSheep>();
         starCollector = player.GetComponent<StarCollector>();
+        tutorialDone = false;
     }
+
 
     public void StartDialogue (Dialogue d)
     {
@@ -52,6 +56,7 @@ public class DialogueManager : MonoBehaviour
 
         DisplayNextSentence();
     }
+
     public void DisplayNextSentence()
     {
         if(sentences.Count == 0)
@@ -63,11 +68,16 @@ public class DialogueManager : MonoBehaviour
         Debug.Log(sentence);
         dialogueText.text = sentence;
     }
+
     public void EndDialogue()
     {
         Debug.Log("end ofconvo");
         animator.SetBool("isOpen", false);
         playerAnim.SetBool("dialogue", false); //allow dancing
+
+        // sandra added this
+        tutorialDone = true;
+        Debug.Log("Is tutorial done? " + tutorialDone);
         if(starCollector.endgame){
             Debug.Log("endScene");
             SceneManager.LoadScene("End");
