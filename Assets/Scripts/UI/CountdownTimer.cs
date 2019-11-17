@@ -51,17 +51,25 @@ public class CountdownTimer : MonoBehaviour
 
             if (seconds < 10 && minutes < 10)
             {
-                countdownText.text = "Time: 0" + minutes + " : 0" + seconds;
+                //countdownText.text = "Time: 0" + minutes + " : 0" + seconds;
+                countdownText.text = "0" + minutes + " : 0" + seconds;
+
             } else if (seconds < 10)
             {
-                countdownText.text = "Time: " + minutes + " : 0" + seconds;
+                //countdownText.text = "Time: " + minutes + " : 0" + seconds;
+                countdownText.text = "" + minutes + " : 0" + seconds;
+
             } else if (minutes < 10)
             {
-                countdownText.text = "Time: 0" + minutes + " : " + seconds;
+                //countdownText.text = "Time: 0" + minutes + " : " + seconds
+                countdownText.text = "0" + minutes + " : " + seconds;
+
 
             } else
             {
-                countdownText.text = "Time: " + minutes + " : " + seconds;
+                //countdownText.text = "Time: " + minutes + " : " + seconds;
+                countdownText.text = "" + minutes + " : " + seconds;
+
             }
             
 
