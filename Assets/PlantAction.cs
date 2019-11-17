@@ -58,8 +58,9 @@ public class PlantAction : MonoBehaviour
     //called at end of plant flying animation
     public void FadePlant(){
         //TODO: fade away plant and then destroy
-        Destroy(this.gameObject);
+
         starCollector.interacted = false;
         starCollector.isNearPlant = false;
+        Destroy(this.gameObject);
     }
 }
