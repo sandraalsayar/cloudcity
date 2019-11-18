@@ -173,7 +173,7 @@ public class CharacterInputController : MonoBehaviour
         //throw newspaper if in quest
         // && starCollector.inQuest
         //dont allow rapid pressing
-        if (Input.GetKeyDown("s") && starCollector.remainingNews>=1)
+        if (Input.GetKeyDown("s") && starCollector.remainingNews>=1 && starCollector.inQuest)
         {
             Debug.Log("throw");
             anim.SetTrigger("isThrowing");
