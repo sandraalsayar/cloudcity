@@ -13,18 +13,15 @@ public class FrontBoxColliderScript : MonoBehaviour
 	public static bool FrontCollisionFlag;
 	public static bool StopMoving;
 	public static bool TurnAroundFlag;
-	// public Animator anim;	
-
+	public GameObject frontCollider;
+	public  MazeSheepAI mazesheep; 
 
 	void Start() {
 
 		FrontCollisionFlag = false;
 		StopMoving = false;
+		mazesheep = gameObject.GetComponent<MazeSheepAI>();
 
-		// anim = GetComponent<Animator>();
-		// if (anim == null) {
-		// 	Debug.Log("Animator could not be found");
-		// }
 	}
 
 	// Notifies the sheep that the player has enetred from the back

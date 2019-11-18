@@ -14,30 +14,28 @@ public class BehindSphereColliderScript : MonoBehaviour
 	public static bool BehindCollisionFlag;
 	public static bool StopMoving;
 	public static bool TurnAroundFlag;
-
 	public Animator anim;	
-
 	private float timer;
 	private bool turnAround;
 	public static bool turnOffFrontCollider;
+	public GameObject backCollider;
+	public MazeSheepAI mazesheep;
 
 
 	void Start() {
 
 		BehindCollisionFlag = false;
-
-		// keepGoing = true;
-		// myNavMeshAgent = GetComponent<NavMeshAgent>();
 		timer = 0; // 5 seconds
 		StopMoving = false;
 		TurnAroundFlag = false;
+		mazesheep = gameObject.GetComponent<MazeSheepAI>();
 
-		// turnOffFrontCollider = false;
 		anim = GetComponent<Animator>();
-		// if (anim == null) {
-		// 	Debug.Log("Animator could not be found");
-		// }
+		if (anim == null) {
+			Debug.Log("Animator could not be found");
+		}
 	}
+
 
 	// Notifies the sheep that the player has entered from the back
 	void OnTriggerEnter(Collider other) {
@@ -45,23 +43,21 @@ public class BehindSphereColliderScript : MonoBehaviour
 			BehindCollisionFlag = true;
 			StopMoving = true;
 			TurnAroundFlag = false;
-           
+
 		}
 	}
 
 	void OnTriggerStay(Collider other) {
 		if(other.gameObject.CompareTag("Player")) {
 			// If it's hit from behind
-				timer += Time.deltaTime; // real time seconds
-				// Debug.Log("TIMER IS = " + timer);
-				if (timer >= 5.0) {  // NOTE: Need to make this smaller but untill everything is implemented keep it high
-					// turn around completly and loose game
-					turnOffFrontCollider = true;
-					TurnAroundFlag = true;
-                    
-					
-				}
+			timer += Time.deltaTime; // real time seconds
+			// Debug.Log("TIMER IS = " + timer);
+			if (timer >= 5.0) {  // NOTE: Need to make this smaller but untill everything is implemented keep it high
+				// turn around completly and loose game
+				turnOffFrontCollider = true;
+				TurnAroundFlag = true;	
 			}
+		}
 	}
 
     // Player moved out of shot and is not in danger
@@ -69,9 +65,6 @@ public class BehindSphereColliderScript : MonoBehaviour
 		timer = 0;
 		StopMoving = false;
 		TurnAroundFlag = false;
-        
-
-
 	}
 
 }
