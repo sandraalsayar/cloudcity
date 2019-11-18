@@ -34,6 +34,8 @@
 		public GameObject frontCollider;
 		public GameObject backCollider;
 
+		public GameObject questFailedText;
+
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
 			// woodChopper = npc.GetComponent<WoodChopperTextScript>();
@@ -105,6 +107,7 @@
 								{
 									Lose = true; // Pauses game
 								}
+								questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
 							}
 							else
 							{
@@ -119,6 +122,7 @@
 								myNavMeshAgent.Stop();
 								anim.SetBool("PlayerInFront", true);
 								Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
+								questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
 								Lose = true;
 							}
 							else
