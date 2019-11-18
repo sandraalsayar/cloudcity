@@ -34,7 +34,7 @@ public class ShakeTree : MonoBehaviour
 
 
             //make star fly/fall down
-            treeStar.SetActive(true);
+           // treeStar.SetActive(true);
             treeStarAnim.SetTrigger("TreeIsShaken");
             starCollector.interacted = false;
 
