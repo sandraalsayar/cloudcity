@@ -16,7 +16,7 @@
 		private NavMeshAgent myNavMeshAgent;
 		public Animator anim;	
 		public GameObject[] waypoints;
-		private int currWaypoint;
+		public int currWaypoint;
 		private bool keepGoing;
 		public GameObject border;
 		private float timer;
@@ -30,6 +30,11 @@
 		public static bool Lose;
 		// WoodChopperTextScript woodChopper;
 		DialogueManager manager;
+
+		public GameObject frontCollider;
+		public GameObject backCollider;
+
+		public GameObject questFailedText;
 
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
@@ -47,6 +52,9 @@
 			}
 			currWaypoint = -1;
 			keepGoing = true;
+
+			backCollider.SetActive(false);
+			frontCollider.SetActive(false);
 			
 			setNextWaypoint();
 		}
@@ -64,18 +72,26 @@
 				
 				if (keepGoing & currWaypoint < 18)
 				{
-					Debug.Log("Currenwaypoint is: " + currWaypoint); // 0
+					// Debug.Log("Currenwaypoint is: " + currWaypoint); // 0
 					if (currWaypoint == -1)
 					{
-						Debug.Log("IM HEREEEEEEE");
+						// Debug.Log("IM HEREEEEEEE");
 						currWaypoint = 0;
+						// Debug.Log("Currenwaypoint should be 0 but it's: " + currWaypoint); // 0
+						// Debug.Log("Distance " + (Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position)));
 						if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending))
 						{
+							// Debug.Log("Again, Currenwaypoint should be 0 but it's: " + currWaypoint); // 0
 							setNextWaypoint();
 						}
 					}
 					else
 					{
+						// Turn on the collider if currwaypoint is 1 or more
+						if (currWaypoint >= 3) {
+							frontCollider.SetActive(true);
+							backCollider.SetActive(true);
+						}
 						
 						if (BehindSphereColliderScript.StopMoving == true)
 						{
@@ -85,12 +101,13 @@
 							{
 							//Sheep turns around fully -> GAMEOVER
 								anim.SetBool("PlayerTooClose", true);
-								// Debug.Log("YOU LOOOOOSEEEE IN BACK");
+								Debug.Log("YOU LOOOOOSEEEE IN BACK");
 								timer += Time.deltaTime; // wait a little before turning completly
 								if (timer >= 2.0)
 								{
 									Lose = true; // Pauses game
 								}
+								questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
 							}
 							else
 							{
@@ -104,7 +121,8 @@
 							{
 								myNavMeshAgent.Stop();
 								anim.SetBool("PlayerInFront", true);
-                        		// Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
+								Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
+								questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
 								Lose = true;
 							}
 							else
@@ -122,30 +140,30 @@
 			}
 		}
 
-            private void setNextWaypoint() {
+		private void setNextWaypoint() {
 			// if the final waypoint is reached then stop
-        	if (currWaypoint >= waypoints.Length - 1) {
-        		keepGoing = false;
-        	} else {
-        		if (currWaypoint == 15) {
-        			timer += Time.deltaTime;
-        			if (timer >= 5.0) { 
-        				keepGoing = true;
-        				currWaypoint++;
+			if (currWaypoint >= waypoints.Length - 1) {
+				keepGoing = false;
+			} else {
+				if (currWaypoint == 15) {
+					timer += Time.deltaTime;
+					if (timer >= 5.0) { 
+						keepGoing = true;
+						currWaypoint++;
         				// Debug.Log("Currenwaypoint = " + currWaypoint);
-        				myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
-        			}
-        		} else { 
-        			if (manager.tutorialDone == true) {
-        				keepGoing = true;
-        				currWaypoint++;
-        				Debug.Log("Im inside!! Currenwaypoint = " + currWaypoint);
-        				myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
-        			}
-        		}
-        	}
-        }
-    }
+						myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
+					}
+				} else { 
+					if (manager.tutorialDone == true) {
+						keepGoing = true;
+						currWaypoint++;
+        				// Debug.Log("Im inside!! Currenwaypoint = " + currWaypoint);
+						myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
+					}
+				}
+			}
+		}
+	}
 
 
    //          private void setNextWaypoint() {
