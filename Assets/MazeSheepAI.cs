@@ -33,8 +33,10 @@
 
 		public GameObject frontCollider;
 		public GameObject backCollider;
-
 		public GameObject questFailedText;
+		public GameObject restart;
+
+		public bool firstTime;
 
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
@@ -55,6 +57,8 @@
 
 			backCollider.SetActive(false);
 			frontCollider.SetActive(false);
+
+			firstTime = true;
 			
 			setNextWaypoint();
 		}
@@ -70,7 +74,7 @@
 				// Debug.Log("Currenwaypoint is: " + currWaypoint); //0
 				anim.SetTrigger("StartWalking");
 				
-				if (keepGoing & currWaypoint < 18)
+				if (keepGoing & currWaypoint < 17)
 				{
 					// Debug.Log("Currenwaypoint is: " + currWaypoint); // 0
 					if (currWaypoint == -1)
@@ -105,9 +109,20 @@
 								timer += Time.deltaTime; // wait a little before turning completly
 								if (timer >= 2.0)
 								{
-									Lose = true; // Pauses game
+									// Lose = true; // Pauses game
+									if (firstTime)
+									{
+										questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
+										firstTime = false;
+									}
+									else
+									{
+										FindObjectOfType<DialogueManager>().DisplayNextSentence();
+									} 
+									restart.GetComponent<GameStarter>().StartGame();
+									// firstTime = true;
 								}
-								questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
+								// questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
 							}
 							else
 							{
@@ -122,8 +137,20 @@
 								myNavMeshAgent.Stop();
 								anim.SetBool("PlayerInFront", true);
 								Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
-								questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
-								Lose = true;
+								// Lose = true; // Pauses game
+								// restart.GetComponent<GameStarter>().StartGame();
+
+								if (firstTime)
+								{
+									questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
+									firstTime = false;
+								}
+								else
+								{
+									FindObjectOfType<DialogueManager>().DisplayNextSentence();
+								} 
+								restart.GetComponent<GameStarter>().StartGame();
+								// firstTime = true;
 							}
 							else
 							{
