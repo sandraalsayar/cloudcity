@@ -44,4 +44,5 @@ public class ThirdPersonCamera : MonoBehaviour
             transform.forward = Vector3.SmoothDamp(transform.forward, desiredPose.forward, ref currentFacingCorrectionVelocity, smoothTime, maxSpeed, Time.deltaTime);
         }
     }
+
 }
