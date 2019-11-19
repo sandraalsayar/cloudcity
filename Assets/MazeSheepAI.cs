@@ -24,8 +24,7 @@
 		private bool winMaze;
 		private bool looseMaze;
 		public Rigidbody player;
-		public GameObject npc;
-		private Vector3 playerPosition;
+		public GameObject sheep;
 		public static bool turnOffCollider;
 		public static bool Lose;
 		// WoodChopperTextScript woodChopper;
@@ -37,15 +36,16 @@
 		public GameObject restart;
 
 		public bool firstTime;
+		public GameObject textCollider;
 
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
 			// woodChopper = npc.GetComponent<WoodChopperTextScript>();
 			manager = FindObjectOfType<DialogueManager>();
 			anim = GetComponent<Animator>();
-			player = GetComponent<Rigidbody>();
+
 			timer = 0; // 5 seconds
-			playerPosition = player.transform.position;
+
 			turnOffCollider = false;
 			Lose = false;
 
@@ -86,6 +86,7 @@
 						if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending))
 						{
 							// Debug.Log("Again, Currenwaypoint should be 0 but it's: " + currWaypoint); // 0
+
 							setNextWaypoint();
 						}
 					}
@@ -101,7 +102,7 @@
 						{
 							myNavMeshAgent.Stop();
 
-							if (BehindSphereColliderScript.TurnAroundFlag == true && !Lose)
+							if (BehindSphereColliderScript.TurnAroundFlag == true)
 							{
 							//Sheep turns around fully -> GAMEOVER
 								anim.SetBool("PlayerTooClose", true);
@@ -110,19 +111,31 @@
 								if (timer >= 2.0)
 								{
 									// Lose = true; // Pauses game
-									if (firstTime)
-									{
-										questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
-										firstTime = false;
-									}
-									else
-									{
-										FindObjectOfType<DialogueManager>().DisplayNextSentence();
-									} 
-									restart.GetComponent<GameStarter>().StartGame();
-									// firstTime = true;
+									
+									// if(Input.GetButtonDown("Interact")){
+									// 	if (firstTime)
+									// 	{
+									// 		questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
+									// 		firstTime = false;
+									// 	}
+									// 	else
+									// 	{
+									// 		FindObjectOfType<DialogueManager>().DisplayNextSentence();
+									// 	} 
+									// }
+									
+
 								}
-								// questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
+								this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
+								player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
+								manager.tutorialDone = false;
+								textCollider.GetComponent<WoodChopperTextScript>().firstTime = true;
+								frontCollider.SetActive(false);
+								backCollider.SetActive(false);
+								currWaypoint = -1;
+								BehindSphereColliderScript.StopMoving = false;
+								BehindSphereColliderScript.TurnAroundFlag = false;
+								
 							}
 							else
 							{
@@ -140,17 +153,25 @@
 								// Lose = true; // Pauses game
 								// restart.GetComponent<GameStarter>().StartGame();
 
-								if (firstTime)
-								{
-									questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
-									firstTime = false;
-								}
-								else
-								{
-									FindObjectOfType<DialogueManager>().DisplayNextSentence();
-								} 
-								restart.GetComponent<GameStarter>().StartGame();
-								// firstTime = true;
+								// if (firstTime)
+								// {
+								// 	questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
+								// 	firstTime = false;
+								// }
+								// else
+								// {
+								// 	FindObjectOfType<DialogueManager>().DisplayNextSentence();
+								// } 
+								this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
+								player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
+								manager.tutorialDone = false;
+								textCollider.GetComponent<WoodChopperTextScript>().firstTime = true;
+								frontCollider.SetActive(false);
+								backCollider.SetActive(false);
+								currWaypoint = -1;
+								BehindSphereColliderScript.StopMoving = false;
+								BehindSphereColliderScript.TurnAroundFlag = false;
+								
 							}
 							else
 							{
@@ -191,26 +212,3 @@
 			}
 		}
 	}
-
-
-   //          private void setNextWaypoint() {
-			// // if the final waypoint is reached then stop
-   //      	if (currWaypoint >= waypoints.Length - 1) {
-   //      		keepGoing = false;
-   //      	} else {
-   //      		if (currWaypoint == 15) {
-   //      			timer += Time.deltaTime;
-   //      			if (timer >= 5.0) { 
-   //      				keepGoing = true;
-   //      				currWaypoint++;
-   //      				myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
-   //      			}
-   //      		} else { 
-   //      			if (MazeFlagCollisionCode.sheepFlag == true) {
-   //      				keepGoing = true;
-   //      				currWaypoint++;
-   //      				myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
-   //      			}
-   //      		}
-   //      	}
-   //      }

@@ -38,7 +38,6 @@ public class WoodChopperTextScript : MonoBehaviour
 					FindObjectOfType<DialogueManager>().DisplayNextSentence();
 				} 
 			}
-			// tutorialDone = true;
 		}
 	}
 	// how can i make it so that when dialogue ends in WoodChopperTextScript.cs the AI sheep will start walking away?
