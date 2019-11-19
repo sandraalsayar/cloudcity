@@ -61,7 +61,10 @@ public class CharacterInputController : MonoBehaviour
     //    private set;
     //}
 
+    float forwardVelocity = 0;
+    float sidewaysVelocity = 0;
 
+    public float movementSmoothing = 0.15f;
 
     void Start(){
         // Reference to the starcollector
@@ -86,11 +89,11 @@ public class CharacterInputController : MonoBehaviour
         }
 
         //do some filtering of our input as well as clamp to a speed limit
-        //filteredForwardInput = Mathf.Clamp(Mathf.Lerp(filteredForwardInput, v,
-        //    Time.deltaTime * forwardInputFilter), -forwardSpeedLimit, forwardSpeedLimit);
+        filteredForwardInput = Mathf.Clamp(Mathf.Lerp(filteredForwardInput, v,
+            Time.deltaTime * forwardInputFilter), -forwardSpeedLimit, forwardSpeedLimit);
 
-        //filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
-        //    Time.deltaTime * turnInputFilter);
+        filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
+            Time.deltaTime * turnInputFilter);
 
         //Forward = filteredForwardInput;
         //Turn = filteredTurnInput;
@@ -98,10 +101,12 @@ public class CharacterInputController : MonoBehaviour
         //unfiltered input
         //DONT ALLOW MOVEMENT WHEN @ ENDGAME DIALOGUE
         if(!starCollector.endgame){
-            Forward = v;
-            Turn = h; 
-            //Forward = filteredForwardInput;
-            //Turn = filteredTurnInput;
+            //Forward = v;
+            //Turn = h; 
+            //Turn = Mathf.SmoothDamp(Turn, h, ref forwardVelocity, movementSmoothing);
+            //Forward = Mathf.SmoothDamp(Forward, v, ref sidewaysVelocity, movementSmoothing);
+            Forward = filteredForwardInput;
+            Turn = filteredTurnInput;
         }
 
 
