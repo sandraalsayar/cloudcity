@@ -11,6 +11,7 @@ TagManager:
   - PauseMenuCanvas
   - NPC
   - Newspaper
+  - camera
   layers:
   - Default
   - TransparentFX
