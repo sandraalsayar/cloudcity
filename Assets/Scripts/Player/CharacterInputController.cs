@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//todo: camera collision w walls
+
 public class CharacterInputController : MonoBehaviour
 {
 
@@ -22,6 +24,18 @@ public class CharacterInputController : MonoBehaviour
     private Animator anim;
     private bool activeAnim;
     public bool nearPlant;
+
+    //for enhanced character camera movement
+    private float speed = 0.0f;
+    private float direction = 0f;
+    [SerializeField]
+    CameraFollow gamecam;
+    [SerializeField]
+    private float directionSpeed=1.0f;
+    private int locomotionId = 0;
+    [SerializeField]
+    private float rotationDegreePerSecond = 120f;
+    private AnimatorStateInfo stateInfo;
 
     public float Forward
     {
@@ -50,6 +64,23 @@ public class CharacterInputController : MonoBehaviour
         get;
         private set;
     }
+
+    public float Speed
+    {
+        get{
+            return this.speed;
+        }
+
+    }
+    public float LocomotionThreshold
+    {
+        get
+        {
+            return 0.2f;
+        }
+
+    }
+
     //public bool Action
     //{
     //    get;
@@ -66,25 +97,38 @@ public class CharacterInputController : MonoBehaviour
 
     public float movementSmoothing = 0.15f;
 
+
+    float h;
+    float v;
+
     void Start(){
         // Reference to the starcollector
         starCollector = GetComponent<StarCollector>();
         anim = GetComponent<Animator>();
+
+        locomotionId = Animator.StringToHash("Base Layer.BlendTreeForward");
+
     }
     void Update()
     {
 
+        if (anim)
+        {
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        }
         //GetAxisRaw() so we can do filtering here instead of the InputManager
-        float h = Input.GetAxisRaw("Horizontal");// setup h variable as our horizontal input axis
-        float v = Input.GetAxisRaw("Vertical"); // setup v variables as our vertical input axis
-
+        //h = Input.GetAxisRaw("Horizontal");// setup h variable as our horizontal input axis
+        v = Input.GetAxisRaw("Vertical"); // setup v variables as our vertical input axis
+        h = Input.GetAxisRaw("Horizontal");
+        speed = v;
+        direction = h;
 
         if (InputMapToCircular)
         {
             // make coordinates circular
             //based on http://mathproofs.blogspot.com/2005/07/mapping-square-to-circle.html
-            h = h * Mathf.Sqrt(1f - 0.5f * v * v);
-            v = v * Mathf.Sqrt(1f - 0.5f * h * h);
+            //h = h * Mathf.Sqrt(1f - 0.5f * v * v);
+            //v = v * Mathf.Sqrt(1f - 0.5f * h * h);
 
         }
 
@@ -94,6 +138,7 @@ public class CharacterInputController : MonoBehaviour
 
         filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
             Time.deltaTime * turnInputFilter);
+
 
         //Forward = filteredForwardInput;
         //Turn = filteredTurnInput;
@@ -105,8 +150,13 @@ public class CharacterInputController : MonoBehaviour
             //Turn = h; 
             //Turn = Mathf.SmoothDamp(Turn, h, ref forwardVelocity, movementSmoothing);
             //Forward = Mathf.SmoothDamp(Forward, v, ref sidewaysVelocity, movementSmoothing);
+
+            //mess with this to simulate joystick
+            //StickToWorldSpace(this.transform, gamecam.transform, ref direction, ref speed);
             Forward = filteredForwardInput;
             Turn = filteredTurnInput;
+            //Forward = speed;
+            //Turn = speed;
         }
 
 
@@ -209,5 +259,34 @@ public class CharacterInputController : MonoBehaviour
         yield return new WaitForSeconds(time);
         starCollector.interacted = true; // used to trigger whatever needs to be done AFTER animation is complete
         activeAnim = false;
+    }
+
+    void FixedUpdate(){
+        //if(IsInLocomotion() && (direction>=0 && h>=0) || (direction<0 && h<0)){
+        //    Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotationDegreePerSecond*(h<0f?-1f:1f),0f), Mathf.Abs(h));
+        //    Quaternion deltaRotation = Quaternion.Euler(rotationAmount*Time.deltaTime);
+        //    this.transform.rotation = (this.transform.rotation * deltaRotation);
+        //}
+    }
+
+    public bool IsInLocomotion(){
+        Debug.Log("loco");
+        return stateInfo.nameHash == locomotionId;
+    }
+
+    public void StickToWorldSpace(Transform root, Transform camera, ref float directionOut, ref float speedOut){
+        Vector3 rootDxn = root.forward;
+        Vector3 stickDxn = new Vector3(h,0,v);
+        speedOut = stickDxn.sqrMagnitude;
+        Vector3 cameraDxn = camera.forward;
+        cameraDxn.y = 0.0f;
+        Quaternion refShift = Quaternion.FromToRotation(Vector3.forward, cameraDxn);
+
+        Vector3 moveDirection = refShift * stickDxn;
+        Vector3 axisSign = Vector3.Cross(moveDirection, rootDxn);
+        float angleRootToMove = Vector3.Angle(rootDxn, moveDirection) * (axisSign.y >= 0 ? -1f : 1f);
+        angleRootToMove /= 180f;
+        directionOut = angleRootToMove * directionSpeed;
+
     }
 }
