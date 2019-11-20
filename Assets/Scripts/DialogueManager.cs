@@ -23,14 +23,12 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> sentences;
 
-    public bool tutorialDone;
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
         sheep = NewsSheep.GetComponent<NewspaperSheep>();
         starCollector = player.GetComponent<StarCollector>();
-        tutorialDone = false;
     }
 
 
@@ -75,9 +73,6 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("isOpen", false);
         playerAnim.SetBool("dialogue", false); //allow dancing
 
-        // sandra added this
-        tutorialDone = true;
-        Debug.Log("Is tutorial done? " + tutorialDone);
         if(starCollector.endgame){
             Debug.Log("endScene");
             SceneManager.LoadScene("End");

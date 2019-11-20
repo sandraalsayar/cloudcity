@@ -9,6 +9,7 @@ public class WoodChopperTextScript : MonoBehaviour
 	public bool firstTime;
 	public GameObject player;
 	public bool tutorialDone; // signifies that first encounter dialogue finished
+	public int convocounter;
 
     // Start is called before the first frame update
 	void Start()
@@ -16,6 +17,7 @@ public class WoodChopperTextScript : MonoBehaviour
 		isNPC = false;
 		firstTime = true;
 		tutorialDone = false;
+		convocounter = 0; // used to make sheep walk away after speaking 4 lines
 	}
 
     // Update is called once per frame
@@ -31,12 +33,19 @@ public class WoodChopperTextScript : MonoBehaviour
 					Debug.Log("toggle");
 					gameObject.GetComponent<TextboxToggle>().TriggerDialogue();
 					firstTime = false;
+					convocounter++;
 				}
 				else
 				{
 					Debug.Log("next");
 					FindObjectOfType<DialogueManager>().DisplayNextSentence();
+					convocounter++;
 				} 
+				
+			}
+
+			if (convocounter == 5) {
+				tutorialDone = true;
 			}
 		}
 	}
@@ -46,7 +55,7 @@ public class WoodChopperTextScript : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
-            Debug.Log("issheep");
+			Debug.Log("issheep");
 			isNPC = true;
 		}
 	}

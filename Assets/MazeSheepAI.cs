@@ -27,7 +27,7 @@
 		public GameObject sheep;
 		public static bool turnOffCollider;
 		public static bool Lose;
-		// WoodChopperTextScript woodChopper;
+		// public GameObject tutorialText;
 		DialogueManager manager;
 
 		public GameObject frontCollider;
@@ -40,8 +40,8 @@
 
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
-			// woodChopper = npc.GetComponent<WoodChopperTextScript>();
-			manager = FindObjectOfType<DialogueManager>();
+			// woodChopper = sheep.GetComponent<WoodChopperTextScript>();
+			// manager = FindObjectOfType<DialogueManager>();
 			anim = GetComponent<Animator>();
 
 			timer = 0; // 5 seconds
@@ -69,7 +69,7 @@
 			// if (MazeFlagCollisionCode.sheepFlag == true) {
 
 			// If conversation with Star is over, start walking
-			if (manager.tutorialDone == true)
+			if (textCollider.GetComponent<WoodChopperTextScript>().tutorialDone == true)
 			{
 				textCollider.SetActive(false);
 				anim.SetTrigger("StartWalking");
@@ -178,7 +178,7 @@
 					myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
 				}
 			} else { 
-				if (manager.tutorialDone == true) {
+				if (textCollider.GetComponent<WoodChopperTextScript>().tutorialDone == true) {
 					keepGoing = true;
 					currWaypoint++;
         				// Debug.Log("Im inside!! Currenwaypoint = " + currWaypoint);
