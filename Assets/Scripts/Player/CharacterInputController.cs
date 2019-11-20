@@ -270,7 +270,7 @@ public class CharacterInputController : MonoBehaviour
     }
 
     public bool IsInLocomotion(){
-        Debug.Log("loco");
+        // Debug.Log("loco");
         return stateInfo.nameHash == locomotionId;
     }
 
