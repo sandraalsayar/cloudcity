@@ -32,6 +32,10 @@ public class CharacterControllerScript : MonoBehaviour
     //public GameObject buttonObject;
     public float isIdle = 0f;
 
+
+    public float inputTurn;
+    public float inputForward;
+
     public bool IsGrounded
     {
         get
@@ -79,8 +83,10 @@ public class CharacterControllerScript : MonoBehaviour
     void Update()
     {
 
-        float inputForward = 0f;
-        float inputTurn = 0f;
+        //float inputForward = 0f;
+        //float inputTurn = 0f;
+
+
         //bool inputAction = false;
         //string inputActionName = "";
         bool inputActionSneak = false;
