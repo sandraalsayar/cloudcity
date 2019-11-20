@@ -71,75 +71,57 @@
 			// If conversation with Star is over, start walking
 			if (manager.tutorialDone == true)
 			{
-				// Debug.Log("Currenwaypoint is: " + currWaypoint); //0
+				textCollider.SetActive(false);
 				anim.SetTrigger("StartWalking");
-				
 				if (keepGoing & currWaypoint < 17)
 				{
-					// Debug.Log("Currenwaypoint is: " + currWaypoint); // 0
 					if (currWaypoint == -1)
 					{
-						// Debug.Log("IM HEREEEEEEE");
 						currWaypoint = 0;
-						// Debug.Log("Currenwaypoint should be 0 but it's: " + currWaypoint); // 0
-						// Debug.Log("Distance " + (Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position)));
 						if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending))
 						{
-							// Debug.Log("Again, Currenwaypoint should be 0 but it's: " + currWaypoint); // 0
-
 							setNextWaypoint();
 						}
 					}
 					else
 					{
-						// Turn on the collider if currwaypoint is 1 or more
-						if (currWaypoint >= 3) {
+						// Turn on the collider if currwaypoint is 2 or more
+						if (currWaypoint >= 2) {
 							frontCollider.SetActive(true);
 							backCollider.SetActive(true);
-						}
-						
-						if (BehindSphereColliderScript.StopMoving == true)
-						{
-							myNavMeshAgent.Stop();
 
-							if (BehindSphereColliderScript.TurnAroundFlag == true)
+						}
+						if (BehindSphereColliderScript.StopMoving == true) // that means player entered back zone 
+						{
+							myNavMeshAgent.Stop(); // stop sheep from moving
+
+							if (BehindSphereColliderScript.TurnAroundFlag == true)  // that means player stood in back zone for too long
 							{
-							//Sheep turns around fully -> GAMEOVER
+								//Sheep turns around fully -> GAMEOVER
 								anim.SetBool("PlayerTooClose", true);
-								Debug.Log("YOU LOOOOOSEEEE IN BACK");
+								Debug.Log("YOU LOOOOOSEEEE IN THE BACK");
 								timer += Time.deltaTime; // wait a little before turning completly
 								if (timer >= 2.0)
 								{
 									// Lose = true; // Pauses game
-									
-									// if(Input.GetButtonDown("Interact")){
-									// 	if (firstTime)
-									// 	{
-									// 		questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
-									// 		firstTime = false;
-									// 	}
-									// 	else
-									// 	{
-									// 		FindObjectOfType<DialogueManager>().DisplayNextSentence();
-									// 	} 
-									// }
-									
-
+									Debug.Log("Timer = " + timer);
+									this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
+									player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
+									// manager.tutorialDone = false;  // so you can talk to him again
+									frontCollider.SetActive(false);
+									backCollider.SetActive(false);
+									currWaypoint = -1;
+									BehindSphereColliderScript.StopMoving = false;
+									BehindSphereColliderScript.TurnAroundFlag = false;
+									timer = 0;
 								}
-								this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
-								player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
-								manager.tutorialDone = false;
-								textCollider.GetComponent<WoodChopperTextScript>().firstTime = true;
-								frontCollider.SetActive(false);
-								backCollider.SetActive(false);
-								currWaypoint = -1;
-								BehindSphereColliderScript.StopMoving = false;
-								BehindSphereColliderScript.TurnAroundFlag = false;
-								
+
 							}
 							else
 							{
+
 								anim.SetBool("PlayerClose", true);
+								// BehindSphereColliderScript.StopMoving = false;
 
 							}
 						}
@@ -147,31 +129,25 @@
 						{
 							if(FrontBoxColliderScript.StopMoving == true)
 							{
-								myNavMeshAgent.Stop();
-								anim.SetBool("PlayerInFront", true);
-								Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
-								// Lose = true; // Pauses game
-								// restart.GetComponent<GameStarter>().StartGame();
+								timer += Time.deltaTime; // wait a little before turning completly
+								if (timer >= 2.0) {
+									// anim.SetBool("PlayerInFront", true);
+									myNavMeshAgent.Stop(); // stop sheep moving
+									Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
+									// Lose = true; // Pauses game
 
-								// if (firstTime)
-								// {
-								// 	questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
-								// 	firstTime = false;
-								// }
-								// else
-								// {
-								// 	FindObjectOfType<DialogueManager>().DisplayNextSentence();
-								// } 
-								this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
-								player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
-								manager.tutorialDone = false;
-								textCollider.GetComponent<WoodChopperTextScript>().firstTime = true;
-								frontCollider.SetActive(false);
-								backCollider.SetActive(false);
-								currWaypoint = -1;
-								BehindSphereColliderScript.StopMoving = false;
-								BehindSphereColliderScript.TurnAroundFlag = false;
-								
+									this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
+									player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
+									// manager.tutorialDone = false;
+									frontCollider.SetActive(false);
+									backCollider.SetActive(false);
+									currWaypoint = -1;
+									FrontBoxColliderScript.StopMoving = false;
+									timer = 0;
+
+									// textCollider.GetComponent<WoodChopperTextScript>().firstTime = true; // to reset dialogue
+								}
+
 							}
 							else
 							{
@@ -182,33 +158,33 @@
 									setNextWaypoint();
 								}
 							}
-						} 
+						}
 					}
 				}
 			}
 		}
 
-		private void setNextWaypoint() {
+	private void setNextWaypoint() {
 			// if the final waypoint is reached then stop
-			if (currWaypoint >= waypoints.Length - 1) {
-				keepGoing = false;
-			} else {
-				if (currWaypoint == 15) {
-					timer += Time.deltaTime;
-					if (timer >= 5.0) { 
-						keepGoing = true;
-						currWaypoint++;
+		if (currWaypoint >= waypoints.Length - 1) {
+			keepGoing = false;
+		} else {
+			if (currWaypoint == 15) {
+				timer += Time.deltaTime;
+				if (timer >= 5.0) { 
+					keepGoing = true;
+					currWaypoint++;
         				// Debug.Log("Currenwaypoint = " + currWaypoint);
-						myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
-					}
-				} else { 
-					if (manager.tutorialDone == true) {
-						keepGoing = true;
-						currWaypoint++;
+					myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
+				}
+			} else { 
+				if (manager.tutorialDone == true) {
+					keepGoing = true;
+					currWaypoint++;
         				// Debug.Log("Im inside!! Currenwaypoint = " + currWaypoint);
-						myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
-					}
+					myNavMeshAgent.SetDestination(waypoints[currWaypoint].transform.position);
 				}
 			}
 		}
 	}
+}
