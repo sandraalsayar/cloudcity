@@ -26,7 +26,7 @@ public class StartQuest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Interact") && nearBox && !sheep.quest){
+        if(Input.GetButtonDown("Interact") && nearBox && !sheep.quest && sheep.sheepTalked){
             sheep.quest = true;
             //news related text shows on HUD to signify quest has begun
             //newsText.gameObject.SetActive(true);
@@ -38,6 +38,11 @@ public class StartQuest : MonoBehaviour
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
             canvasGroup.alpha = 1f;
+        }
+        if(sheep.complete){ //when quest is over, remove HUD
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0f;
         }
     }
 
