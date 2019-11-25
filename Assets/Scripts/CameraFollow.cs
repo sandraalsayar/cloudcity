@@ -50,7 +50,7 @@ public class CameraFollow : MonoBehaviour
         //targetPosition = characterOffset+follow.up*distanceUp-lookDir*distanceAway;
 
         //new for polish
-        if(follower.Speed > follower.LocomotionThreshold && follower.IsInLocomotion()){
+        if(follower.Speed > follower.LocomotionThreshold){
             lookDir = Vector3.Lerp(follow.right * (leftX<0?1f:-1f),follow.forward*(leftY<0?-1f:1f),Mathf.Abs(Vector3.Dot(this.transform.forward,follow.forward)));
             curLookDir = Vector3.Normalize(characterOffset-this.transform.position);
             curLookDir.y = 0;
@@ -59,9 +59,29 @@ public class CameraFollow : MonoBehaviour
         targetPosition = characterOffset + follow.up * distanceUp - Vector3.Normalize(curLookDir) * distanceAway;
 
         //transform.position = Vector3.Lerp(transform.position,targetPosition,Time.deltaTime*smooth);
+        CollisionWall(characterOffset,ref targetPosition);
         smoothPosition(this.transform.position,targetPosition);
         transform.LookAt(follow);
     }
+    //void LateUpdate(){
+    //    Vector3 characterOffset = follow.position + offset;
+    //    lookDir = characterOffset - this.transform.position;
+    //    lookDir.y = 0;
+    //    lookDir.Normalize();
+
+    //    //targetPosition = follow.position + follow.up * distanceUp - follow.forward * distanceAway;
+    //    //Debug.DrawRay(follow.position, Vector3.up * distanceUp, Color.red);
+    //    //Debug.DrawRay(follow.position, -1f * follow.forward * distanceAway, Color.blue);
+    //    //Debug.DrawLine(follow.position, targetPosition, Color.magenta);
+    //    //transform.position = Vector3.Lerp(transform.position,targetPosition,Time.deltaTime*smooth);
+
+    //    targetPosition = characterOffset + follow.up * distanceUp - lookDir * distanceAway;
+
+    //    smoothPosition(this.transform.position,targetPosition);
+
+    //    transform.LookAt(follow);
+
+    //}
 
     public void smoothPosition(Vector3 fromPos, Vector3 toPos){
         this.transform.position = Vector3.SmoothDamp(fromPos,toPos,ref velocityCamSmooth,camSmoothDampTime);
@@ -83,9 +103,13 @@ public class CameraFollow : MonoBehaviour
         
     //}
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+    //handles camera changing position when it hits a wall
+    private void CollisionWall(Vector3 fromObject, ref Vector3 toTarget){
+        Debug.DrawLine(fromObject, toTarget, Color.cyan);
+        RaycastHit wallHit = new RaycastHit();
+        if(Physics.Linecast(fromObject, toTarget,out wallHit)){
+            Debug.DrawRay(wallHit.point, Vector3.left, Color.red);
+            toTarget = new Vector3(wallHit.point.x,toTarget.y,wallHit.point.z);
+        }
+    }
 }

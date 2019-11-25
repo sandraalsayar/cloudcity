@@ -44,6 +44,15 @@ public class CharacterControllerScript : MonoBehaviour
         }
     }
 
+    //new movement pt2
+    //[SerializeField]
+    //private Animator anim;
+    //[SerializeField]
+    //private float DirectionDampTime = 0.25f;
+    //private float speed = 0.0f;
+    //private float h = 0.0f;
+    //private floatv=0.0f;
+
     void Awake()
     {
 
@@ -75,11 +84,7 @@ public class CharacterControllerScript : MonoBehaviour
 
     }
 
-
-
-
-
-
+   
     void Update()
     {
 
