@@ -76,21 +76,10 @@ public class CharacterInputController : MonoBehaviour
     {
         get
         {
-            return 0.2f;
+            return 0.1f; //0.2
         }
 
     }
-
-    //public bool Action
-    //{
-    //    get;
-    //    private set;
-    //}
-    //public string ActionName
-    //{
-    //    get;
-    //    private set;
-    //}
 
     float forwardVelocity = 0;
     float sidewaysVelocity = 0;
@@ -101,6 +90,16 @@ public class CharacterInputController : MonoBehaviour
     float h;
     float v;
 
+
+    ////new movement pt2
+    //[SerializeField]
+    //private Animator anim;
+    //[SerializeField]
+    //private float DirectionDampTime = 0.25f;
+    //private float speed = 0.0f;
+    //private float h = 0.0f;
+    //private floatv=0.0f;
+
     void Start(){
         // Reference to the starcollector
         starCollector = GetComponent<StarCollector>();
@@ -109,6 +108,15 @@ public class CharacterInputController : MonoBehaviour
         locomotionId = Animator.StringToHash("Base Layer.BlendTreeForward");
 
     }
+    //void Update(){
+    //    if(anim){
+    //        h = Input.GetAxis("Horizontal");
+    //        v = Input.GetAxis("Vertical");
+    //        //speed = h * h + v * v;
+    //        //anim.SetFloat("Speed", speed);
+    //        //anim.SetFloat("Direction", h, DirectionDampTime, DirectionDampTime.deltaTime);
+    //    }
+    //}
     void Update()
     {
 
@@ -127,8 +135,8 @@ public class CharacterInputController : MonoBehaviour
         {
             // make coordinates circular
             //based on http://mathproofs.blogspot.com/2005/07/mapping-square-to-circle.html
-            //h = h * Mathf.Sqrt(1f - 0.5f * v * v);
-            //v = v * Mathf.Sqrt(1f - 0.5f * h * h);
+            h = h * Mathf.Sqrt(1f - 0.5f * v * v);
+            v = v * Mathf.Sqrt(1f - 0.5f * h * h);
 
         }
 
@@ -153,6 +161,8 @@ public class CharacterInputController : MonoBehaviour
 
             //mess with this to simulate joystick
             //StickToWorldSpace(this.transform, gamecam.transform, ref direction, ref speed);
+            //StickToWorldSpace(this.transform, gamecam.transform, ref direction, ref filteredForwardInput);
+
             Forward = filteredForwardInput;
             Turn = filteredTurnInput;
             //Forward = speed;

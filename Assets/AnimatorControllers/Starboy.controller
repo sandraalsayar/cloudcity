@@ -221,14 +221,14 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 1ab8ea22612e54bd682932b8eb6cf7f6, type: 2}
     m_Threshold: 0
-    m_Position: {x: 0, y: 0}
+    m_Position: {x: -0.05, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: velx
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 35dfdc0c1bbe241669ac01836b2e5f43, type: 2}
-    m_Threshold: 0.13333334
+    m_Threshold: 0.11111112
     m_Position: {x: -0.5, y: 0.07}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -236,7 +236,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: beffd54e5b07a45b78abc103c7a0aa42, type: 2}
-    m_Threshold: 0.26666668
+    m_Threshold: 0.22222224
     m_Position: {x: 0.43, y: 0.03}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -244,7 +244,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: a54412a6c0dd7451e98b5a83d076239e, type: 2}
-    m_Threshold: 0.40000004
+    m_Threshold: 0.33333337
     m_Position: {x: -0.05, y: 0.7}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -252,16 +252,16 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 62744d574e32f45b3954fc3265a0728a, type: 2}
-    m_Threshold: 0.53333336
-    m_Position: {x: -0.32, y: 0.4}
+    m_Threshold: 0.44444448
+    m_Position: {x: -0.302, y: 0.342}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: velx
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: d9f53d0f1fb9f4515a908dd050a9c998, type: 2}
-    m_Threshold: 0.6666667
-    m_Position: {x: 0.19, y: 0.41}
+    m_Threshold: 0.5555556
+    m_Position: {x: 0.157, y: 0.414}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: velx
@@ -269,7 +269,7 @@ BlendTree:
   m_BlendParameter: velx
   m_BlendParameterY: vely
   m_MinThreshold: 0
-  m_MaxThreshold: 0.6666667
+  m_MaxThreshold: 0.5555556
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 2
