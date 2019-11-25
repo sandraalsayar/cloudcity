@@ -8,6 +8,7 @@ public class NewspaperSheep : MonoBehaviour
     public bool firstTime;
     public bool quest; //track whether the player is doing quest or not
     public bool complete;
+    public bool sheepTalked;
 
     public const int newspaperCount = 22; //TODO: change this to be wat max we want
     public GameObject player;
@@ -28,7 +29,6 @@ public class NewspaperSheep : MonoBehaviour
     void Update()
     {
 
-        //TODO: nofity when quest is over, remove HUD of newspaper
         if(quest){
             starCollector.inQuest = true;
         }

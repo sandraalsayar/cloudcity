@@ -69,27 +69,42 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        Debug.Log("end ofconvo");
-        animator.SetBool("isOpen", false);
-        playerAnim.SetBool("dialogue", false); //allow dancing
+        if (animator.GetBool("isOpen")) //only if the animator was open, close it
+        {
 
-        if(starCollector.endgame){
-            Debug.Log("endScene");
-            SceneManager.LoadScene("End");
-        } else{
-            //newssheep--to allow speaking to NPC again
-            sheep.firstTime = true;
 
-            if (sheep.complete)
-            { //make star appear
-                Debug.Log("star appears");
-                newsStar.SetActive(true);
-                sheep.isNPC = false;
-                //make quest panel disappear
-                newsPanel.interactable = false;
-                newsPanel.blocksRaycasts = false;
-                newsPanel.alpha = 0f;
-                //TODO: get sheep to hand star--plce in front of player?
+            Debug.Log("end ofconvo");
+            animator.SetBool("isOpen", false);
+            playerAnim.SetBool("dialogue", false); //allow dancing
+
+            if (starCollector.endgame)
+            {
+                Debug.Log("endScene");
+                SceneManager.LoadScene("End");
+            }
+            else
+            {
+                //newssheep--to allow speaking to NPC again
+                sheep.firstTime = true;
+
+                //when you FIRST talk to the sheep before starting the quest, allow to interact with the box to get your newspapers
+                if (!sheep.quest)
+                {
+                    Debug.Log("talked to the sheep");
+                    sheep.sheepTalked = true;
+                }
+
+                if (sheep.complete)
+                { //make star appear
+                    Debug.Log("star appears");
+                    newsStar.SetActive(true);
+                    sheep.isNPC = false;
+                    //make quest panel disappear
+                    newsPanel.interactable = false;
+                    newsPanel.blocksRaycasts = false;
+                    newsPanel.alpha = 0f;
+                    //TODO: get sheep to hand star--plce in front of player?
+                }
             }
         }
 
