@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NewspaperSheep : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class NewspaperSheep : MonoBehaviour
     public GameObject questFailedText;
     StarCollector starCollector;
     // Start is called before the first frame update
+
+    public Text indication;
+
     void Start()
     {
         firstTime = true;
@@ -120,6 +124,8 @@ public class NewspaperSheep : MonoBehaviour
             Debug.Log("issheep");
             isNPC = true;
         }
+        //enable indication, means it'll only show if you're suuuuper close, maybe change to a different area check?
+        GetComponent<PlayerInteractions>().indication.SetActive(true);
     }
 
     void OnTriggerExit(Collider other)
