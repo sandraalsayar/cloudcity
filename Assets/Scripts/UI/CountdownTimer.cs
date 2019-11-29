@@ -14,17 +14,19 @@ using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour
 {
-    private int countdown;
+    public int countdown;
+    public int currCountdown;
     private Text countdownText;
     private int minutes;
     private int seconds;
-    public int currCountdown;
+    public bool timeOut;
 
     IEnumerator Start()
     {
-        GameObject GameOverCanvas = GameObject.Find("GameOverCanvas"); //Find the gameobject that the script is attached to
-        GameOverMenuTimeIn gameOverScript = GameOverCanvas.GetComponent<GameOverMenuTimeIn>(); //Access script by using GetComponent
-        countdown = gameOverScript.timeout; //Now can access variables in script
+        timeOut = false;
+    //    GameObject GameOverCanvas = GameObject.Find("GameOverCanvas"); //Find the gameobject that the script is attached to
+    //    GameOverMenuTimeIn gameOverScript = GameOverCanvas.GetComponent<GameOverMenuTimeIn>(); //Access script by using GetComponent
+    //    countdown = gameOverScript.timeout; //Now can access variables in script
         yield return StartCoroutine(StartCountdown(countdown));
     }
 
@@ -34,10 +36,8 @@ public class CountdownTimer : MonoBehaviour
 
         while (currCountdown >= 0)
         {
-
-            // Debug.Log("countdown: " + currCountdown);
-           //compute minutes from seconds if over 59 seconds
-           if (currCountdown > 59)
+            //compute minutes from seconds if over 59 seconds
+            if (currCountdown > 59)
             {
                 minutes = currCountdown / 60;
                 seconds = currCountdown - (minutes * 60);
@@ -79,6 +79,13 @@ public class CountdownTimer : MonoBehaviour
             }
             yield return new WaitForSeconds(1.0f);
             currCountdown--;
+
+            /*if the current countdown number is below 0, set timeout flag to be true
+             so that the gameovercanvas will appear*/
+            if (currCountdown < 0)
+            {
+                timeOut = true;
+            }
         }
     }
 }
