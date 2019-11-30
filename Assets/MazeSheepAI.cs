@@ -38,11 +38,18 @@
 		public bool firstTime;
 		public GameObject textCollider;
 
+        //sound
+        AudioSource audioSource;
+        public AudioClip hmSound;
+        bool audioPlayedOnce;
+
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
 			// woodChopper = sheep.GetComponent<WoodChopperTextScript>();
 			// manager = FindObjectOfType<DialogueManager>();
 			anim = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
+            audioPlayedOnce = false;
 
 			timer = 0; // 5 seconds
 
@@ -71,10 +78,12 @@
 			// If conversation with Star is over, start walking
 			if (textCollider.GetComponent<WoodChopperTextScript>().tutorialDone == true)
 			{
+              
 				textCollider.SetActive(false);
 				anim.SetTrigger("StartWalking");
 				if (keepGoing & currWaypoint < 17)
 				{
+                 
 					if (currWaypoint == -1)
 					{
 						currWaypoint = 0;
@@ -93,7 +102,16 @@
 						}
 						if (BehindSphereColliderScript.StopMoving == true) // that means player entered back zone 
 						{
-							myNavMeshAgent.Stop(); // stop sheep from moving
+                            
+                            myNavMeshAgent.Stop(); // stop sheep from moving
+                            Debug.Log("hm?");
+                            if (!audioSource.isPlaying && !audioPlayedOnce)
+                            {
+                                audioSource.PlayOneShot(hmSound , 0.7f);
+                                audioPlayedOnce = true;
+                            }
+
+                   
 
 							if (BehindSphereColliderScript.TurnAroundFlag == true)  // that means player stood in back zone for too long
 							{
@@ -119,7 +137,7 @@
 							}
 							else
 							{
-
+                              
 								anim.SetBool("PlayerClose", true);
 								// BehindSphereColliderScript.StopMoving = false;
 
@@ -151,6 +169,7 @@
 							}
 							else
 							{
+                                audioPlayedOnce = false;
 								myNavMeshAgent.Resume();
 								anim.SetBool("PlayerClose", false);
 								if ((Vector3.Distance(transform.position, waypoints[currWaypoint].transform.position) < 2f ) && (!myNavMeshAgent.pathPending))
