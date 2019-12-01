@@ -13,11 +13,17 @@ public class PlantAction : MonoBehaviour
     //reference to player
     public GameObject player;
 
+    //Audio
+    AudioSource audioSource;
+    public bool audioPlayedOnce;
+
     void Start()
     {
         isNearPlant = false;
         anim = GetComponent<Animator>();
         starCollector = player.GetComponent<StarCollector>();
+        audioSource = GetComponent<AudioSource>();
+        audioPlayedOnce = false;
 
     }
 
@@ -34,6 +40,12 @@ public class PlantAction : MonoBehaviour
             //make star pop out
             //plantStar.SetActive(true);
             StartCoroutine(WaitForPlant());
+            if (!audioSource.isPlaying && !audioPlayedOnce)
+            {
+                audioSource.Play(0);
+                audioPlayedOnce = true;
+            }
+        
 
         }
     }

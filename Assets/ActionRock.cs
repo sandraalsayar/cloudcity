@@ -9,16 +9,22 @@ public class ActionRock : MonoBehaviour
 	private Animator anim;	
 	private bool isNearRock;
 	public static bool isTurnedOver;
-	// public String openText;
+    // public String openText;
 
-	void Start() {
+    //Audio
+    AudioSource audioSource;
+    public AudioClip[] audioClips;
+    public bool audioPlayedOnce;
+
+    void Start() {
 		rock = GetComponent<Rigidbody>();
 		player = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator>();
 		isNearRock = false;
 		isTurnedOver = false;
-		// openText = "Press T.";
-	}
+        audioSource = GetComponent<AudioSource>();
+        // openText = "Press T.";
+    }
 
 	// When player presses "t" the rock turns over
 	void Update() {
@@ -29,7 +35,13 @@ public class ActionRock : MonoBehaviour
 			{
 				anim.SetTrigger("isTurnedOver");
 				isTurnedOver = true;
-			}
+                if (!audioPlayedOnce)
+                {
+                    audioSource.PlayOneShot(audioClips[0], 0.7f);
+                    audioSource.PlayOneShot(audioClips[1], 1.0f);
+                    audioPlayedOnce = true;
+                }
+            }
 		}
 	}
 
