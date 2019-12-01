@@ -214,6 +214,8 @@ public class CharacterInputController : MonoBehaviour
                 anim.SetFloat("interaction", 2.0f);
                 anim.SetTrigger("interact");
                 StartCoroutine(WaitForInteract(2.3f));
+                //StartCoroutine(WaitForInteract(0.0f));
+
             }
             //tree interaction
             else if (starCollector.isNearTree)
