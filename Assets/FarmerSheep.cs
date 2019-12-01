@@ -8,9 +8,12 @@ public class FarmerSheep : MonoBehaviour
 	public bool firstTime;
 	public GameObject player;
 
+    public DialogueManager dialogMan;
+
 	void Start()
 	{
 		firstTime = true;
+        dialogMan = FindObjectOfType<DialogueManager>();
 	}
 
     // Update is called once per frame
@@ -21,18 +24,26 @@ public class FarmerSheep : MonoBehaviour
 		{
             // FIRST ENCOUNTER
 			if(Input.GetButtonDown("Interact")){
-                if (firstTime)
+                if (dialogMan.firstTime)
                 {
-                    Debug.Log("toggle");
-                    //toggle the text
                     gameObject.GetComponent<TextboxToggle>().TriggerDialogue();
-                    firstTime = false;
                 }
                 else
                 {
-                    Debug.Log("next");
-                    FindObjectOfType<DialogueManager>().DisplayNextSentence();
-                } 
+                    dialogMan.DisplayNextSentence();
+                }
+                //if (firstTime)
+                //{
+                //    Debug.Log("toggle");
+                //    //toggle the text
+                //    gameObject.GetComponent<TextboxToggle>().TriggerDialogue();
+                //    firstTime = false;
+                //}
+                //else
+                //{
+                //    Debug.Log("next");
+                //    FindObjectOfType<DialogueManager>().DisplayNextSentence();
+                //} 
             }
 		}
 	}

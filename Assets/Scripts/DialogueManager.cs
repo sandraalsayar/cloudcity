@@ -23,9 +23,14 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> sentences;
 
+    //this is for NPCs that always say the same things
+    //(not different things based off of condition (in quest/not..etc)
+    public bool firstTime;
     // Start is called before the first frame update
     void Start()
     {
+        firstTime = true;
+
         sentences = new Queue<string>();
         sheep = NewsSheep.GetComponent<NewspaperSheep>();
         starCollector = player.GetComponent<StarCollector>();
@@ -34,6 +39,9 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue (Dialogue d)
     {
+        //Start dialog from beginning
+        firstTime = false;
+
         animator.SetBool("isOpen", true);
         playerAnim.SetBool("dialogue", true); //prevent dancing
         Debug.Log("start convo for" + d.name);
@@ -71,6 +79,9 @@ public class DialogueManager : MonoBehaviour
     {
         if (animator.GetBool("isOpen")) //only if the animator was open, close it
         {
+
+            //allow restarting dialog
+            firstTime = true;
 
 
             Debug.Log("end ofconvo");
