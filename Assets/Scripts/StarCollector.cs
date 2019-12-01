@@ -71,7 +71,10 @@ public class StarCollector : MonoBehaviour
         
         Debug.Log("throwing news paper here");
         isThrown = true;
-        remainingNews--; //decrement newspapers
+        if(remainingNews>0){
+            remainingNews--;
+        }
+        //remainingNews--; //decrement newspapers
 
     }
 }
