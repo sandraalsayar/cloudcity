@@ -26,12 +26,14 @@ public class PlantAction : MonoBehaviour
     {
         // if you are near the plant and the PLAYER's animation has played, trigger animation for plant
         // make star appear
+
         if (isNearPlant && starCollector.interacted)
         {
             //trigger plant flying animation
             anim.SetTrigger("isYanked");
             //make star pop out
-            plantStar.SetActive(true);
+            //plantStar.SetActive(true);
+            StartCoroutine(WaitForPlant());
 
         }
     }
@@ -62,5 +64,13 @@ public class PlantAction : MonoBehaviour
         starCollector.interacted = false;
         starCollector.isNearPlant = false;
         Destroy(this.gameObject);
+    }
+
+    IEnumerator WaitForPlant()
+    {
+        yield return new WaitForSeconds(.9f);
+        //starCollector.interacted = true; // used to trigger whatever needs to be done AFTER animation is complete
+        //activeAnim = false;
+        plantStar.SetActive(true);
     }
 }
