@@ -17,6 +17,8 @@ public class ActionStar : MonoBehaviour
     public GameObject player;
     public bool starFloated;
 
+   
+
     void Start()
     {
 		anim = GetComponent<Animator>();
@@ -25,6 +27,7 @@ public class ActionStar : MonoBehaviour
 		starFloated = false;
 		isNearRock = false;
         starCollector = player.GetComponent<StarCollector>();
+
 
     }
 
@@ -35,7 +38,9 @@ public class ActionStar : MonoBehaviour
 			// CanFloat = true;
 			// starIsFloating = true;
 			starFloated = true;
-		}
+         
+      
+        }
 
     }
 

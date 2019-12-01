@@ -14,12 +14,21 @@ public class ShakeTree : MonoBehaviour
     private Animator treeStarAnim;
     private bool isNearTree;
 
+    //Audio
+    AudioSource audioSource;
+    public AudioClip[] audioClips;
+    public bool audioPlayedOnce;
+    public bool shakeAudioPlayedOnce;
+
     void Start()
     {
         isNearTree = false;
         anim = GetComponent<Animator>();
         starCollector = player.GetComponent<StarCollector>();
         treeStarAnim = treeStar.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        audioPlayedOnce = false;
+        shakeAudioPlayedOnce = false;
 
     }
 
@@ -32,11 +41,25 @@ public class ShakeTree : MonoBehaviour
             //trigger tree shaking animation
             anim.SetTrigger("isShaken");
 
+            //play tree shaking sound if it hasn't played yet
+            if (!audioSource.isPlaying && !shakeAudioPlayedOnce)
+            {
+                audioSource.PlayOneShot(audioClips[1], 0.7f);
+                shakeAudioPlayedOnce = true;
+            }
 
             //make star fly/fall down
-           // treeStar.SetActive(true);
+            // treeStar.SetActive(true);
             treeStarAnim.SetTrigger("TreeIsShaken");
             starCollector.interacted = false;
+         
+            //play star sparkle sound
+            if (!audioPlayedOnce)
+            {
+                audioSource.PlayOneShot(audioClips[0], 0.7f);
+                audioPlayedOnce = true;
+            }
+
 
         }
     }
