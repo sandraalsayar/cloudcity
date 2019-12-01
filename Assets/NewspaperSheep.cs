@@ -20,7 +20,7 @@ public class NewspaperSheep : MonoBehaviour
     StarCollector starCollector;
     // Start is called before the first frame update
 
-    public Text indication;
+    //public Text indication;
 
     void Start()
     {
@@ -138,5 +138,6 @@ public class NewspaperSheep : MonoBehaviour
             //TODO:make it so player cant move when talking to sheep?
             FindObjectOfType<DialogueManager>().EndDialogue();
         }
+        GetComponent<PlayerInteractions>().indication.SetActive(false);
     }
 }
