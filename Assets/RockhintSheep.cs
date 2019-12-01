@@ -8,9 +8,13 @@ public class RockhintSheep : MonoBehaviour
 	public bool firstTime;
 	public GameObject player;
 
+    public DialogueManager dialogMan;
+
 	void Start()
 	{
 		firstTime = true;
+        //dialog manager
+        dialogMan = FindObjectOfType<DialogueManager>();
 	}
 
     // Update is called once per frame
@@ -21,18 +25,23 @@ public class RockhintSheep : MonoBehaviour
 		{
             // FIRST ENCOUNTER
 			if(Input.GetButtonDown("Interact")){
-                if (firstTime)
-                {
-                    Debug.Log("toggle");
-                    //toggle the text
+                if(dialogMan.firstTime){
                     gameObject.GetComponent<TextboxToggle>().TriggerDialogue();
-                    firstTime = false;
+                } else {
+                    dialogMan.DisplayNextSentence();
                 }
-                else
-                {
-                    Debug.Log("next");
-                    FindObjectOfType<DialogueManager>().DisplayNextSentence();
-                } 
+                //if (firstTime)
+                //{
+                //    Debug.Log("toggle");
+                //    //toggle the text
+                //    gameObject.GetComponent<TextboxToggle>().TriggerDialogue();
+                //    firstTime = false;
+                //}
+                //else
+                //{
+                //    Debug.Log("next");
+                //    FindObjectOfType<DialogueManager>().DisplayNextSentence();
+                //} 
             }
 		}
 	}
