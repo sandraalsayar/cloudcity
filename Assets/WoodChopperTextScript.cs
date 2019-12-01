@@ -57,7 +57,9 @@ public class WoodChopperTextScript : MonoBehaviour
 		{
 			Debug.Log("issheep");
 			isNPC = true;
+            GetComponent<PlayerInteractions>().indication.SetActive(true);
 		}
+
 	}
 
 	void OnTriggerExit(Collider other)
@@ -66,6 +68,8 @@ public class WoodChopperTextScript : MonoBehaviour
 		{
 			isNPC = false;
 			FindObjectOfType<DialogueManager>().EndDialogue();
+            GetComponent<PlayerInteractions>().indication.SetActive(false);
 		}
+
 	}
 }

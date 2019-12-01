@@ -55,6 +55,8 @@ public class TreehintSheep : MonoBehaviour
             // Debug.Log("issheep");
             isNPC = true;
         }
+        GetComponent<PlayerInteractions>().indication.SetActive(true);
+
     }
 
      void OnTriggerExit(Collider other)
@@ -67,5 +69,7 @@ public class TreehintSheep : MonoBehaviour
             //TODO:make it so player cant move when talking to sheep?
             FindObjectOfType<DialogueManager>().EndDialogue();
         }
+        GetComponent<PlayerInteractions>().indication.SetActive(false);
+
     }
 }
