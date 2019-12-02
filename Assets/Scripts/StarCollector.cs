@@ -36,6 +36,8 @@ public class StarCollector : MonoBehaviour
     string nextStar = "";
     //endgame check
     public bool endgame;
+    public bool caughtStar;
+    private Animator anim;
 
     public void Start()
     {
@@ -45,6 +47,9 @@ public class StarCollector : MonoBehaviour
         newsDelivery.text = newsDelivered.ToString() + "/" + newsGoal.ToString(); //hardcode newspaper count total
         newsRemaining.text = remainingNews.ToString() + "/" + maxNews.ToString();
         endgame = false;
+        caughtStar = false;
+        anim = GetComponent<Animator>();
+
     }
 
     public void Update() {
@@ -54,17 +59,25 @@ public class StarCollector : MonoBehaviour
     public void ReceiveStar()
     {
         starCount++;
-        //make star appear above head
+        //make star appear above head (new player doesnt have this yet)
         nextStar = "StarBoy/stars/Orbit/"+"star" + starCount;
         GameObject.Find(nextStar).SetActive(true);
 
         //reset vars
         canCollect = false;
-        pickedUp = false;
+        //pickedUp = false;
         //update num in UI
         starScore.text = starCount.ToString();
         Debug.Log("received star");
         Debug.Log(canCollect);
+
+        //do excited animation (new player)
+        //anim.SetTrigger("pickUp");
+        //with text showing
+
+        // dont allow movement
+        caughtStar = true;
+        StartCoroutine(WaitForAnim());
     }
     //similar method for when delivering newspapers
     public void ThrowNewspaper(){
@@ -76,6 +89,14 @@ public class StarCollector : MonoBehaviour
         }
         //remainingNews--; //decrement newspapers
 
+    }
+
+    //wait for collection animation
+    IEnumerator WaitForAnim()
+    {
+        yield return new WaitForSeconds(1.6f);
+        //duration based on anim length but sometimes it's off anim.GetCurrentAnimatorStateInfo(0).length+ anim.GetCurrentAnimatorStateInfo(0).normalizedTime
+        caughtStar = false;
     }
 }
 
