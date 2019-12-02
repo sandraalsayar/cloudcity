@@ -212,6 +212,8 @@ public class CharacterInputController : MonoBehaviour
             //}
             ////plant interaction
             //else
+            Debug.Log(starCollector.isNearPlant);
+            //Debug.Log(starCollector.isNearRock);
             if (starCollector.isNearPlant)
             {
                 Debug.Log("plant");
@@ -232,7 +234,7 @@ public class CharacterInputController : MonoBehaviour
             //rock interaction
             else if(starCollector.isNearRock)
             {
-                Debug.Log("rock");
+                Debug.Log("rockkk");
                 anim.SetFloat("interaction", 4.0f);
                 anim.SetTrigger("interact");
                 StartCoroutine(WaitForInteract(2.3f)); //TODO: adjust time based on anim&whether needed

@@ -16,6 +16,9 @@ public class ActionRock : MonoBehaviour
     public AudioClip[] audioClips;
     public bool audioPlayedOnce;
 
+    //Star
+    public Animator floatAnim;
+
     void Start() {
 		rock = GetComponent<Rigidbody>();
 		player = GetComponent<Rigidbody>();
@@ -33,8 +36,13 @@ public class ActionRock : MonoBehaviour
 			// noooo looping
 			if(Input.GetKeyDown("x"))
 			{
+                //trigger animations
 				anim.SetTrigger("isTurnedOver");
 				isTurnedOver = true;
+                floatAnim.SetTrigger("float");
+                //reset
+                player.gameObject.GetComponent<StarCollector>().interacted = false;
+
                 if (!audioPlayedOnce)
                 {
                     audioSource.PlayOneShot(audioClips[0], 0.7f);
@@ -48,12 +56,14 @@ public class ActionRock : MonoBehaviour
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.CompareTag("Player")) {
 			isNearRock = true;
+            other.gameObject.GetComponent<StarCollector>().isNearRock = true;
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
 		if(other.gameObject.CompareTag("Player")) {
 			isNearRock = false;
+            other.gameObject.GetComponent<StarCollector>().isNearRock = false;
 		}
 	}
 	

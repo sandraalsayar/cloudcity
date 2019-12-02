@@ -64,9 +64,10 @@ public class StarCollector : MonoBehaviour
         nextStar = "StarBoy/stars/Orbit/"+"star" + starCount;
         GameObject.Find(nextStar).SetActive(true);
 
-        //reset vars
-        canCollect = false;
+        //reset vars (NEW)
+        //canCollect = false;
         //pickedUp = false;
+
         //update num in UI
         starScore.text = starCount.ToString();
         Debug.Log("received star");
@@ -99,6 +100,7 @@ public class StarCollector : MonoBehaviour
         //duration based on anim length but sometimes it's off anim.GetCurrentAnimatorStateInfo(0).length+ anim.GetCurrentAnimatorStateInfo(0).normalizedTime
         caughtStar = false;
         textAnim.SetBool("isOpen", false);
+        canCollect = false;
     }
 }
 
