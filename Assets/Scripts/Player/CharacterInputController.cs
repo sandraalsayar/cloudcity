@@ -153,7 +153,7 @@ public class CharacterInputController : MonoBehaviour
 
         //unfiltered input
         //DONT ALLOW MOVEMENT WHEN @ ENDGAME DIALOGUE
-        if(!starCollector.endgame){
+        if(!starCollector.endgame && !starCollector.caughtStar){
             //Forward = v;
             //Turn = h; 
             //Turn = Mathf.SmoothDamp(Turn, h, ref forwardVelocity, movementSmoothing);
@@ -167,6 +167,9 @@ public class CharacterInputController : MonoBehaviour
             Turn = filteredTurnInput;
             //Forward = speed;
             //Turn = speed;
+        } else {
+            Forward = 0;
+            Turn = 0;
         }
 
 
@@ -199,16 +202,17 @@ public class CharacterInputController : MonoBehaviour
         if (Input.GetButtonDown("Interact") && !activeAnim)
         {
             activeAnim = true;
-            //regular collecting the actual star
-            if (starCollector.canCollect)
-            {
-                Debug.Log("isstar");
-                anim.SetFloat("interaction", 1.0f);
-                anim.SetTrigger("interact");
-                StartCoroutine(WaitForAnim());
-            }
-            //plant interaction
-            else if (starCollector.isNearPlant)
+            //regular collecting the actual star REMOVED
+            //if (starCollector.canCollect)
+            //{
+            //    Debug.Log("isstar");
+            //    anim.SetFloat("interaction", 1.0f);
+            //    anim.SetTrigger("interact");
+            //    StartCoroutine(WaitForAnim());
+            //}
+            ////plant interaction
+            //else
+            if (starCollector.isNearPlant)
             {
                 Debug.Log("plant");
                 anim.SetFloat("interaction", 2.0f);
