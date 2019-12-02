@@ -61,10 +61,10 @@ public class StarCollector : MonoBehaviour
     {
         starCount++;
         //make star appear above head (new player doesnt have this yet)
-        nextStar = "StarBoy/stars/Orbit/"+"star" + starCount;
-        GameObject.Find(nextStar).SetActive(true);
+        //nextStar = "StarBoy/stars/Orbit/"+"star" + starCount;
+        //GameObject.Find(nextStar).SetActive(true);
 
-        //reset vars (NEW)
+        //reset vars (NEWly commentedout)
         //canCollect = false;
         //pickedUp = false;
 
