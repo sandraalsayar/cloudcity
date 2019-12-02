@@ -17,6 +17,10 @@ public class PlantAction : MonoBehaviour
     AudioSource audioSource;
     public bool audioPlayedOnce;
 
+
+    //star
+    public Animator floatAnim;
+
     void Start()
     {
         isNearPlant = false;
@@ -84,5 +88,6 @@ public class PlantAction : MonoBehaviour
         //starCollector.interacted = true; // used to trigger whatever needs to be done AFTER animation is complete
         //activeAnim = false;
         plantStar.SetActive(true);
+        floatAnim.SetTrigger("float"); //make it float up
     }
 }
