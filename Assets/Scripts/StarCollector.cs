@@ -38,6 +38,7 @@ public class StarCollector : MonoBehaviour
     public bool endgame;
     public bool caughtStar;
     private Animator anim;
+    public Animator textAnim;
 
     public void Start()
     {
@@ -74,7 +75,7 @@ public class StarCollector : MonoBehaviour
         //do excited animation (new player)
         //anim.SetTrigger("pickUp");
         //with text showing
-
+        textAnim.SetBool("isOpen", true);
         // dont allow movement
         caughtStar = true;
         StartCoroutine(WaitForAnim());
@@ -97,6 +98,7 @@ public class StarCollector : MonoBehaviour
         yield return new WaitForSeconds(1.6f);
         //duration based on anim length but sometimes it's off anim.GetCurrentAnimatorStateInfo(0).length+ anim.GetCurrentAnimatorStateInfo(0).normalizedTime
         caughtStar = false;
+        textAnim.SetBool("isOpen", false);
     }
 }
 
