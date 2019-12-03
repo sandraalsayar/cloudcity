@@ -40,6 +40,9 @@ public class StarCollector : MonoBehaviour
     private Animator anim;
     public Animator textAnim;
 
+    //Anim collection
+    public Transform cam;
+
     public void Start()
     {
         remainingNews = maxNews;
@@ -60,9 +63,10 @@ public class StarCollector : MonoBehaviour
     public void ReceiveStar()
     {
         starCount++;
-        //make star appear above head (new player doesnt have this yet)
+        //make star appear above head
         //nextStar = "StarBoy/stars/Orbit/"+"star" + starCount;
-        //GameObject.Find(nextStar).SetActive(true);
+        nextStar = "StarBoii/stars/Orbit/" + "star" + starCount;
+        GameObject.Find(nextStar).SetActive(true);
 
         //reset vars (NEWly commentedout)
         //canCollect = false;
@@ -73,8 +77,10 @@ public class StarCollector : MonoBehaviour
         Debug.Log("received star");
         Debug.Log(canCollect);
 
+        //turn towards camera
+        this.transform.LookAt(new Vector3(cam.position.x,this.transform.position.y,cam.position.z));
         //do excited animation (new player)
-        //anim.SetTrigger("pickUp");
+        anim.SetTrigger("pickUp");
         //with text showing
         textAnim.SetBool("isOpen", true);
         // dont allow movement
