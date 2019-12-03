@@ -60,7 +60,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blend Tree - Interaction
+  m_Name: InteractionBlend
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -511,13 +511,13 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Base Layer
     m_StateMachine: {fileID: 604984486838454088}
-    m_Mask: {fileID: 0}
+    m_Mask: {fileID: 31900000, guid: f453b2f7b77694a6a9c5a96a9b8fe923, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
     m_DefaultWeight: 0
-    m_IKPass: 0
+    m_IKPass: 1
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
 --- !u!1102 &300996762028299563
