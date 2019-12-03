@@ -146,7 +146,8 @@ public class CharacterInputController : MonoBehaviour
 
         filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
             Time.deltaTime * turnInputFilter);
-
+        //filteredTurnInput = Mathf.Clamp(Mathf.Lerp(filteredTurnInput, h, 
+                                                   //Time.deltaTime * turnInputFilter),-1f, 1f);
 
         //Forward = filteredForwardInput;
         //Turn = filteredTurnInput;
@@ -161,12 +162,13 @@ public class CharacterInputController : MonoBehaviour
 
             //mess with this to simulate joystick
             //StickToWorldSpace(this.transform, gamecam.transform, ref direction, ref speed);
-            //StickToWorldSpace(this.transform, gamecam.transform, ref direction, ref filteredForwardInput);
+            //StickToWorldSpace(this.transform, gamecam.transform, ref filteredTurnInput, ref speed);
 
             Forward = filteredForwardInput;
             Turn = filteredTurnInput;
+
             //Forward = speed;
-            //Turn = speed;
+            //Turn = filteredTurnInput;
         } else {
             Forward = 0;
             Turn = 0;
