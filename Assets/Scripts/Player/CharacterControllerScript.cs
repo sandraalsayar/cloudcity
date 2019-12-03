@@ -234,37 +234,23 @@ public class CharacterControllerScript : MonoBehaviour
         //Debug.Log("animIK");
         if(anim){
             AnimatorStateInfo aState = anim.GetCurrentAnimatorStateInfo(0);
-            Debug.Log(aState);
-            if(aState.IsName("InteractionBlend")){
-                //Debug.Log("IK PULL");
-                float plantWeight = 1.0f;
-                // Set the look target position, if one has been assigned
-                if (plant != null)
-                {
-                    Debug.Log("IK PULL");
-                    anim.SetLookAtWeight(plantWeight);
-                    anim.SetLookAtPosition(plant.transform.position);
-                    anim.SetIKPositionWeight(AvatarIKGoal.RightHand, plantWeight);
-                    anim.SetIKPosition(AvatarIKGoal.RightHand, plant.transform.position);
-                }
-            } else {
-                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
-                anim.SetLookAtWeight(0);
-            }
-    //        if(aState.IsName("ButtonPress")) {
-    //            float buttonWeight = anim.GetFloat("buttonClose");
-
-    //            // Set the look target position, if one has been assigned
-    //            if(buttonObject != null) {
-    //                anim.SetLookAtWeight(buttonWeight);
-    //                anim.SetLookAtPosition(buttonObject.transform.position);
-    //                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, buttonWeight);
-    //                anim.SetIKPosition(AvatarIKGoal.RightHand, buttonObject.transform.position);
-    //            }
-    //        } else{
-    //            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
-    //            anim.SetLookAtWeight(0);
-    //        }
+            //Debug.Log(aState);
+            //if(aState.IsName("InteractionBlend")){
+            //    //Debug.Log("IK PULL");
+            //    float plantWeight = 1.0f;
+            //    // Set the look target position, if one has been assigned
+            //    if (plant != null)
+            //    {
+            //        Debug.Log("IK PULL");
+            //        anim.SetLookAtWeight(plantWeight);
+            //        anim.SetLookAtPosition(plant.transform.position);
+            //        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, plantWeight);
+            //        anim.SetIKPosition(AvatarIKGoal.RightHand, plant.transform.position);
+            //    }
+            //} else {
+            //    anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
+            //    anim.SetLookAtWeight(0);
+            //}
 
         }
     }
