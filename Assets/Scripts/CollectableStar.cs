@@ -71,7 +71,7 @@ public class CollectableStar : MonoBehaviour
                || starNum == 1
                || starNum == 4
                || starNum == 6
-               || starNum == 5
+               //|| starNum == 5
               )
             { // only allow once it's revealed in spot
                 bc.stars[int.Parse(this.name)] = true;

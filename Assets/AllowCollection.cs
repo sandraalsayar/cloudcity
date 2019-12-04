@@ -15,6 +15,7 @@ public class AllowCollection : MonoBehaviour
     }
 
     public void AllowCollecting(){
+        Debug.Log("allow collect");
         starCollector.canCollect = true;
     }
 }
