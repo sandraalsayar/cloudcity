@@ -146,6 +146,8 @@ public class CharacterInputController : MonoBehaviour
 
         filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
             Time.deltaTime * turnInputFilter);
+
+
         //filteredTurnInput = Mathf.Clamp(Mathf.Lerp(filteredTurnInput, h, 
                                                    //Time.deltaTime * turnInputFilter),-1f, 1f);
 
