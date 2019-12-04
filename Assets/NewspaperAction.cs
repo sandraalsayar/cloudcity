@@ -38,7 +38,7 @@ public class NewspaperAction : MonoBehaviour
             //trigger newspaper flying
             news.gameObject.GetComponent<Rigidbody>().useGravity = true;
             //modify this to change how much its thrown by in conjunction with the height of the gameobject in unity inspector
-            news.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * 10.0f;
+            news.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * 12.0f;
 
             starCollector.isThrown = false;
 

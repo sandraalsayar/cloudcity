@@ -51,7 +51,7 @@ public class StartQuest : MonoBehaviour
         Debug.Log("entered box");
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("startQuest");
+            Debug.Log("canstartQuest");
             nearBox = true;
         }
     }
