@@ -113,7 +113,7 @@ public class CharacterControllerScript : MonoBehaviour
             //inputActionName = cinput.ActionName;
             inputActionSneak = cinput.ActionSneak;
             inputActionInteract = cinput.ActionInteract;
-            //inputActionThrow = cinput.ActionThrow;
+            inputActionThrow = cinput.ActionThrow;
 
 
         }
@@ -147,13 +147,17 @@ public class CharacterControllerScript : MonoBehaviour
         anim.speed = animationSpeed;
 
 
+        anim.SetFloat("velx", inputTurn);
+        anim.SetFloat("vely", inputForward);
 
         //Checking for special actions
         anim.SetBool("isSneaking", inputActionSneak);
         //anim.SetBool("isThrowing", inputActionThrow);
+        //anim.SetBool("isThrowingg",inputActionThrow);
+        //if(inputActionThrow){
+        //    anim.SetTrigger("isThrowing");
+        //}
 
-        anim.SetFloat("velx", inputTurn);
-        anim.SetFloat("vely", inputForward);
 
         //anim.SetBool("jump",inputJump);
 
