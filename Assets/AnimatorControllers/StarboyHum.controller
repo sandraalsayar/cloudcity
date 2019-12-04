@@ -583,33 +583,41 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 6e745c0aefe0443bcbb89a3a06ac8f79, type: 2}
+    m_Motion: {fileID: 7400000, guid: 97faefc49228242838903016c482ddee, type: 2}
     m_Threshold: 0.33333334
-    m_Position: {x: 0.02, y: 0.5}
+    m_Position: {x: 0, y: 0.5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: velx
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: ecf1221fc9a8b4a6883734dbdee92290, type: 2}
-    m_Threshold: 0.44444448
-    m_Position: {x: -3, y: 0}
+    m_Motion: {fileID: 7400000, guid: da6e85d7fd53c457c8be79911841d151, type: 2}
+    m_Threshold: 0.33333334
+    m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: velx
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 3b167900e000b4647a35806425591861, type: 2}
-    m_Threshold: 0.5555556
-    m_Position: {x: 3, y: 0}
-    m_TimeScale: 1
+    m_Motion: {fileID: 7400000, guid: db78638b2dfe24353a9907d9c50ca2bf, type: 2}
+    m_Threshold: 0.33333334
+    m_Position: {x: -0.7, y: 0}
+    m_TimeScale: 0.9
+    m_CycleOffset: 0
+    m_DirectBlendParameter: velx
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 65b3cf874f7ea4d2689334839afec907, type: 2}
+    m_Threshold: 0.33333334
+    m_Position: {x: 0.7, y: 0}
+    m_TimeScale: 0.9
     m_CycleOffset: 0
     m_DirectBlendParameter: velx
     m_Mirror: 0
   m_BlendParameter: velx
   m_BlendParameterY: vely
   m_MinThreshold: 0.33333334
-  m_MaxThreshold: 0.5555556
+  m_MaxThreshold: 0.33333334
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 2
@@ -646,6 +654,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -8584101559433385094}
     m_Position: {x: -0.39868164, y: -55.942062, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 5923178340898671593}
+    m_Position: {x: 34.60132, y: 9.057938, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 2816456634041038183}
+    m_Position: {x: 69.60132, y: 74.05794, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -708,6 +722,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &2816456634041038183
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SneakLeft
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 027092e53dea9466cba68b3672834f59, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &5310084896902270008
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -738,7 +778,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Blend Tree
-  m_Speed: 0.5
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7170208447296092131}
@@ -755,6 +795,32 @@ AnimatorState:
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: isFalling
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &5923178340898671593
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TurningLeft
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 061d52b2766fc4646bd188219b1d00fc, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1101 &7858768120805559133
