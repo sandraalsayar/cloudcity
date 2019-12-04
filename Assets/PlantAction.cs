@@ -40,10 +40,9 @@ public class PlantAction : MonoBehaviour
         if (isNearPlant && starCollector.interacted)
         {
             //trigger plant flying animation
+            //make star pop out in animation
             anim.SetTrigger("isYanked");
-            //make star pop out
-            //plantStar.SetActive(true);
-            StartCoroutine(WaitForPlant());
+
             if (!audioSource.isPlaying && !audioPlayedOnce)
             {
                 audioSource.Play(0);
@@ -75,19 +74,15 @@ public class PlantAction : MonoBehaviour
 
     //called at end of plant flying animation
     public void FadePlant(){
-        //TODO: fade away plant and then destroy
 
         starCollector.interacted = false;
         starCollector.isNearPlant = false;
         Destroy(this.gameObject);
     }
 
-    IEnumerator WaitForPlant()
-    {
-        yield return new WaitForSeconds(.9f);
-        //starCollector.interacted = true; // used to trigger whatever needs to be done AFTER animation is complete
-        //activeAnim = false;
+    //activate star event
+    public void ActivateStar(){
         plantStar.SetActive(true);
-        floatAnim.SetTrigger("float"); //make it float up
+        floatAnim.SetTrigger("float");
     }
 }

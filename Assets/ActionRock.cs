@@ -5,12 +5,12 @@ using UnityEngine;
 public class ActionRock : MonoBehaviour
 {
 	private Rigidbody rock;
-	private Rigidbody player;
+	public GameObject player;
 	private Animator anim;	
 	private bool isNearRock;
 	public static bool isTurnedOver;
     // public String openText;
-
+    StarCollector starCollector;
     //Audio
     AudioSource audioSource;
     public AudioClip[] audioClips;
@@ -21,27 +21,29 @@ public class ActionRock : MonoBehaviour
 
     void Start() {
 		rock = GetComponent<Rigidbody>();
-		player = GetComponent<Rigidbody>();
+		//player = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator>();
 		isNearRock = false;
 		isTurnedOver = false;
         audioSource = GetComponent<AudioSource>();
+        starCollector = player.GetComponent<StarCollector>();
         // openText = "Press T.";
     }
 
 	// When player presses "t" the rock turns over
 	void Update() {
 		// check if player is near rock and rock isn't turned over yet
-		if (isNearRock && isTurnedOver == false) {
-			// noooo looping
-			if(Input.GetKeyDown("x"))
-			{
+        if (isNearRock && starCollector.interacted
+            //&& isTurnedOver == false
+           ) {
+			
+			//if(Input.GetKeyDown("x"))
+			//{
                 //trigger animations
 				anim.SetTrigger("isTurnedOver");
-				isTurnedOver = true;
-                floatAnim.SetTrigger("float");
+				//set turnover to true in the animation
                 //reset
-                player.gameObject.GetComponent<StarCollector>().interacted = false;
+                starCollector.interacted = false;
 
                 if (!audioPlayedOnce)
                 {
@@ -49,7 +51,7 @@ public class ActionRock : MonoBehaviour
                     audioSource.PlayOneShot(audioClips[1], 1.0f);
                     audioPlayedOnce = true;
                 }
-            }
+            //}
 		}
 	}
 
@@ -66,5 +68,10 @@ public class ActionRock : MonoBehaviour
             other.gameObject.GetComponent<StarCollector>().isNearRock = false;
 		}
 	}
+
+    public void activateStarFloat(){
+        isTurnedOver = true;
+        floatAnim.SetTrigger("float");
+    }
 	
 }
