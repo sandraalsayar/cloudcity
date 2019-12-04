@@ -137,7 +137,7 @@ public class CharacterControllerScript : MonoBehaviour
         //If player moves at all, should do appropriate animation and stop longidle
         if (inputTurn != 0 || inputForward != 0)
         {
-            Debug.Log("not dancing");
+            
             anim.SetBool("longIdle", false);
             isIdle = 0;
         }
