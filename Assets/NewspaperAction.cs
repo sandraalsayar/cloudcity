@@ -33,6 +33,7 @@ public class NewspaperAction : MonoBehaviour
             Debug.Log("newspaper thrown");
             // instantiates newspaper
             news = Instantiate(newspaper, transform.position +transform.forward ,Quaternion.identity);
+
             news.gameObject.SetActive(true);
             //trigger newspaper flying
             news.gameObject.GetComponent<Rigidbody>().useGravity = true;
