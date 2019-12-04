@@ -103,6 +103,7 @@ public class StarCollector : MonoBehaviour
     IEnumerator WaitForAnim()
     {
         yield return new WaitForSeconds(1.6f);
+        //yield return new WaitForSeconds(3.0f);
         //duration based on anim length but sometimes it's off anim.GetCurrentAnimatorStateInfo(0).length+ anim.GetCurrentAnimatorStateInfo(0).normalizedTime
         caughtStar = false;
         textAnim.SetBool("isOpen", false);
