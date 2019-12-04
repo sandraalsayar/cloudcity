@@ -216,7 +216,7 @@ public class CharacterInputController : MonoBehaviour
             //}
             ////plant interaction
             //else
-            Debug.Log(starCollector.isNearPlant);
+            //Debug.Log(starCollector.isNearPlant);
             //Debug.Log(starCollector.isNearRock);
             if (starCollector.isNearPlant)
             {
