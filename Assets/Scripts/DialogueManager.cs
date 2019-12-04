@@ -109,6 +109,7 @@ public class DialogueManager : MonoBehaviour
                 { //make star appear
                     Debug.Log("star appears");
                     newsStar.SetActive(true);
+                    newsStar.transform.parent.gameObject.GetComponent<Animator>().SetTrigger("float");
                     sheep.isNPC = false;
                     //make quest panel disappear
                     newsPanel.interactable = false;
