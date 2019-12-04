@@ -229,11 +229,11 @@ public class CharacterControllerScript : MonoBehaviour
 
     }
 
-    void OnAnimatorIK()
-    {
+    //void OnAnimatorIK()
+    //{
         //Debug.Log("animIK");
-        if(anim){
-            AnimatorStateInfo aState = anim.GetCurrentAnimatorStateInfo(0);
+        //if(anim){
+            //AnimatorStateInfo aState = anim.GetCurrentAnimatorStateInfo(0);
             //Debug.Log(aState);
             //if(aState.IsName("InteractionBlend")){
             //    //Debug.Log("IK PULL");
@@ -252,6 +252,6 @@ public class CharacterControllerScript : MonoBehaviour
             //    anim.SetLookAtWeight(0);
             //}
 
-        }
-    }
+    //    }
+    //}
 }

@@ -221,7 +221,7 @@ public class CharacterInputController : MonoBehaviour
                 Debug.Log("plant");
                 anim.SetFloat("interaction", 2.0f);
                 anim.SetTrigger("interact");
-                StartCoroutine(WaitForInteract(2.3f));
+                //StartCoroutine(WaitForInteract(2f));
                 //StartCoroutine(WaitForInteract(0.0f));
 
             }
@@ -308,5 +308,12 @@ public class CharacterInputController : MonoBehaviour
         angleRootToMove /= 180f;
         directionOut = angleRootToMove * directionSpeed;
 
+    }
+
+    public void AfterInteraction(){
+        //trigger plant animation
+        starCollector.interacted = true;
+        activeAnim = false;
+        //trigger rock animation
     }
 }
