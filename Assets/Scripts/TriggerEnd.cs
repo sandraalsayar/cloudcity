@@ -10,6 +10,8 @@ public class TriggerEnd : MonoBehaviour
     StarCollector starCollector;
 
     public bool firstTime;
+
+    public GameObject indication;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,9 +49,11 @@ public class TriggerEnd : MonoBehaviour
 
     void OnTriggerEnter(Collider c){
         if (c.CompareTag("Player")
-            && starCollector.starCount==7)
+           && starCollector.starCount==7
+           )
         {
             well = true;
+            indication.SetActive(true);
         }
     }
     void OnTriggerExit(Collider c)

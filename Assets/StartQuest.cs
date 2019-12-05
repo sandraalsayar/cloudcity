@@ -50,7 +50,7 @@ public class StartQuest : MonoBehaviour
             //controlGroup.blocksRaycasts = true;
             //controlGroup.alpha = 1f;
             //button
-            btn.enabled = true;
+            //btn.enabled = true;
             //load in the text
             controlType.controls[0]="Press  s  to Throw Newspaper";
             controlType.current = 0;
