@@ -17,8 +17,9 @@ public class StartQuest : MonoBehaviour
     public CanvasGroup canvasGroup;
 
     //for controls
-    public CanvasGroup controlGroup;
+    //public CanvasGroup controlGroup;
     public ControlsTracker controlType;
+    public Image btn;
 
     public bool nearBox;
     // Start is called before the first frame update
@@ -43,12 +44,15 @@ public class StartQuest : MonoBehaviour
             canvasGroup.blocksRaycasts = true;
             canvasGroup.alpha = 1f;
 
+
             //controls
-            controlGroup.interactable = true;
-            controlGroup.blocksRaycasts = true;
-            controlGroup.alpha = 1f;
+            //controlGroup.interactable = true;
+            //controlGroup.blocksRaycasts = true;
+            //controlGroup.alpha = 1f;
+            //button
+            btn.enabled = true;
             //load in the text
-            controlType.controls[0]="Press     to Throw Newspaper";
+            controlType.controls[0]="Press  s  to Throw Newspaper";
             controlType.current = 0;
             controlType.num++;
         }
@@ -56,13 +60,13 @@ public class StartQuest : MonoBehaviour
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
             canvasGroup.alpha = 0f;
-
+            btn.enabled = false;
             //controls
-            controlGroup.interactable = false;
-            controlGroup.blocksRaycasts = false;
-            controlGroup.alpha = 0f;
+            //controlGroup.interactable = false;
+            //controlGroup.blocksRaycasts = false;
+            //controlGroup.alpha = 0f;
             //unload text
-            controlType.current = -1;
+            controlType.current = 1;
             controlType.num--;
         }
     }
