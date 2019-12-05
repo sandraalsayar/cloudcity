@@ -53,8 +53,6 @@ public class ControlsTracker : MonoBehaviour
         } else if(num>0){
             //set the text here
             //current is always which one is ONLY being shown
-            Debug.Log("num is 1");
-            Debug.Log(current);
             if(current==1){
                 if (player.GetComponent<StarCollector>().stars[0])
                 {

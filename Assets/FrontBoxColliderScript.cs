@@ -29,7 +29,13 @@ public class FrontBoxColliderScript : MonoBehaviour
 		if(other.gameObject.CompareTag("Player")) {
 			FrontCollisionFlag = true;
 			StopMoving = true;
-
 		}
 	}
+
+    //// Player moved out of shot and is not in danger
+    //void OnTriggerExit(Collider other)
+    //{
+    //    StopMoving = false;
+    //    FrontCollisionFlag = false;
+    //}
 }
