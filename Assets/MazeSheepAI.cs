@@ -47,6 +47,10 @@
         //public CanvasGroup controlGroup;
         public ControlsTracker controlType;
 
+        //restart
+        public Quaternion originalRotation;
+        public GameObject star;
+
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
 			// woodChopper = sheep.GetComponent<WoodChopperTextScript>();
@@ -69,6 +73,8 @@
 			backCollider.SetActive(false);
 			frontCollider.SetActive(false);
 
+            originalRotation = transform.rotation;
+
 			firstTime = true;
 			
 			setNextWaypoint();
@@ -76,6 +82,27 @@
 
 
 		private void Update() {
+            if(player.GetComponent<StarCollector>().playerlost && Input.GetButtonDown("Interact")){
+                FindObjectOfType<DialogueManager>().DisplayNextSentence();
+                //resetting maze quest
+                player.GetComponent<StarCollector>().playerlost = false;
+                BehindSphereColliderScript.StopMoving = false;
+                BehindSphereColliderScript.TurnAroundFlag = false;
+                anim.SetTrigger("playerlost");
+                transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
+                transform.rotation = originalRotation;
+                //star.transform.position = new Vector3((float)-0.02, (float)0.68, (float)0.43);
+
+                player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
+                textCollider.GetComponent<WoodChopperTextScript>().tutorialDone = false;  // so you can talk to him again
+                textCollider.SetActive(true);
+                textCollider.GetComponent<WoodChopperTextScript>().firstTime = true;
+                
+                //anim.SetBool("PlayerTooClose", false);
+                //controls
+                controlType.current = 0;
+                controlType.num--;
+            }
 		// If star entered the border, then start walking
 			// if (MazeFlagCollisionCode.sheepFlag == true) {
 
@@ -127,15 +154,19 @@
 								{
 									// Lose = true; // Pauses game
 									Debug.Log("Timer = " + timer);
-									this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
-									player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
+									//this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
+									//player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
 									// manager.tutorialDone = false;  // so you can talk to him again
 									frontCollider.SetActive(false);
 									backCollider.SetActive(false);
 									currWaypoint = -1;
-									BehindSphereColliderScript.StopMoving = false;
-									BehindSphereColliderScript.TurnAroundFlag = false;
+									//BehindSphereColliderScript.StopMoving = false;
+									//BehindSphereColliderScript.TurnAroundFlag = false;
 									timer = 0;
+                                    //failed quest pops up
+                                    questFailedText.GetComponent<TextboxToggle>().TriggerDialogue();
+                                    //dont let player move until you click x to get back into game
+                                    player.GetComponent<StarCollector>().playerlost  = true;
 								}
 
 							}
@@ -149,30 +180,30 @@
 						}
 						else if (BehindSphereColliderScript.StopMoving == false)
 						{
-							if(FrontBoxColliderScript.StopMoving == true)
-							{
-								timer += Time.deltaTime; // wait a little before turning completly
-								if (timer >= 2.0) {
-									// anim.SetBool("PlayerInFront", true);
-									myNavMeshAgent.Stop(); // stop sheep moving
-									Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
-									// Lose = true; // Pauses game
+							//if(FrontBoxColliderScript.StopMoving == true)
+							//{
+							//	timer += Time.deltaTime; // wait a little before turning completly
+							//	if (timer >= 2.0) {
+							//		// anim.SetBool("PlayerInFront", true);
+							//		myNavMeshAgent.Stop(); // stop sheep moving
+							//		Debug.Log("YOU LOOOOOSEEEE FROM THE FRONT");
+							//		// Lose = true; // Pauses game
 
-									this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
-									player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
-									// manager.tutorialDone = false;
-									frontCollider.SetActive(false);
-									backCollider.SetActive(false);
-									currWaypoint = -1;
-									FrontBoxColliderScript.StopMoving = false;
-									timer = 0;
+							//		this.transform.position = new Vector3((float)172.38, (float)0.12, (float)-27.64);
+							//		player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
+							//		// manager.tutorialDone = false;
+							//		frontCollider.SetActive(false);
+							//		backCollider.SetActive(false);
+							//		currWaypoint = -1;
+							//		FrontBoxColliderScript.StopMoving = false;
+							//		timer = 0;
 
-									// textCollider.GetComponent<WoodChopperTextScript>().firstTime = true; // to reset dialogue
-								}
+							//		// textCollider.GetComponent<WoodChopperTextScript>().firstTime = true; // to reset dialogue
+							//	}
 
-							}
-							else
-							{
+							//}
+							//else
+							//{
                                 audioPlayedOnce = false;
 								myNavMeshAgent.Resume();
 								anim.SetBool("PlayerClose", false);
@@ -180,7 +211,7 @@
 								{
 									setNextWaypoint();
 								}
-							}
+							//}
 						}
 					}
                 }

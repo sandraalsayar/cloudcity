@@ -67,6 +67,9 @@ public class ControlsTracker : MonoBehaviour
                 control.text = controls[current];
                 sneak.enabled = false;
                 news.enabled = true;
+            } else {
+                news.enabled = false;
+                sneak.enabled = false;
             }
         } else{ //no text
             control.text = "";

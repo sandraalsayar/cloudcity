@@ -43,6 +43,9 @@ public class StarCollector : MonoBehaviour
     //Anim collection
     public Transform cam;
 
+    //mazesheep quest
+    public bool playerlost;
+
     public void Start()
     {
         remainingNews = maxNews;
@@ -53,6 +56,7 @@ public class StarCollector : MonoBehaviour
         endgame = false;
         caughtStar = false;
         anim = GetComponent<Animator>();
+        playerlost = false;
 
     }
 

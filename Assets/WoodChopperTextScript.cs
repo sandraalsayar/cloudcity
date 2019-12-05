@@ -63,6 +63,7 @@ public class WoodChopperTextScript : MonoBehaviour
                 controlType.num++; 
 
                 GetComponent<PlayerInteractions>().indication.SetActive(false);
+                convocounter = 0;
 			}
 		}
 	}
