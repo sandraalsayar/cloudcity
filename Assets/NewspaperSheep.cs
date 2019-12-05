@@ -11,7 +11,7 @@ public class NewspaperSheep : MonoBehaviour
     public bool complete;
     public bool sheepTalked;
 
-    public const int newspaperCount = 22; //TODO: change this to be wat max we want
+    public const int newspaperCount = 19; //TODO: change this to be wat max we want
     public GameObject player;
     //public GameObject newsStar;
     public GameObject questCompleteText;
@@ -76,7 +76,7 @@ public class NewspaperSheep : MonoBehaviour
                     } 
 
                     // IN-PROGRESS - CONTINUE DELIVERING
-                } else if(starCollector.newsDelivered < 22 && starCollector.remainingNews != 0)  { 
+                } else if(starCollector.newsDelivered < 19 && starCollector.remainingNews != 0)  { 
                     Debug.Log("go finish delivering");
                     complete = false;
 
@@ -93,7 +93,7 @@ public class NewspaperSheep : MonoBehaviour
                         FindObjectOfType<DialogueManager>().DisplayNextSentence();
                     } 
                     // FAIL - DO IT AGAIN
-                } else if(starCollector.newsDelivered < 22 && starCollector.remainingNews <= 0)  { 
+                } else if(starCollector.newsDelivered < 19 && starCollector.remainingNews <= 0)  { 
                     Debug.Log("start again");
                     complete = false;
 
