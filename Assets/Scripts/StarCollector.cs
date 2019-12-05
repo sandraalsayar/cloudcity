@@ -46,6 +46,8 @@ public class StarCollector : MonoBehaviour
     //mazesheep quest
     public bool playerlost;
 
+    //public bool sheepCaught;
+
     public void Start()
     {
         remainingNews = maxNews;
