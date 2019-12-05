@@ -20,6 +20,8 @@ public class ShakeTree : MonoBehaviour
     public bool audioPlayedOnce;
     public bool shakeAudioPlayedOnce;
 
+    public GameObject search;
+
     void Start()
     {
         isNearTree = false;
@@ -59,6 +61,7 @@ public class ShakeTree : MonoBehaviour
                 audioSource.PlayOneShot(audioClips[0], 0.7f);
                 audioPlayedOnce = true;
             }
+            search.SetActive(false);
 
 
         }
@@ -72,6 +75,8 @@ public class ShakeTree : MonoBehaviour
             {
                 isNearTree = true;
                 starCollector.isNearTree = true;
+                search.SetActive(true);
+
             }
         }
 
@@ -81,6 +86,8 @@ public class ShakeTree : MonoBehaviour
             {
                 isNearTree = false;
                 starCollector.isNearTree = false;
+                search.SetActive(false);
+
             }
         }
 }
