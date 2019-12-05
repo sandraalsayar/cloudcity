@@ -55,7 +55,8 @@ public class BehindSphereColliderScript : MonoBehaviour
 			if (timer >= 5.0) {  // NOTE: Need to make this smaller but untill everything is implemented keep it high
 				// turn around completly and loose game
 				turnOffFrontCollider = true;
-				TurnAroundFlag = true;	
+				TurnAroundFlag = true;
+                timer = 0;
 			}
 		}
 	}

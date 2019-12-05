@@ -64,6 +64,8 @@ public class WoodChopperTextScript : MonoBehaviour
 
                 GetComponent<PlayerInteractions>().indication.SetActive(false);
                 convocounter = 0;
+
+
 			}
 		}
 	}
