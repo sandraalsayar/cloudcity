@@ -38,6 +38,13 @@ public class CharacterControllerScript : MonoBehaviour
 
     //IK OBJECTS
     public GameObject plant;
+    public GameObject rock;
+    public GameObject tree;
+    public GameObject RHand;
+    public GameObject LHand;
+    public bool shakeTree=false;
+    public bool kick = false;
+    public bool kickRock = false;
 
     public bool IsGrounded
     {
@@ -235,29 +242,65 @@ public class CharacterControllerScript : MonoBehaviour
 
     }
 
-    //void OnAnimatorIK()
-    //{
+    void OnAnimatorIK()
+    {
         //Debug.Log("animIK");
-        //if(anim){
-            //AnimatorStateInfo aState = anim.GetCurrentAnimatorStateInfo(0);
+        if(anim){
+            AnimatorStateInfo aState = anim.GetCurrentAnimatorStateInfo(0);
             //Debug.Log(aState);
-            //if(aState.IsName("InteractionBlend")){
-            //    //Debug.Log("IK PULL");
-            //    float plantWeight = 1.0f;
-            //    // Set the look target position, if one has been assigned
-            //    if (plant != null)
-            //    {
-            //        Debug.Log("IK PULL");
-            //        anim.SetLookAtWeight(plantWeight);
-            //        anim.SetLookAtPosition(plant.transform.position);
-            //        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, plantWeight);
-            //        anim.SetIKPosition(AvatarIKGoal.RightHand, plant.transform.position);
-            //    }
-            //} else {
-            //    anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
-            //    anim.SetLookAtWeight(0);
-            //}
 
-    //    }
-    //}
+            if(aState.IsName("InteractionBlend")){
+                Debug.Log("IK KICK");
+                float objWeight = 1.0f;
+                // Set the look target position, if one has been assigned
+                if (plant != null && rock!=null && kick)
+                {
+                    Debug.Log("IK PULL");
+                    if(cinput.plantk){
+                        anim.SetLookAtWeight(objWeight);
+                        anim.SetLookAtPosition(plant.transform.position);
+                        anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, objWeight);
+                        anim.SetIKPosition(AvatarIKGoal.RightFoot, plant.transform.position);
+                    } else {
+                        anim.SetLookAtWeight(objWeight);
+                        anim.SetLookAtPosition(rock.transform.position);
+                        anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, objWeight);
+                        anim.SetIKPosition(AvatarIKGoal.RightFoot, rock.transform.position);
+                    }
+                }
+
+                if (tree != null && shakeTree)
+                {
+                    Debug.Log("IK TREE");
+                    anim.SetLookAtWeight(objWeight);
+                    anim.SetLookAtPosition(tree.transform.position);
+                    anim.SetIKPositionWeight(AvatarIKGoal.RightHand, objWeight);
+                    anim.SetIKPosition(AvatarIKGoal.RightHand, RHand.transform.position);
+
+                    anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, objWeight);
+                    anim.SetIKPosition(AvatarIKGoal.LeftHand, LHand.transform.position);
+                } else {
+                    anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, 0);
+                    anim.SetLookAtWeight(0);
+                    anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
+                    anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
+                }
+            } else {
+                anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, 0);
+                anim.SetLookAtWeight(0);
+                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
+                anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
+            }
+
+        }
+    }
+
+    public void toggleTree(){
+        shakeTree = !shakeTree;
+    }
+    public void toggleKick()
+    {
+        Debug.Log("kick");
+        kick = !kick;
+    }
 }
