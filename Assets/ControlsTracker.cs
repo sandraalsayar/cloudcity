@@ -32,7 +32,12 @@ public class ControlsTracker : MonoBehaviour
             //alternate between the 2 texts
             if(frameUpdate>=50){
                 current = current==0 ? 1 : 0;
+
                 frameUpdate = 0;
+            }
+            if (!player.GetComponent<StarCollector>().stars[0])
+            {
+                current = 0;
             }
             if (current == 0)
             {
