@@ -80,7 +80,10 @@ public class CharacterInputController : MonoBehaviour
         }
 
     }
-
+    public bool plantk {
+        get;
+        private set;
+    }
     float forwardVelocity = 0;
     float sidewaysVelocity = 0;
 
@@ -220,6 +223,7 @@ public class CharacterInputController : MonoBehaviour
             //Debug.Log(starCollector.isNearRock);
             if (starCollector.isNearPlant)
             {
+                plantk = true;
                 Debug.Log("plant");
                 anim.SetFloat("interaction", 2.0f);
                 anim.SetTrigger("interact");
@@ -230,6 +234,7 @@ public class CharacterInputController : MonoBehaviour
             //tree interaction
             else if (starCollector.isNearTree)
             {
+                plantk = false;
                 Debug.Log("tree");
                 anim.SetFloat("interaction", 3.0f);
                 anim.SetTrigger("interact");
@@ -238,6 +243,7 @@ public class CharacterInputController : MonoBehaviour
             //rock interaction
             else if(starCollector.isNearRock)
             {
+                plantk = false;
                 Debug.Log("rockkk");
                 anim.SetFloat("interaction", 4.0f);
                 anim.SetTrigger("interact");
