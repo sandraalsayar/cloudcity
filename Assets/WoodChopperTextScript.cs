@@ -12,7 +12,7 @@ public class WoodChopperTextScript : MonoBehaviour
 	public int convocounter;
 
     //for controls
-    public CanvasGroup controlGroup;
+    //public CanvasGroup controlGroup;
     public ControlsTracker controlType;
 
 
@@ -53,9 +53,9 @@ public class WoodChopperTextScript : MonoBehaviour
 				tutorialDone = true;
 
                 //controlsUI
-                controlGroup.interactable = true;
-                controlGroup.blocksRaycasts = true;
-                controlGroup.alpha = 1f;
+                //controlGroup.interactable = true;
+                //controlGroup.blocksRaycasts = true;
+                //controlGroup.alpha = 1f;
 
                 //load in the text
                 controlType.controls[1] = "Hold  z  to Sneak";

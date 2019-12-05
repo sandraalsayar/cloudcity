@@ -48,18 +48,25 @@ public class ControlsTracker : MonoBehaviour
         } else if(num>0){
             //set the text here
             //current is always which one is ONLY being shown
+            Debug.Log("num is 1");
+            Debug.Log(current);
             if(current==1){
                 if (player.GetComponent<StarCollector>().stars[0])
                 {
                     control.text = controls[current];
                     //button
+                    news.enabled = false;
                     sneak.enabled = true;
                 }
             } else if(current==0){
                 control.text = controls[current];
+                sneak.enabled = false;
+                news.enabled = true;
             }
-
-
+        } else{ //no text
+            control.text = "";
+            news.enabled = false;
+            sneak.enabled = false;
         }
     }
 }

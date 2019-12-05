@@ -17,7 +17,7 @@ public class StartQuest : MonoBehaviour
     public CanvasGroup canvasGroup;
 
     //for controls
-    public CanvasGroup controlGroup;
+    //public CanvasGroup controlGroup;
     public ControlsTracker controlType;
     public Image btn;
 
@@ -46,9 +46,9 @@ public class StartQuest : MonoBehaviour
 
 
             //controls
-            controlGroup.interactable = true;
-            controlGroup.blocksRaycasts = true;
-            controlGroup.alpha = 1f;
+            //controlGroup.interactable = true;
+            //controlGroup.blocksRaycasts = true;
+            //controlGroup.alpha = 1f;
             //button
             btn.enabled = true;
             //load in the text
@@ -62,11 +62,11 @@ public class StartQuest : MonoBehaviour
             canvasGroup.alpha = 0f;
             btn.enabled = false;
             //controls
-            controlGroup.interactable = false;
-            controlGroup.blocksRaycasts = false;
-            controlGroup.alpha = 0f;
+            //controlGroup.interactable = false;
+            //controlGroup.blocksRaycasts = false;
+            //controlGroup.alpha = 0f;
             //unload text
-            controlType.current = -1;
+            controlType.current = 1;
             controlType.num--;
         }
     }

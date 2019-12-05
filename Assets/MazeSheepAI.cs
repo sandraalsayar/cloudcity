@@ -44,7 +44,7 @@
         bool audioPlayedOnce;
 
         //controlsUI
-        public CanvasGroup controlGroup;
+        //public CanvasGroup controlGroup;
         public ControlsTracker controlType;
 
 		private void Start() {
@@ -183,22 +183,24 @@
 							}
 						}
 					}
-				}
+                }
 			}
 		}
 
 	private void setNextWaypoint() {
 			// if the final waypoint is reached then stop
+        if(currWaypoint==16){
+            //controlsUI disable
+            //controlGroup.interactable = false;
+            //controlGroup.blocksRaycasts = false;
+            //controlGroup.alpha = 0f;
+            //unload text
+            controlType.current = 0;
+            controlType.num--;
+        }
 		if (currWaypoint >= waypoints.Length - 1) {
 			keepGoing = false;
-            Debug.Log("AI sheep stopped");
-            //controlsUI disable
-            controlGroup.interactable = false;
-            controlGroup.blocksRaycasts = false;
-            controlGroup.alpha = 0f;
-            //unload text
-            controlType.current = -1;
-            controlType.num--;
+
 		} else {
 			if (currWaypoint == 15) {
 				timer += Time.deltaTime;
