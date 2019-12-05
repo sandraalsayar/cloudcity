@@ -13,6 +13,9 @@ public class ControlsTracker : MonoBehaviour
     public Text control;
     public GameObject player;
 
+    public Image sneak;
+    public Image news;
+
     void Start()
     {
         num = 0;
@@ -31,6 +34,16 @@ public class ControlsTracker : MonoBehaviour
                 current = current==0 ? 1 : 0;
                 frameUpdate = 0;
             }
+            if (current == 0)
+            {
+                sneak.enabled = false;
+                news.enabled = true;
+            }
+            else
+            {
+                news.enabled = false;
+                sneak.enabled = true;
+            }
             control.text = controls[current];
         } else if(num>0){
             //set the text here
@@ -39,6 +52,8 @@ public class ControlsTracker : MonoBehaviour
                 if (player.GetComponent<StarCollector>().stars[0])
                 {
                     control.text = controls[current];
+                    //button
+                    sneak.enabled = true;
                 }
             } else if(current==0){
                 control.text = controls[current];
