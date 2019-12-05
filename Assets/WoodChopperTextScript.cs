@@ -59,6 +59,8 @@ public class WoodChopperTextScript : MonoBehaviour
                 controlType.controls[1] = "Hold     to Sneak";
                 controlType.current = 1;
                 controlType.num++; 
+
+                GetComponent<PlayerInteractions>().indication.SetActive(false);
 			}
 		}
 	}
