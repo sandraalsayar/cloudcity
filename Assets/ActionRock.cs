@@ -19,6 +19,8 @@ public class ActionRock : MonoBehaviour
     //Star
     public Animator floatAnim;
 
+    public GameObject search;
+
     void Start() {
 		rock = GetComponent<Rigidbody>();
 		//player = GetComponent<Rigidbody>();
@@ -59,6 +61,8 @@ public class ActionRock : MonoBehaviour
 		if(other.gameObject.CompareTag("Player")) {
 			isNearRock = true;
             other.gameObject.GetComponent<StarCollector>().isNearRock = true;
+            //interaction icon
+            search.SetActive(true);
 		}
 	}
 
@@ -66,6 +70,8 @@ public class ActionRock : MonoBehaviour
 		if(other.gameObject.CompareTag("Player")) {
 			isNearRock = false;
             other.gameObject.GetComponent<StarCollector>().isNearRock = false;
+            //interaction icon
+            search.SetActive(false);
 		}
 	}
 

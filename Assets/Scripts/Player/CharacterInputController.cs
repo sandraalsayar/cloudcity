@@ -156,7 +156,7 @@ public class CharacterInputController : MonoBehaviour
 
         //unfiltered input
         //DONT ALLOW MOVEMENT WHEN @ ENDGAME DIALOGUE
-        if(!starCollector.endgame && !starCollector.caughtStar){
+        if(!starCollector.endgame && !starCollector.caughtStar && !starCollector.playerlost){
             //Forward = v;
             //Turn = h; 
             //Turn = Mathf.SmoothDamp(Turn, h, ref forwardVelocity, movementSmoothing);

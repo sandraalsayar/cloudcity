@@ -22,6 +22,9 @@ public class StartQuest : MonoBehaviour
     public Image btn;
 
     public bool nearBox;
+
+    public GameObject search;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +58,9 @@ public class StartQuest : MonoBehaviour
             controlType.controls[0]="Press  s  to Throw Newspaper";
             controlType.current = 0;
             controlType.num++;
+
+            //interaction icon
+            search.SetActive(false);
         }
         if(sheep.complete){ //when quest is over, remove HUD
             canvasGroup.interactable = false;
@@ -77,6 +83,10 @@ public class StartQuest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("canstartQuest");
+            if(sheep.sheepTalked){
+                //interaction icon
+                search.SetActive(true);
+            }
             nearBox = true;
         }
     }
@@ -87,6 +97,8 @@ public class StartQuest : MonoBehaviour
         {
             Debug.Log("left box area");
             nearBox = false;
+            //interaction icon
+            search.SetActive(false);
         }
     }
 }
