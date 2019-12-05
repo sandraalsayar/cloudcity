@@ -20,7 +20,7 @@ public class ChangeSkyBox : MonoBehaviour
         nightColor = new Color(0.1568f, 0.18039f, 0.2196f);
         dayLightIntensity = 1.2f;
         nightLightIntensity = 0.75f;
-        duration = 30f;
+        duration = 1200f;
    
 
     }
