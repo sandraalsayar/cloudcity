@@ -43,6 +43,10 @@
         public AudioClip hmSound;
         bool audioPlayedOnce;
 
+        //controlsUI
+        public CanvasGroup controlGroup;
+        public ControlsTracker controlType;
+
 		private void Start() {
 			myNavMeshAgent = GetComponent<NavMeshAgent>();
 			// woodChopper = sheep.GetComponent<WoodChopperTextScript>();
@@ -187,6 +191,14 @@
 			// if the final waypoint is reached then stop
 		if (currWaypoint >= waypoints.Length - 1) {
 			keepGoing = false;
+            Debug.Log("AI sheep stopped");
+            //controlsUI disable
+            controlGroup.interactable = false;
+            controlGroup.blocksRaycasts = false;
+            controlGroup.alpha = 0f;
+            //unload text
+            controlType.current = -1;
+            controlType.num--;
 		} else {
 			if (currWaypoint == 15) {
 				timer += Time.deltaTime;
