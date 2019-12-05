@@ -11,6 +11,10 @@ public class WoodChopperTextScript : MonoBehaviour
 	public bool tutorialDone; // signifies that first encounter dialogue finished
 	public int convocounter;
 
+    //for controls
+    public CanvasGroup controlGroup;
+    public ControlsTracker controlType;
+
     // Start is called before the first frame update
 	void Start()
 	{
@@ -46,6 +50,15 @@ public class WoodChopperTextScript : MonoBehaviour
 
 			if (convocounter == 5) {
 				tutorialDone = true;
+
+                //controlsUI
+                controlGroup.interactable = true;
+                controlGroup.blocksRaycasts = true;
+                controlGroup.alpha = 1f;
+                //load in the text
+                controlType.controls[1] = "Hold     to Sneak";
+                controlType.current = 1;
+                controlType.num++; 
 			}
 		}
 	}

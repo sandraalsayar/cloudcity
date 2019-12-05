@@ -16,6 +16,10 @@ public class StartQuest : MonoBehaviour
     //public Text numRemaining;
     public CanvasGroup canvasGroup;
 
+    //for controls
+    public CanvasGroup controlGroup;
+    public ControlsTracker controlType;
+
     public bool nearBox;
     // Start is called before the first frame update
     void Start()
@@ -38,11 +42,28 @@ public class StartQuest : MonoBehaviour
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
             canvasGroup.alpha = 1f;
+
+            //controls
+            controlGroup.interactable = true;
+            controlGroup.blocksRaycasts = true;
+            controlGroup.alpha = 1f;
+            //load in the text
+            controlType.controls[0]="Press     to Throw Newspaper";
+            controlType.current = 0;
+            controlType.num++;
         }
         if(sheep.complete){ //when quest is over, remove HUD
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
             canvasGroup.alpha = 0f;
+
+            //controls
+            controlGroup.interactable = false;
+            controlGroup.blocksRaycasts = false;
+            controlGroup.alpha = 0f;
+            //unload text
+            controlType.current = -1;
+            controlType.num--;
         }
     }
 
