@@ -88,6 +88,9 @@ public class DialogueManager : MonoBehaviour
             animator.SetBool("isOpen", false);
             playerAnim.SetBool("dialogue", false); //allow dancing
 
+            //if (starCollector.playerlost){
+            //    player.GetComponent<Rigidbody>().transform.position = new Vector3((float)154.18, (float)0.12, (float)-29.38);
+            //}
             if (starCollector.endgame)
             {
                 Debug.Log("endScene");
