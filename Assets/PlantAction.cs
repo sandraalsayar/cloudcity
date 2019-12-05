@@ -21,6 +21,9 @@ public class PlantAction : MonoBehaviour
     //star
     public Animator floatAnim;
 
+    //
+    public GameObject search;
+
     void Start()
     {
         isNearPlant = false;
@@ -42,7 +45,8 @@ public class PlantAction : MonoBehaviour
             //trigger plant flying animation
             //make star pop out in animation
             anim.SetTrigger("isYanked");
-
+            //interaction icon
+            search.SetActive(false);
             if (!audioSource.isPlaying && !audioPlayedOnce)
             {
                 audioSource.Play(0);
@@ -60,6 +64,9 @@ public class PlantAction : MonoBehaviour
         {
             isNearPlant = true;
             starCollector.isNearPlant = true;
+
+            //interaction icon
+            search.SetActive(true);
         }
     }
 
@@ -69,6 +76,8 @@ public class PlantAction : MonoBehaviour
         {
             isNearPlant = false;
             starCollector.isNearPlant = false;
+            //interaction icon
+            search.SetActive(false);
         }
     }
 
