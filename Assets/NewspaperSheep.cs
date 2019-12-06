@@ -63,6 +63,7 @@ public class NewspaperSheep : MonoBehaviour
                 if(newspaperCount == starCollector.newsDelivered){
                     Debug.Log("you get a star!");
                     complete = true;
+                    starCollector.inQuest = false;
                     if (firstTime)
                     {
                         //trigger completion dialogue
