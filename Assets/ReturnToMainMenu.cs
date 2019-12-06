@@ -8,6 +8,18 @@ using UnityEngine.SceneManagement;
 */
 public class ReturnToMainMenu : MonoBehaviour
 {
+    public Animator anim;
+
+    //public void FadeScene()
+    //{
+    //    anim.SetTrigger("fadeOut");
+    //}
+    //public void onFadeComplete()
+    //{
+    //    SceneManager.LoadScene("MainMenu");
+    //    Time.timeScale = 1f;
+    //}
+
 	public void startGame() {
 		SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1f;
