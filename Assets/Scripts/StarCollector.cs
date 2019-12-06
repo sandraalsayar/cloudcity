@@ -39,6 +39,7 @@ public class StarCollector : MonoBehaviour
     public bool caughtStar;
     private Animator anim;
     public Animator textAnim;
+    public CanvasGroup textGroup;
 
     //Anim collection
     public Transform cam;
@@ -47,6 +48,9 @@ public class StarCollector : MonoBehaviour
     public bool playerlost;
 
     //public bool sheepCaught;
+
+    //Audio
+    AudioSource audioSource;
 
     public void Start()
     {
@@ -59,7 +63,7 @@ public class StarCollector : MonoBehaviour
         caughtStar = false;
         anim = GetComponent<Animator>();
         playerlost = false;
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Update() {
@@ -88,7 +92,17 @@ public class StarCollector : MonoBehaviour
         //do excited animation (new player)
         anim.SetTrigger("pickUp");
         //with text showing
+        textGroup.interactable = true;
+        textGroup.blocksRaycasts = true;
+        textGroup.alpha = 1f;
         textAnim.SetBool("isOpen", true);
+
+        //playsound
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play(0);
+        }
+
         // dont allow movement
         caughtStar = true;
         StartCoroutine(WaitForAnim());
@@ -112,6 +126,10 @@ public class StarCollector : MonoBehaviour
         //yield return new WaitForSeconds(3.0f);
         //duration based on anim length but sometimes it's off anim.GetCurrentAnimatorStateInfo(0).length+ anim.GetCurrentAnimatorStateInfo(0).normalizedTime
         caughtStar = false;
+        //with text showing
+        textGroup.interactable = false;
+        textGroup.blocksRaycasts = false;
+        textGroup.alpha = 0f;
         textAnim.SetBool("isOpen", false);
         canCollect = false;
     }
