@@ -12,6 +12,7 @@ public class TriggerEnd : MonoBehaviour
     public bool firstTime;
 
     public GameObject indication;
+    public GameObject inProgress;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,19 +29,34 @@ public class TriggerEnd : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact"))
             {
-                starCollector.endgame = true;
-                if (firstTime)
-                {
-                    Debug.Log("toggle");
-                    //toggle the text
-                    gameObject.GetComponent<TextboxToggle>().TriggerDialogue();
-                    firstTime = false;
+                if(starCollector.starCount == 7){
+                    starCollector.endgame = true;
+                    if (firstTime)
+                    {
+                        Debug.Log("toggle");
+                        //toggle the text
+                        gameObject.GetComponent<TextboxToggle>().TriggerDialogue();
+                        firstTime = false;
+                    }
+                    else
+                    {
+                        Debug.Log("next");
+                        FindObjectOfType<DialogueManager>().DisplayNextSentence();
+                    } 
+                } else {
+                    if (firstTime)
+                    {
+                        Debug.Log("toggleProgress");
+                        //toggle the text
+                        inProgress.GetComponent<TextboxToggle>().TriggerDialogue();
+                        firstTime = false;
+                    }
+                    else
+                    {
+                        Debug.Log("next");
+                        FindObjectOfType<DialogueManager>().DisplayNextSentence();
+                    } 
                 }
-                else
-                {
-                    Debug.Log("next");
-                    FindObjectOfType<DialogueManager>().DisplayNextSentence();
-                } 
             }  
         }
 
@@ -49,7 +65,7 @@ public class TriggerEnd : MonoBehaviour
 
     void OnTriggerEnter(Collider c){
         if (c.CompareTag("Player")
-           && starCollector.starCount==7
+           //&& starCollector.starCount==7
            )
         {
             well = true;

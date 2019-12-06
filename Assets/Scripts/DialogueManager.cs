@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     StarCollector starCollector;
     public Animator playerAnim;
 
+    public GameObject well;
     public GameObject NewsSheep;
     NewspaperSheep sheep;
     public GameObject newsStar;
@@ -77,6 +78,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        well.GetComponent<TriggerEnd>().firstTime = true;
         if (animator.GetBool("isOpen")) //only if the animator was open, close it
         {
 
