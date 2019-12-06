@@ -21,7 +21,7 @@ public class PlayerInteractions : MonoBehaviour
     void Update()
     {
         //have the object point towards the camera/player/rotate to show the correct side
-        indication.transform.position = this.transform.position+ new Vector3(0f,2.5f,0f);
+        indication.transform.position = this.transform.position+ new Vector3(0f,2.6f,0f);
         //indication.transform.position = this.transform.position + new Vector3(0f, 3.0f, 0f);
         indication.transform.LookAt(Camera.main.transform.position);
         indication.transform.Rotate(0,180,0);
