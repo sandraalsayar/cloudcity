@@ -267,20 +267,6 @@ public class CharacterInputController : MonoBehaviour
             }
         //}
 
-        //if (Input.GetKeyUp(KeyCode.S))
-        //{
-        //    ActionThrow = false;
-        //}
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    //anim.SetTrigger("jump");
-        //    Jump = true;
-
-        //} else
-        //{
-        //    Jump = false;
-        //}
-
     }
 
     // coroutine to make star disappear when animation is done playing
@@ -306,26 +292,26 @@ public class CharacterInputController : MonoBehaviour
         //}
     }
 
-    public bool IsInLocomotion(){
-        // Debug.Log("loco");
-        return stateInfo.nameHash == locomotionId;
-    }
+    //public bool IsInLocomotion(){
+    //    // Debug.Log("loco");
+    //    return stateInfo.nameHash == locomotionId;
+    //}
 
-    public void StickToWorldSpace(Transform root, Transform camera, ref float directionOut, ref float speedOut){
-        Vector3 rootDxn = root.forward;
-        Vector3 stickDxn = new Vector3(h,0,v);
-        speedOut = stickDxn.sqrMagnitude;
-        Vector3 cameraDxn = camera.forward;
-        cameraDxn.y = 0.0f;
-        Quaternion refShift = Quaternion.FromToRotation(Vector3.forward, cameraDxn);
+    //public void StickToWorldSpace(Transform root, Transform camera, ref float directionOut, ref float speedOut){
+    //    Vector3 rootDxn = root.forward;
+    //    Vector3 stickDxn = new Vector3(h,0,v);
+    //    speedOut = stickDxn.sqrMagnitude;
+    //    Vector3 cameraDxn = camera.forward;
+    //    cameraDxn.y = 0.0f;
+    //    Quaternion refShift = Quaternion.FromToRotation(Vector3.forward, cameraDxn);
 
-        Vector3 moveDirection = refShift * stickDxn;
-        Vector3 axisSign = Vector3.Cross(moveDirection, rootDxn);
-        float angleRootToMove = Vector3.Angle(rootDxn, moveDirection) * (axisSign.y >= 0 ? -1f : 1f);
-        angleRootToMove /= 180f;
-        directionOut = angleRootToMove * directionSpeed;
+    //    Vector3 moveDirection = refShift * stickDxn;
+    //    Vector3 axisSign = Vector3.Cross(moveDirection, rootDxn);
+    //    float angleRootToMove = Vector3.Angle(rootDxn, moveDirection) * (axisSign.y >= 0 ? -1f : 1f);
+    //    angleRootToMove /= 180f;
+    //    directionOut = angleRootToMove * directionSpeed;
 
-    }
+    //}
 
     public void AfterInteraction(){
         //trigger plant animation

@@ -42,15 +42,10 @@ public class CameraFollow : MonoBehaviour
         float leftX = Input.GetAxis("Horizontal");
         float leftY = Input.GetAxis("Vertical");
         Vector3 characterOffset = follow.position + offset;
-        //old
-        //lookDir = characterOffset - this.transform.position;
-        //lookDir.y = 0;
-        //lookDir.Normalize();
-        ////targetPosition = follow.position + follow.up * distanceUp - (follow.forward * distanceAway);
-        //targetPosition = characterOffset+follow.up*distanceUp-lookDir*distanceAway;
 
         //new for polish
         if(follower.Speed > follower.LocomotionThreshold){
+            //Debug.Log("turn cam");
             lookDir = Vector3.Lerp(follow.right * (leftX<0?1f:-1f),follow.forward*(leftY<0?-1f:1f),Mathf.Abs(Vector3.Dot(this.transform.forward,follow.forward)));
             curLookDir = Vector3.Normalize(characterOffset-this.transform.position);
             curLookDir.y = 0;
@@ -63,45 +58,10 @@ public class CameraFollow : MonoBehaviour
         smoothPosition(this.transform.position,targetPosition);
         transform.LookAt(follow);
     }
-    //void LateUpdate(){
-    //    Vector3 characterOffset = follow.position + offset;
-    //    lookDir = characterOffset - this.transform.position;
-    //    lookDir.y = 0;
-    //    lookDir.Normalize();
-
-    //    //targetPosition = follow.position + follow.up * distanceUp - follow.forward * distanceAway;
-    //    //Debug.DrawRay(follow.position, Vector3.up * distanceUp, Color.red);
-    //    //Debug.DrawRay(follow.position, -1f * follow.forward * distanceAway, Color.blue);
-    //    //Debug.DrawLine(follow.position, targetPosition, Color.magenta);
-    //    //transform.position = Vector3.Lerp(transform.position,targetPosition,Time.deltaTime*smooth);
-
-    //    targetPosition = characterOffset + follow.up * distanceUp - lookDir * distanceAway;
-
-    //    smoothPosition(this.transform.position,targetPosition);
-
-    //    transform.LookAt(follow);
-
-    //}
 
     public void smoothPosition(Vector3 fromPos, Vector3 toPos){
         this.transform.position = Vector3.SmoothDamp(fromPos,toPos,ref velocityCamSmooth,camSmoothDampTime);
     }
-    //public Transform cameraTarget;
-    //public float sSpeed = 10.0f;
-    //public Vector3 dist;
-    //public Transform lookTarget;
-
-    //void FixedUpdate(){
-    //    Vector3 dPos = cameraTarget.position + dist;
-    //    Vector3 sPos = Vector3.Lerp(transform.position, dPos, sSpeed * Time.deltaTime);
-    //    transform.position = sPos;
-    //    transform.LookAt(lookTarget.position);
-    //}
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
 
     //handles camera changing position when it hits a wall
     private void CollisionWall(Vector3 fromObject, ref Vector3 toTarget){
