@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameStarter : MonoBehaviour
 {
-   public void StartGame()
+    public Animator anim;
+
+    public void FadeScene()
     {
-        //change scene below to main game scene
+        anim.SetTrigger("fadeOut");
+    }
+    public void onFadeComplete()
+    {
         SceneManager.LoadScene("SampleScene");
     }
 }
