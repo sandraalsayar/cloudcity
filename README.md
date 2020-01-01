@@ -3,7 +3,7 @@
 CloudCity is a Unity3D video game created by a team of 3 women who love making games.
 The game is a cute low-poly aesthetic with a mixture of 2D & 3D style.
 
-<b>Storyline:<b/>
+<b>Storyline:</b>
 
 One morning, a star fell down from the sky and landed in Cloud City. Pieces of its crown broke and became scattered in Cloud City.
 It needs to fly back up to its place in the constellation in the sky before night falls, or the the rest of the constellation that it belonged to comes crashing down.
