@@ -12,6 +12,7 @@ In order to go back home, the star needs to retrieve its crown fragments, shaped
 Characters:
 
 Main Character: A fallen star.
+
 NPCs: sheep (citizens of Cloud City).
 
 Setting:
@@ -21,5 +22,7 @@ A floating city in the clouds.
 Rules/Objectives:
 
 Find missing pieces of the broken star.
+
 Interact with npcs and objects in the environment (rocks, plants, trees).
+
 Do so before nighttime (time runs out).
